@@ -15,7 +15,7 @@ const StyledEmptyList = styled.div`
 const EmptyList = () => {
     return (
         <StyledEmptyList>
-            <div><img src={EmptyImg} alt='icon'/></div>
+            <img src={EmptyImg} alt='icon'/>
             <p>You have no patients yet.<br/>To create a patient profile, please contact your administrator.</p>
         </StyledEmptyList>
     );

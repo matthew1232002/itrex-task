@@ -4,7 +4,7 @@ import {StyledFooter, StyledLink, StyledText} from "./footer.styled";
 const Footer = ({text, path, link}) => {
     return (
         <StyledFooter>
-            {text && <StyledText>{text}</StyledText>}
+            <StyledText>{text}</StyledText>
             <StyledLink to={path}>{link}</StyledLink>
         </StyledFooter>
     );

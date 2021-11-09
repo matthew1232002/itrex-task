@@ -9,25 +9,27 @@ import {
     StyledPatient,
     StyledStatus, StyledTime
 } from "./Patient.styled";
+import PatientAvatar from '../../assets/patient-img.jpg'
+import PatientMore from '../../assets/patient-more.svg'
 
-const Patient = () => {
+const Patient = ({key, id, name, status, date, description}) => {
     return (
         <StyledPatient>
             <StyledHeader>
                 <StyledInfo>
-                    <StyledAvatar><img alt='avatar'/></StyledAvatar>
+                    <StyledAvatar><img alt='avatar' src={PatientAvatar}/></StyledAvatar>
                     <StyledName>
-                        <p>Jane Cooper</p>
-                        <StyledStatus>Appointment is confirmed</StyledStatus>
+                        <p>{name}</p>
+                        <StyledStatus>{status}</StyledStatus>
                     </StyledName>
                 </StyledInfo>
                 <div>
-                    <img alt='more'/>
+                    <img alt='more' src={PatientMore}/>
                 </div>
             </StyledHeader>
             <StyledFooter>
-                <StyledTime>Thu Sept 10, 2021 4 pm – 5 pm</StyledTime>
-                <StyledDescription>We will invite you in for a full review every year and more frequently if you are struggling with blood sugar levels</StyledDescription>
+                <StyledTime>{date}</StyledTime>
+                <StyledDescription>{description}</StyledDescription>
             </StyledFooter>
         </StyledPatient>
     );
