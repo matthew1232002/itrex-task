@@ -1,15 +1,13 @@
 import React from 'react';
 
-import {StyledAside, StyledWrapper} from "./LoginLayout.styled";
+import { StyledAside, StyledWrapper } from './LoginLayout.styled';
 
-const LoginLayout = (props) => {
-    return (
-        <StyledWrapper>
-            <StyledAside>
-                {props.children}
-            </StyledAside>
-        </StyledWrapper>
-    );
-};
+const LoginLayout = ({ children }) => (
+  <StyledWrapper>
+    <StyledAside>
+      {children}
+    </StyledAside>
+  </StyledWrapper>
+);
 
 export default LoginLayout;

@@ -1,10 +1,5 @@
-import styled from "styled-components";
-
-import {Link} from "react-router-dom";
+import styled from 'styled-components';
 import Search from '../../assets/search.svg';
-import ArrowUp from '../../assets/arrow-up.svg';
-import SelectIcon from '../../assets/select__icon.svg'
-import Plus from '../../assets/plus.svg'
 
 export const StyledWrapper = styled.div`
   margin: 0;
@@ -21,7 +16,7 @@ export const StyledWrapper = styled.div`
 
 export const StyledContainer = styled.div`
   height: 100vh;
-  padding: 0 64px 48px 64px;
+  padding: 0 48px 48px 79px;
   @media (max-width: 600px) {
     padding: 0;
   }
@@ -30,7 +25,7 @@ export const StyledContainer = styled.div`
 export const StyledHeader = styled.header`
   display: flex;
   justify-content: space-between;
-  padding: 20px 0;
+  padding: 20px 0 5px 0;
   @media (max-width: 600px) {
     padding: 20px 24px;
   }
@@ -108,54 +103,6 @@ export const StyledMain = styled.main`
   }
 `;
 
-export const StyledControllers = styled.div`
-  margin-bottom: 56px;
-  @media (max-width: 600px) {
-    margin-bottom: 40px;
-  }
-`;
-
-export const StyledBtn = styled(Link)`
-  background: #FFFFFF;
-  color: #7297FF;
-  outline: none;
-  border: none;
-  border-radius: 8px;
-
-  margin: 0 12px 0 0;
-  padding: 12px 0;
-  width: 160px;
-  text-decoration: none;
-
-  @media (max-width: 600px) {
-    width: 120px;
-  }
-`;
-
-export const StyledTitle = styled.div`
-  display: flex;
-  justify-content: space-between;
-  margin: 0 36px 32px 0;
-
-  h2 {
-    font-size: 24px;
-    font-weight: 600;
-    line-height: 26px;
-  }
-
-  @media (max-width: 600px) {
-    margin: 0 0 16px 0;
-    h2 {
-      font-size: 20px;
-      line-height: 24px;
-    }
-  }
-`;
-
-export const StyledSearch = styled.div`
-  display: flex;
-`;
-
 export const StyledSearchInput = styled.div`
   margin: 0 18px 0 0;
   background: url(${Search}) no-repeat;
@@ -181,91 +128,5 @@ export const StyledSearchInput = styled.div`
     input {
       display: none;
     }
-  }
-`;
-
-export const StyledSearchForm = styled.form`
-  display: flex;
-  position: relative;
-
-  p {
-    font-size: 15px;
-    line-height: 21px;
-    color: #A1ABC9;
-    padding: 2px 16px 0 0;
-  }
-
-  @media (max-width: 950px) {
-    p {
-      display: none;
-    }
-  }
-`;
-
-export const StyledIcon = styled.div`
-  background: url(${SelectIcon}) no-repeat;
-  padding-left: 30px;
-  display: none;
-  @media (max-width: 950px) {
-    display: block;
-  }
-`;
-
-export const StyledSearchList = styled.div`
-  width: 106px;
-
-  @media (max-width: 950px) {
-    display: none;
-  }
-`;
-
-export const StyledSearchHeader = styled.div`
-  cursor: pointer;
-  background: url(${ArrowUp}) no-repeat;
-  background-position-y: center;
-  background-position-x: right;
-
-  span {
-    color: #7297FF;
-    font-size: 15px;
-    line-height: 21px;
-  }
-`;
-
-export const StyledSearchItems = styled.div`
-  position: absolute;
-  top: 100%;
-  left: 0;
-  border-radius: 8px;
-  background: #F9FAFF;
-  display: none;
-
-  div {
-    font-size: 15px;
-    line-height: 21px;
-    cursor: pointer;
-    padding: 10px 96px 10px 24px;
-
-    &:hover {
-      color: #7297FF;
-    }
-  }
-`;
-
-export const StyledCreateAppointment = styled(Link)`
-  font-size: 15px;
-  font-weight: 600;
-  text-decoration: none;
-  background: #7297FF;
-  color: #FFF;
-  border-radius: 8px;
-  padding: 12px 16px 12px 48px;
-  background-image: url(${Plus});
-  background-repeat: no-repeat;
-  background-position-y: center;
-  background-position-x: 16px;
-  margin: -10px 0 0 64px;
-  @media (max-width: 950px){
-    display: none;
   }
 `;

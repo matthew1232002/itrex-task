@@ -1,8 +1,8 @@
-import styled from "styled-components";
-import {Link} from "react-router-dom";
+import styled from 'styled-components';
+import { Link } from 'react-router-dom';
 import Search from '../../assets/search.svg';
 import ArrowUp from '../../assets/arrow-up.svg';
-import SelectIcon from '../../assets/select__icon.svg'
+import SelectIcon from '../../assets/select__icon.svg';
 
 export const StyledWrapper = styled.div`
   margin: 0;
@@ -92,7 +92,7 @@ export const StyledUserImg = styled.div`
   }
 `;
 
-export const StyledMain= styled.main`
+export const StyledMain = styled.main`
   background: #F9FAFF;
   border-radius: 16px;
   padding: 40px 16px 0 48px;
@@ -102,14 +102,14 @@ export const StyledMain= styled.main`
   }
 `;
 
-export const StyledControllers= styled.div`
+export const StyledControllers = styled.div`
   margin-bottom: 56px;
   @media (max-width: 600px) {
     margin-bottom: 40px;
   }
 `;
 
-export const StyledBtn= styled(Link)`
+export const StyledBtn = styled(Link)`
   background: #FFFFFF;
   color: #7297FF;
   outline: none;
@@ -126,7 +126,7 @@ export const StyledBtn= styled(Link)`
   }
 `;
 
-export const StyledTitle= styled.div`
+export const StyledTitle = styled.div`
   display: flex;
   justify-content: space-between;
   margin: 0 36px 32px 0;
@@ -146,11 +146,11 @@ export const StyledTitle= styled.div`
   }
 `;
 
-export const StyledSearch= styled.div`
+export const StyledSearch = styled.div`
   display: flex;
 `;
 
-export const StyledSearchInput= styled.div`
+export const StyledSearchInput = styled.div`
   margin: 0 18px 0 0;
   background: url(${Search}) no-repeat;
   background-position-y: center;
@@ -176,7 +176,7 @@ export const StyledSearchInput= styled.div`
   }
 `;
 
-export const StyledSearchForm= styled.form`
+export const StyledSearchForm = styled.form`
   display: flex;
   position: relative;
   p{
@@ -192,7 +192,7 @@ export const StyledSearchForm= styled.form`
   }
 `;
 
-export const StyledIcon= styled.div`
+export const StyledIcon = styled.div`
   background: url(${SelectIcon}) no-repeat;
   padding-left: 30px;
   display: none;
@@ -201,7 +201,7 @@ export const StyledIcon= styled.div`
   }
 `;
 
-export const StyledSearchList= styled.div`
+export const StyledSearchList = styled.div`
   width: 70px;
 
   @media (max-width: 769px) {
@@ -209,7 +209,7 @@ export const StyledSearchList= styled.div`
   }
 `;
 
-export const StyledSearchHeader= styled.div`
+export const StyledSearchHeader = styled.div`
   cursor: pointer;
   background: url(${ArrowUp}) no-repeat;
   background-position-y: center;
@@ -222,7 +222,7 @@ export const StyledSearchHeader= styled.div`
   }
 `;
 
-export const StyledSearchItems= styled.div`
+export const StyledSearchItems = styled.div`
   position: absolute;
   top: 100%;
   left: 0;

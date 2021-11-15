@@ -1,9 +1,9 @@
-import styled from "styled-components";
-import Arrow from "../../assets/arrow-right.svg";
-import User from "../../assets/user.svg";
-import Email from "../../assets/email.svg";
-import Password from "../../assets/password.svg";
-import Password2 from "../../assets/confirm_password.svg";
+import styled from 'styled-components';
+import Arrow from '../../assets/arrow-right.svg';
+import User from '../../assets/user.svg';
+import Email from '../../assets/email.svg';
+import Password from '../../assets/password.svg';
+import Password2 from '../../assets/confirm_password.svg';
 
 export const StyledInputs = styled.div`
   div{

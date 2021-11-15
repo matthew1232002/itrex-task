@@ -1,7 +1,7 @@
 import styled from 'styled-components';
 
-import Background from '../../assets/bg.webp'
-import BackgroundMob from '../../assets/bg-mob.png'
+import Background from '../../assets/bg.webp';
+import BackgroundMob from '../../assets/bg-mob.png';
 
 export const StyledWrapper = styled.div`
   height: 100vh;

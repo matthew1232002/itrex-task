@@ -1,8 +1,8 @@
-import styled from "styled-components";
-import Email from "../../assets/email.svg";
-import Password from "../../assets/password.svg";
-import Arrow from "../../assets/arrow-right.svg";
-import {Link} from "react-router-dom";
+import styled from 'styled-components';
+import { Link } from 'react-router-dom';
+import Email from '../../assets/email.svg';
+import Password from '../../assets/password.svg';
+import Arrow from '../../assets/arrow-right.svg';
 
 export const StyledInputs = styled.div`
   div{

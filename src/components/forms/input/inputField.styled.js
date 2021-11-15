@@ -1,4 +1,4 @@
-import styled from "styled-components";
+import styled from 'styled-components';
 import EyeFlash from '../../../assets/eye-flash.svg';
 
 export const StyledWrapper = styled.div`
