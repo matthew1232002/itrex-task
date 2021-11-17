@@ -4,7 +4,7 @@ export const StyledPatientsList = styled.div`
   display: grid;
   gap: 24px 20px;
   grid-template-columns: repeat(auto-fit, minmax(406px, 1fr));
-  height: calc(100vh - 280px);
+  height: calc(100vh - 306px);
   background-color: #F9FAFF;
   overflow: scroll;
   overflow-x: hidden;

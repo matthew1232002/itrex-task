@@ -16,11 +16,7 @@ const DoctorPatients = () => {
       {patients && patients.map((patient) => (
         <Patient
           key={patient.id}
-          id={patient.id}
-          name={patient.name}
-          status={patient.status}
-          date={patient.date}
-          description={patient.description}
+          patient={patient}
         />
       ))}
     </StyledPatientsList>

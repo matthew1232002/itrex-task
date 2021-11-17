@@ -13,7 +13,13 @@ import PatientAvatar from '../../assets/patient-img.jpg';
 import PatientMore from '../../assets/patient-more.svg';
 
 const Patient = ({
-  id, name, status, date, description,
+  patient: {
+    id,
+    name,
+    status,
+    date,
+    description,
+  },
 }) => (
   <StyledPatient key={id}>
     <StyledHeader>

@@ -26,16 +26,14 @@ const Appointment = ({
         <StyledAvatar><img alt="avatar" src={DocAvatar} /></StyledAvatar>
         <StyledName>
           <p>{doctorName}</p>
-          <StyledDoctorPosition>{`${occupation} ${note}`}</StyledDoctorPosition>
+          <StyledDoctorPosition>{`${occupation}`}</StyledDoctorPosition>
         </StyledName>
       </StyledInfo>
-      <div>
-        <img alt="more" src={More} />
-      </div>
+      <img alt="more" src={More} />
     </StyledHeader>
     <StyledFooter>
       <StyledTime>{`${calendarData} ${time}`}</StyledTime>
-      <StyledDescription>{reason}</StyledDescription>
+      <StyledDescription>{`${reason} ${note}`}</StyledDescription>
     </StyledFooter>
   </StyledPatient>
 );

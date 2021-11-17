@@ -1,31 +1,10 @@
 import styled from 'styled-components';
 import Search from '../../assets/search.svg';
 
-export const StyledWrapper = styled.div`
-  margin: 0;
-  padding: 0;
-  font-family: "Poppins", sans-serif;
-  min-height: 100vh;
-  background: #E4EBFF;
-  overflow: hidden;
-
-  @media (max-width: 600px) {
-    padding: 0;
-  }
-`;
-
-export const StyledContainer = styled.div`
-  height: 100vh;
-  padding: 0 48px 48px 79px;
-  @media (max-width: 600px) {
-    padding: 0;
-  }
-`;
-
 export const StyledHeader = styled.header`
   display: flex;
   justify-content: space-between;
-  padding: 20px 0 5px 0;
+  padding: 20px 0;
   @media (max-width: 600px) {
     padding: 20px 24px;
   }

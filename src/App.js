@@ -13,12 +13,7 @@ const NotFound = React.lazy(() => import('./pages/NotFound'));
 
 function App() {
   return (
-    <Suspense fallback={(
-      <div className="centered">
-        <LoadingSpinner />
-      </div>
-          )}
-    >
+    <Suspense fallback={<LoadingSpinner />}>
       <Switch>
         <Route path="/" exact>
           <Redirect to="/sign-up" />

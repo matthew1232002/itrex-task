@@ -14,7 +14,7 @@ import Breadcrumb from './BreadCrumbs/Breadcrumb';
 import Title from './title/Title';
 import FormPatient from './Form/FormPatient';
 import Checkboxes from './checkboxes/Checkboxes';
-import { appointmentsActions } from '../../../store/user-appointments';
+import UseRequest from '../../../hooks/useRequest';
 
 const CreateAppointment = () => {
   const history = useHistory();
@@ -53,17 +53,14 @@ const CreateAppointment = () => {
   };
 
   const onCreateHandler = () => {
-    if (!disabled) {
-      dispatch(appointmentsActions.addAppointment({
-        calendarData,
-        time,
-        occupation: formData.occupation,
-        doctorName: formData.doctorName,
-        reason: formData.reason,
-        note: formData.note,
-      }));
-      history.replace('/user-appointments');
-    }
+    UseRequest(dispatch, calendarData,
+      time,
+      formData.occupation,
+      formData.doctorName,
+      formData.reason,
+      formData.note);
+
+    history.replace('/user-appointments');
   };
 
   return (
