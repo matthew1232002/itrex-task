@@ -1,4 +1,3 @@
-import React from 'react';
 import { StyledNumber, StyledTitle } from './Title.styled';
 
 const Title = ({ text, number, last }) => (

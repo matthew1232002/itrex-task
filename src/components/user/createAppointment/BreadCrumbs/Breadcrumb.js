@@ -1,4 +1,3 @@
-import React from 'react';
 import { StyledItem, StyledLi, StyledList } from './Breadcrumb.styled';
 
 const Breadcrumb = ({ crumbs, selected }) => (

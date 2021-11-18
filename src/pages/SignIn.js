@@ -1,6 +1,4 @@
-import React from 'react';
-
-import LoginLayout from '../components/layout/LoginLayout';
+import LoginLayout from '../components/layout/LoginPages/LoginLayout';
 import SignInForm from '../components/forms/SignInForm';
 
 const SignIn = () => (

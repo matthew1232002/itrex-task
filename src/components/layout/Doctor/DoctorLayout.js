@@ -1,12 +1,8 @@
-import React from 'react';
-
-import logo from '../../assets/logo.png';
-import userAvatar from '../../assets/user_avatar.png';
+import userAvatar from '../../../assets/user_avatar.png';
 import {
   StyledBtn,
   StyledControllers,
-  StyledHeader, StyledIcon,
-  StyledLogo,
+  StyledIcon,
   StyledMain,
   StyledSearch,
   StyledSearchForm,
@@ -14,30 +10,13 @@ import {
   StyledSearchInput, StyledSearchItems,
   StyledSearchList,
   StyledTitle,
-  StyledUser,
-  StyledUserData,
-  StyledUserImg,
-  StyledUserProfession,
 } from './DoctorLayout.styled';
-import DoctorAndUserLayout from './DoctorAndUserLayout';
+import DoctorAndUserLayout from '../DoctorAndUserLayout';
+import Header from '../Header/Header';
 
 const DoctorLayout = ({ children }) => (
   <DoctorAndUserLayout>
-    <StyledHeader>
-      <StyledLogo>
-        <div><img src={logo} alt="logo" /></div>
-        <span>PALM CLINIC</span>
-      </StyledLogo>
-      <StyledUser>
-        <StyledUserData>
-          <p>Miranda Nelson</p>
-          <StyledUserProfession>Doctor</StyledUserProfession>
-        </StyledUserData>
-        <StyledUserImg>
-          <img src={userAvatar} alt="logo" />
-        </StyledUserImg>
-      </StyledUser>
-    </StyledHeader>
+    <Header name="Miranda Nelson" status="Doctor" userAvatar={userAvatar} />
     <StyledMain>
       <StyledControllers>
         <StyledBtn>Patients</StyledBtn>

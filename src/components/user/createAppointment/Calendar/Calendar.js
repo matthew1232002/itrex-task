@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import { useEffect, useState } from 'react';
 import { StyledCalendar } from './Calendar.styled';
 
 const ReactCalendar = (props) => {

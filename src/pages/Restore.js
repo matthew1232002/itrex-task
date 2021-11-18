@@ -1,6 +1,4 @@
-import React from 'react';
-
-import LoginLayout from '../components/layout/LoginLayout';
+import LoginLayout from '../components/layout/LoginPages/LoginLayout';
 import RestoreForm from '../components/forms/RestoreForm';
 
 const Restore = () => (

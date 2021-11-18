@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import { useEffect, useState } from 'react';
 import { CustomSelect } from './Select.styled';
 import { StyledInput, StyledInputContainer, StyledLabel } from './FormPatient.styled';
 

@@ -1,6 +1,7 @@
 import React, { Suspense } from 'react';
 import { Route, Switch, Redirect } from 'react-router-dom';
 
+import routes from './routes/routes';
 import LoadingSpinner from './components/UI/LoadingSpinner';
 
 const SignUp = React.lazy(() => import('./pages/SignUp'));
@@ -16,24 +17,24 @@ function App() {
     <Suspense fallback={<LoadingSpinner />}>
       <Switch>
         <Route path="/" exact>
-          <Redirect to="/sign-up" />
+          <Redirect to={routes.signUpPage} />
         </Route>
-        <Route path="/sign-up">
+        <Route path={routes.signUpPage}>
           <SignUp />
         </Route>
-        <Route path="/sign-in">
+        <Route path={routes.signInPage}>
           <SignIn />
         </Route>
-        <Route path="/restore">
+        <Route path={routes.restorePage}>
           <Restore />
         </Route>
-        <Route path="/doctor-patients">
+        <Route path={routes.doctorPatientsPage}>
           <DoctorPatients />
         </Route>
-        <Route path="/user-appointments">
+        <Route path={routes.userAppointmentsPage}>
           <UserAppointments />
         </Route>
-        <Route path="/create-appointment">
+        <Route path={routes.createAppointmentPage}>
           <UserCreateAppointment />
         </Route>
         <Route path="*">

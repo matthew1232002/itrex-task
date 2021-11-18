@@ -1,4 +1,3 @@
-import React from 'react';
 import {
   StyledAvatar, StyledDescription, StyledDoctorPosition,
   StyledFooter,

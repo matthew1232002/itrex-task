@@ -1,4 +1,3 @@
-import React from 'react';
 import * as Yup from 'yup';
 import { Formik } from 'formik';
 import Header from './header/header';

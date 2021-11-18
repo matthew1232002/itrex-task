@@ -1,4 +1,3 @@
-import React from 'react';
 import { StyledContainer, StyledWrapper } from './DoctorAndUserLayout.styled';
 
 const DoctorAndUserLayout = ({ children }) => (

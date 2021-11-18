@@ -21,6 +21,8 @@ const userAppointments = createSlice({
   },
 });
 
+export const appointmentItems = (state) => state.userAppointments.items;
+
 export const appointmentsActions = userAppointments.actions;
 
 export default userAppointments;

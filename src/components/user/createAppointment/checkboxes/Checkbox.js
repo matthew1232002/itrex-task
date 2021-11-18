@@ -1,4 +1,3 @@
-import React from 'react';
 import { StyledInput, StyledLabel, StyledSpan } from './Checkbox.styled';
 
 const Checkbox = ({ time, onChangeTime }) => {

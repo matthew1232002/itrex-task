@@ -1,6 +1,5 @@
-import React, { useEffect, useState } from 'react';
+import { useEffect, useState } from 'react';
 import { useHistory } from 'react-router-dom';
-import { useDispatch } from 'react-redux';
 
 import ReactCalendar from './Calendar/Calendar';
 import {
@@ -14,11 +13,11 @@ import Breadcrumb from './BreadCrumbs/Breadcrumb';
 import Title from './title/Title';
 import FormPatient from './Form/FormPatient';
 import Checkboxes from './checkboxes/Checkboxes';
-import UseRequest from '../../../hooks/useRequest';
+import useRequest from '../../../hooks/usePatient';
 
 const CreateAppointment = () => {
   const history = useHistory();
-  const dispatch = useDispatch();
+  const { createAppointment } = useRequest();
 
   const crumbs = ['Doctors', 'Make an appointment'];
   const [calendarData, setCalendarData] = useState();
@@ -53,13 +52,16 @@ const CreateAppointment = () => {
   };
 
   const onCreateHandler = () => {
-    UseRequest(dispatch, calendarData,
+    const obj = {
+      calendarData,
       time,
-      formData.occupation,
-      formData.doctorName,
-      formData.reason,
-      formData.note);
+      occupation: formData.occupation,
+      doctorName: formData.doctorName,
+      reason: formData.reason,
+      note: formData.note,
+    };
 
+    createAppointment(obj);
     history.replace('/user-appointments');
   };
 

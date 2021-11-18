@@ -1,5 +1,4 @@
-import React from 'react';
-import UserLayout from '../components/layout/UserLayout';
+import UserLayout from '../components/layout/User/UserLayout';
 import UserAppointments from '../components/user/appointments/UserAppointments';
 
 const UserAppointmentsPage = () => (

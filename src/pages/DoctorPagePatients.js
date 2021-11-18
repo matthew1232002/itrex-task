@@ -1,5 +1,4 @@
-import React from 'react';
-import DoctorLayout from '../components/layout/DoctorLayout';
+import DoctorLayout from '../components/layout/Doctor/DoctorLayout';
 import DoctorPatients from '../components/doctor/DoctorPatients';
 
 const DoctorPagePatients = () => (

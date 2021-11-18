@@ -1,5 +1,3 @@
-import React from 'react';
-import { useSelector } from 'react-redux';
 import {
   StyledAppointmentsList,
   StyledBtn,
@@ -9,9 +7,11 @@ import {
   StyledTitle,
 } from './UserAppointmets.styled';
 import Appointment from './Appointment';
+import useRequest from '../../../hooks/usePatient';
 
 const UserAppointments = () => {
-  const appointments = useSelector((state) => state.userAppointments.items);
+  const { appointments } = useRequest();
+
   return (
     <>
       <StyledControllers>

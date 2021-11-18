@@ -1,5 +1,3 @@
-import React from 'react';
-
 import { StyledAside, StyledWrapper } from './LoginLayout.styled';
 
 const LoginLayout = ({ children }) => (

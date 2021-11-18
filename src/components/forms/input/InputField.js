@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import { useState } from 'react';
 
 import { ErrorMessage, useField } from 'formik';
 import { StyledEye, StyledInput, StyledWrapper } from './inputField.styled';
