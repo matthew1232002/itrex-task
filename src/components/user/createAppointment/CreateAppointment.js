@@ -13,7 +13,7 @@ import Breadcrumb from './BreadCrumbs/Breadcrumb';
 import Title from './title/Title';
 import FormPatient from './Form/FormPatient';
 import Checkboxes from './checkboxes/Checkboxes';
-import useRequest from '../../../hooks/usePatient';
+import useRequest from '../../../hooks/useActions';
 
 const CreateAppointment = () => {
   const history = useHistory();

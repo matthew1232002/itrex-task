@@ -7,7 +7,7 @@ import {
   StyledTitle,
 } from './UserAppointmets.styled';
 import Appointment from './Appointment';
-import useRequest from '../../../hooks/usePatient';
+import useRequest from '../../../hooks/useActions';
 
 const UserAppointments = () => {
   const { appointments } = useRequest();
