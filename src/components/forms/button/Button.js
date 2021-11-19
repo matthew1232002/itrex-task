@@ -1,10 +1,9 @@
-import React from 'react';
-import styled from "styled-components";
-import Arrow from '../../../assets/arrow-right.svg'
+import styled from 'styled-components';
+import Arrow from '../../../assets/arrow-right.svg';
 
 const StyledButton = styled.button`
   height: 56px;
-  width: ${props => props.width? props.width: '146px'};
+  width: ${(props) => (props.width ? props.width : '146px')};
   border-radius: 8px;
   background-color: #7297FF;
   color: #FFF;
@@ -27,7 +26,7 @@ const StyledButton = styled.button`
   @media (max-width: 600px) {
     font-size: 15px;
     height: 48px;
-    width: ${props => props.mediaWidth? props.mediaWidth: '122px'};
+    width: ${(props) => (props.mediaWidth ? props.mediaWidth : '122px')};
     padding: 0 32px 0 0;
     :after{
       right: 19px;
@@ -35,10 +34,8 @@ const StyledButton = styled.button`
   }
 `;
 
-const Button = ({text, width, mediaWidth}) => {
-    return (
-        <StyledButton type='submit' width={width} mediaWidth={mediaWidth}>{text}</StyledButton>
-    );
-};
+const Button = ({ text, width, mediaWidth }) => (
+  <StyledButton type="submit" width={width} mediaWidth={mediaWidth}>{text}</StyledButton>
+);
 
-export default Button
+export default Button;

@@ -1,7 +1,7 @@
-import styled from "styled-components";
+import styled from 'styled-components';
 
-import PatientTime from '../../assets/patient-time.svg';
-import Reason from '../../assets/reasonIcon.svg';
+import PatientTime from '../../../assets/patient-time.svg';
+import Reason from '../../../assets/reasonIcon.svg';
 
 export const StyledPatient = styled.div`
   background: #fff;

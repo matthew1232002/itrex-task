@@ -1,4 +1,4 @@
-import styled from "styled-components";
+import styled from 'styled-components';
 
 import PatientTime from '../../assets/patient-time.svg';
 import PatientDescription from '../../assets/patient-description.svg';

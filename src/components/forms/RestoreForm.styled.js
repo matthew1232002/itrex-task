@@ -1,6 +1,6 @@
-import styled from "styled-components";
-import Email from "../../assets/email.svg";
-import Arrow from "../../assets/arrow-right.svg";
+import styled from 'styled-components';
+import Email from '../../assets/email.svg';
+import Arrow from '../../assets/arrow-right.svg';
 
 export const StyledText = styled.p`
   font-size: 15px;
