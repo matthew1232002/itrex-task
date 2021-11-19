@@ -2,7 +2,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import { useCallback } from 'react';
 import { appointmentItems, appointmentsActions } from '../store/user-appointments';
 
-function usePatient() {
+function useActions() {
   const dispatch = useDispatch();
   const createAppointment = useCallback((data) => {
     dispatch(appointmentsActions.addAppointment(data));
@@ -16,4 +16,4 @@ function usePatient() {
   };
 }
 
-export default usePatient;
+export default useActions;
