@@ -31,6 +31,24 @@ const logIn = (credentials) => async (dispatch) => {
   }
 };
 
+const register = (credentials) => async (dispatch) => {
+  dispatch(authActions.registerRequest());
+  dispatch(authActions.getUserProfileRequest());
+
+  try {
+    const { data } = await axios.post('api/auth/registration', credentials);
+    token.set(data.access_token);
+    dispatch(authActions.registerSuccess(data));
+
+    const response = await axios.get('/api/auth/profile');
+    dispatch(authActions.getUserProfileSuccess(response.data));
+  } catch (error) {
+    dispatch(authActions.registerError(error.message));
+    dispatch(authActions.getUserProfileError(error.message));
+  }
+};
+
 export default {
   logIn,
+  register,
 };

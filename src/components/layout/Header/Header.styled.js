@@ -57,7 +57,7 @@ export const StyledUserImg = styled.div`
     position: absolute;
     top: 0;
     right: 0;
-    z-index: 999;
+    z-index: 1;
   }
 
   &:after {

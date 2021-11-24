@@ -10,16 +10,20 @@ const user = createReducer({}, {
 });
 
 const token = createReducer(null, {
+  [authActions.registerSuccess]: (_, { payload }) => payload.access_token,
   [authActions.loginSuccess]: (_, { payload }) => payload.access_token,
 });
 
 const error = createReducer(null, {
+  [authActions.registerError]: (_, { payload }) => payload,
   [authActions.loginError]: (_, { payload }) => payload,
   [authActions.getUserProfileError]: (_, { payload }) => payload,
 });
 
 const isAuthenticated = createReducer(false, {
+  [authActions.registerSuccess]: () => true,
   [authActions.loginSuccess]: () => true,
+  [authActions.registerError]: () => false,
   [authActions.loginError]: () => false,
 });
 

@@ -144,7 +144,7 @@ export const StyledAppointmentsList = styled.div`
   grid-template-columns: repeat(auto-fit, minmax(406px, 1fr));
   height: calc(100vh - 320px);
   background-color: #F9FAFF;
-  overflow: scroll;
+  overflow: auto;
   overflow-x: hidden;
   padding: 0 32px 0 0;
 

@@ -1,14 +1,16 @@
+import moment from 'moment';
 import { StyledInput, StyledLabel, StyledSpan } from './Checkbox.styled';
 
 const Checkbox = ({ time, onChangeTime }) => {
   const onChangeHandler = (event) => {
-    onChangeTime(event.target.value);
+    const timeValue = event.target.value;
+    onChangeTime(timeValue);
   };
 
   return (
     <StyledLabel onChange={onChangeHandler}>
       <StyledInput type="radio" name="time" value={time} />
-      <StyledSpan>{time}</StyledSpan>
+      <StyledSpan>{moment(time).format('hh:mm a')}</StyledSpan>
     </StyledLabel>
   );
 };

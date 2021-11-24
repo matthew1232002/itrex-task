@@ -1,3 +1,4 @@
+import { useEffect, useState } from 'react';
 import {
   StyledAppointmentsList,
   StyledBtn,
@@ -6,12 +7,14 @@ import {
   StyledSearchForm, StyledSearchHeader, StyledSearchItems, StyledSearchList,
   StyledTitle,
 } from './UserAppointmets.styled';
+import { getAppointments } from '../../../store/user/patientOperations';
 import Appointment from './Appointment';
-import useRequest from '../../../hooks/useActions';
 
 const UserAppointments = () => {
-  const { appointments } = useRequest();
-
+  const [appointments, setAppointments] = useState([]);
+  useEffect(() => {
+    getAppointments(0, 100).then((response) => setAppointments(response.data.appointments));
+  }, []);
   return (
     <>
       <StyledControllers>
@@ -44,12 +47,15 @@ const UserAppointments = () => {
         {appointments.map((item) => (
           <Appointment
             key={item.id}
-            item={item}
+            visitDate={item.visit_date}
+            reason={item.reason}
+            note={item.note}
+            status={item.status}
+            doctor={item.doctor}
           />
         ))}
       </StyledAppointmentsList>
     </>
   );
 };
-
 export default UserAppointments;

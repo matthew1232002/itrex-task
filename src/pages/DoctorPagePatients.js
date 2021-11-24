@@ -1,5 +1,5 @@
 import DoctorLayout from '../components/layout/Doctor/DoctorLayout';
-import DoctorPatients from '../components/doctor/DoctorPatients';
+import DoctorPatients from '../components/doctor/patients/DoctorPatients';
 
 const DoctorPagePatients = () => (
   <DoctorLayout>

@@ -3,10 +3,15 @@ import { createReducer } from '@reduxjs/toolkit';
 
 import patientAction from './patientAction';
 
-const doctorList = createReducer([], {
-  [patientAction.setDoctorList]: (state, { payload }) => [...state, payload],
+const appointments = createReducer([], {
+  [patientAction.createAppointmentSuccess]: (state, { payload }) => [...state, payload],
+});
+
+const error = createReducer(null, {
+  [patientAction.createAppointmentError]: (_, { payload }) => payload,
 });
 
 export default combineReducers({
-  doctorList,
+  appointments,
+  error,
 });

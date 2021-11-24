@@ -1,28 +1,31 @@
 import { useDispatch, useSelector } from 'react-redux';
 import { useCallback } from 'react';
-import patientAction from '../store/user/patientAction';
-import patientSelector from '../store/user/patientSelector';
-import authSelector from '../store/auth/authSelector';
+import { addAppointment } from '../store/user/patientOperations';
 import authOperations from '../store/auth/authOperations';
 
 function useActions() {
   const dispatch = useDispatch();
   const createAppointment = useCallback((data) => {
-    dispatch(patientAction.setDoctorList(data));
+    dispatch(addAppointment(data));
   }, [dispatch]);
 
   const loginUser = useCallback((data) => {
     dispatch(authOperations.logIn(data));
   }, [dispatch]);
 
-  const appointments = useSelector(patientSelector.getDoctorList);
-  const isLogged = useSelector(authSelector.getIsAuthenticated);
+  const registerUser = useCallback((data) => {
+    dispatch(authOperations.register(data));
+  }, [dispatch]);
+
+  const isLogged = useSelector((state) => state.auth.isAuthenticated);
+  const profile = useSelector((state) => state.auth.user);
 
   return {
     createAppointment,
-    appointments,
     loginUser,
+    registerUser,
     isLogged,
+    profile,
   };
 }
 

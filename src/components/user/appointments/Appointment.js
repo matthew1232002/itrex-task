@@ -1,3 +1,4 @@
+import moment from 'moment';
 import {
   StyledAvatar, StyledDescription, StyledDoctorPosition,
   StyledFooter,
@@ -6,32 +7,32 @@ import {
   StyledName, StyledPatient,
   StyledTime,
 } from './Appointment.styled';
-import DocAvatar from '../../../assets/DocAvatar.png';
 import More from '../../../assets/patient-more.svg';
 
 const Appointment = ({
-  item: {
-    calendarData,
-    time,
-    occupation,
-    doctorName,
-    reason,
-    note,
-  },
+  visitDate,
+  reason,
+  note,
+  doctor,
+
 }) => (
   <StyledPatient>
     <StyledHeader>
       <StyledInfo>
-        <StyledAvatar><img alt="avatar" src={DocAvatar} /></StyledAvatar>
+        <StyledAvatar><img alt="avatar" src={doctor.photo} width="48" height="48" /></StyledAvatar>
         <StyledName>
-          <p>{doctorName}</p>
-          <StyledDoctorPosition>{`${occupation}`}</StyledDoctorPosition>
+          <p>
+            {doctor.first_name}
+            {' '}
+            {doctor.last_name}
+          </p>
+          <StyledDoctorPosition>{doctor.specialization_name}</StyledDoctorPosition>
         </StyledName>
       </StyledInfo>
       <img alt="more" src={More} />
     </StyledHeader>
     <StyledFooter>
-      <StyledTime>{`${calendarData} ${time}`}</StyledTime>
+      <StyledTime>{moment(visitDate).format('ddd MMM D, YYYY h:mm a')}</StyledTime>
       <StyledDescription>{`${reason} ${note}`}</StyledDescription>
     </StyledFooter>
   </StyledPatient>

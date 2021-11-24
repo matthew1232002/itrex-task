@@ -6,8 +6,19 @@ import Footer from './footer/footer';
 import { StyledInputs } from './SignUpForm.styled';
 import { StyledForm, StyledSidebar } from './LoginPages.styled';
 import Button from './button/Button';
+import useActions from '../../hooks/useActions';
 
 const SignUpForm = () => {
+  const { registerUser } = useActions();
+  const onSubmitHandler = (values) => {
+    const obj = {
+      userName: values.email,
+      password: values.password,
+      firstName: values.firstName,
+      lastName: values.lastName,
+    };
+    registerUser(obj);
+  };
   const validate = Yup.object({
     firstName: Yup.string().max(15, 'Must be 15 characters or less').required('First name is required'),
     lastName: Yup.string().max(20, 'Must be 20 characters or less').required('Last name is required'),
@@ -25,9 +36,7 @@ const SignUpForm = () => {
         confirmPassword: '',
       }}
       validationSchema={validate}
-      onSubmit={(values) => (
-        values
-      )}
+      onSubmit={onSubmitHandler}
     >
       {() => (
         <StyledSidebar>

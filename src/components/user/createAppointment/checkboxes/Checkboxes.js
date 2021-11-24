@@ -1,24 +1,27 @@
+import { useEffect, useState } from 'react';
 import Checkbox from './Checkbox';
+import { getAvailableTime } from '../../../../store/user/patientOperations';
 
-const Checkboxes = ({ onChangeTime }) => {
-  const data = [
-    '12:00 am',
-    '1:00 pm',
-    '2:00 pm',
-    '3:00 pm',
-    '4:00 pm',
-    '5:00 pm',
-    '6:00 pm',
-    '7:00 pm',
-    '8:00 pm',
-    '9:00 pm',
-  ];
+const Checkboxes = ({ onChangeTime, formData, dataIso }) => {
+  const [availableHours, setAvailableHours] = useState(null);
+  useEffect(() => {
+    if (formData && dataIso) {
+      getAvailableTime(formData.doctorId, dataIso)
+        .then((response) => setAvailableHours(response.data));
+    }
+  }, [formData, dataIso]);
 
   return (
     <>
-      {data.map((item) => (
-        <Checkbox key={item} time={item} onChangeTime={(time) => onChangeTime(time)} />
-      ))}
+      {!availableHours && <p>Chose the doctor</p>}
+      {availableHours
+            && availableHours.map((hour) => (
+              <Checkbox
+                key={hour}
+                time={hour}
+                onChangeTime={(time) => onChangeTime(time)}
+              />
+            ))}
     </>
   );
 };
