@@ -2,6 +2,10 @@ import axios from 'axios';
 import patientActions from './patientAction';
 
 axios.defaults.baseURL = 'https://reactlabapi.herokuapp.com';
+const localAuth = localStorage.getItem('persist:auth');
+const jsonAuth = JSON.parse(localAuth);
+const token = jsonAuth.token.replace(/"/g, '');
+axios.defaults.headers.common.Authorization = token;
 
 export const getAllSpecializations = () => axios.get('/api/specializations');
 

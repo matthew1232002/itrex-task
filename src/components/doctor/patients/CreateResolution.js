@@ -12,7 +12,7 @@ const CreateResolution = ({ onCloseCreate }) => (
       <StyledArea id="text" />
     </StyledWrapper>
     <StyledControllers>
-      <StyledBtn onClick={onCloseCreate}>Cancel</StyledBtn>
+      <StyledBtn onClick={onCloseCreate} cancel>Cancel</StyledBtn>
       <StyledBtn>Create</StyledBtn>
     </StyledControllers>
   </Modal>
