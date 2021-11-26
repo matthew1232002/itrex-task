@@ -35,3 +35,7 @@ export const addAppointment = (values) => async (dispatch) => {
     dispatch(patientActions.createAppointmentError(error.message));
   }
 };
+
+export const changeIsAddedState = () => (dispatch) => {
+  dispatch(patientActions.changeIsAdded());
+};
