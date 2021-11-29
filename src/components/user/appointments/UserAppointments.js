@@ -29,9 +29,9 @@ const UserAppointments = () => {
   return (
     <>
       <StyledControllers>
-        <StyledBtn>Profile</StyledBtn>
-        <StyledBtn>Appointments</StyledBtn>
-        <StyledBtn>Resolutions</StyledBtn>
+        <StyledBtn to="/">Profile</StyledBtn>
+        <StyledBtn to="/">Appointments</StyledBtn>
+        <StyledBtn to="/">Resolutions</StyledBtn>
       </StyledControllers>
       <StyledTitle>
         <h2>My Appointments</h2>
@@ -58,6 +58,7 @@ const UserAppointments = () => {
         {appointments.map((item) => (
           <Appointment
             key={item.id}
+            id={item.id}
             visitDate={item.visit_date}
             reason={item.reason}
             note={item.note}
