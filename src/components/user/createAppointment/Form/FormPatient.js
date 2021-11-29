@@ -11,12 +11,7 @@ const FormPatient = ({ onChangeFormData }) => {
   const [note, setNote] = useState('');
 
   useEffect(() => {
-    getAllSpecializations().then((response) => setAllOccupations(response.data.map((item) => (
-      {
-        value: item.id,
-        label: item.specialization_name,
-      }
-    ))));
+    getAllSpecializations().then((response) => setAllOccupations(response));
     const obj = {
       doctorId,
       reason,
@@ -26,12 +21,7 @@ const FormPatient = ({ onChangeFormData }) => {
   }, [doctorId, reason, note]);
 
   const onChangeOccupation = (value) => {
-    getDoctorsBySpecializations(value.value).then((response) => {
-      setNamesBySpecialization(response.data.map((item) => ({
-        value: item.id,
-        label: `${item.first_name} ${item.last_name}`,
-      })));
-    });
+    getDoctorsBySpecializations(value.value).then((response) => setNamesBySpecialization(response));
   };
 
   const onChangeName = (value) => {
@@ -39,7 +29,9 @@ const FormPatient = ({ onChangeFormData }) => {
   };
 
   const onReasonHandler = (e) => {
-    setReason(e.target.value);
+    if (e.target.value.length >= 4) {
+      setReason(e.target.value);
+    }
   };
   const onNoteHandler = (e) => {
     setNote(e.target.value);

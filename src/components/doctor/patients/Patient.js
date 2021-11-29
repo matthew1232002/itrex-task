@@ -18,7 +18,7 @@ const Patient = ({
     id,
     name,
     status,
-    date,
+    time,
     description,
   },
 }) => {
@@ -55,7 +55,7 @@ const Patient = ({
           {menuIsOpen && <DropDownList onCreateResolution={onCreateResolution} />}
         </StyledHeader>
         <StyledFooter>
-          <StyledTime>{date}</StyledTime>
+          <StyledTime>{time}</StyledTime>
           <StyledDescription>{description}</StyledDescription>
         </StyledFooter>
       </StyledPatient>

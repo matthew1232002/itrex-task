@@ -16,11 +16,11 @@ const UserCreateAppointment = React.lazy(() => import('./pages/UserCreateAppoint
 const NotFound = React.lazy(() => import('./pages/NotFound'));
 
 function App() {
-  const { profile } = useActions();
+  const { profile = null } = useActions();
   const history = useHistory();
 
   useEffect(() => {
-    if (Object.keys(profile).length !== 0) {
+    if (profile) {
       if (profile.role_name === 'Doctor') {
         history.replace(routes.doctorPatientsPage);
       } else if (profile.role_name === 'Patient') {

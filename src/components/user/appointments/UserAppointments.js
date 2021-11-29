@@ -55,14 +55,14 @@ const UserAppointments = () => {
         </StyledSearch>
       </StyledTitle>
       <StyledAppointmentsList>
-        {appointments.map((item) => (
+        {appointments.map((appointment) => (
           <Appointment
-            key={item.id}
-            visitDate={item.visit_date}
-            reason={item.reason}
-            note={item.note}
-            status={item.status}
-            doctor={item.doctor}
+            key={appointment.id}
+            visitDate={appointment.visit_date}
+            reason={appointment.reason}
+            note={appointment.note}
+            status={appointment.status}
+            doctor={appointment.doctor}
           />
         ))}
       </StyledAppointmentsList>
