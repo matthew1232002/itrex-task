@@ -13,11 +13,12 @@ import Breadcrumb from './BreadCrumbs/Breadcrumb';
 import Title from './title/Title';
 import FormPatient from './Form/FormPatient';
 import Checkboxes from './checkboxes/Checkboxes';
-import useRequest from '../../../hooks/useActions';
+import useActions from '../../../hooks/useActions';
+import routes from '../../../routes/routes';
 
 const CreateAppointment = () => {
   const history = useHistory();
-  const { createAppointment } = useRequest();
+  const { createAppointment } = useActions();
 
   const crumbs = ['Doctors', 'Make an appointment'];
   const [calendarData, setCalendarData] = useState();
@@ -26,14 +27,14 @@ const CreateAppointment = () => {
   const [disabled, setDisabled] = useState(true);
 
   useEffect(() => {
-    if (calendarData && time && formData) {
+    if (calendarData && time && formData.doctorId && formData.reason) {
       setDisabled(false);
     }
-  });
+  }, [calendarData, time, formData]);
 
   const selected = (crumb) => {
     if (crumb === 'Doctors') {
-      history.replace('/user-appointments');
+      history.replace(routes.userAppointmentsPage);
     }
   };
 
@@ -46,23 +47,21 @@ const CreateAppointment = () => {
   };
 
   const formDataHandler = (formValues) => {
-    if (formValues.occupation && formValues.doctorName && formValues.reason) {
+    if (formValues.doctorId) {
       setFormData(formValues);
     }
   };
 
   const onCreateHandler = () => {
     const obj = {
-      calendarData,
-      time,
-      occupation: formData.occupation,
-      doctorName: formData.doctorName,
+      date: time,
       reason: formData.reason,
       note: formData.note,
+      doctorID: formData.doctorId,
     };
 
     createAppointment(obj);
-    history.replace('/user-appointments');
+    history.replace(routes.userAppointmentsPage);
   };
 
   return (
@@ -78,7 +77,11 @@ const CreateAppointment = () => {
         </StyledContainer>
         <StyledContainer width="464px">
           <Title text="Select an available timeslot" number="2" />
-          <Checkboxes onChangeTime={timeHandler} />
+          <Checkboxes
+            onChangeTime={timeHandler}
+            dataIso={calendarData}
+            formData={formData}
+          />
         </StyledContainer>
         <StyledContainer width="624px">
           <Title last text="Select a doctor and define the reason of your visit" number="3" />

@@ -1,3 +1,5 @@
+import { useEffect, useState } from 'react';
+import { toast } from 'react-toastify';
 import {
   StyledAppointmentsList,
   StyledBtn,
@@ -6,12 +8,24 @@ import {
   StyledSearchForm, StyledSearchHeader, StyledSearchItems, StyledSearchList,
   StyledTitle,
 } from './UserAppointmets.styled';
+import SuccessIcon from '../../../assets/notification_success.svg';
+import { getAppointments } from '../../../store/user/patientOperations';
 import Appointment from './Appointment';
-import useRequest from '../../../hooks/useActions';
+import useActions from '../../../hooks/useActions';
+import { NotifySuccess } from '../../UI/Notify';
 
 const UserAppointments = () => {
-  const { appointments } = useRequest();
-
+  const [appointments, setAppointments] = useState([]);
+  const { isAdded, isAddedChangeState } = useActions();
+  useEffect(() => {
+    getAppointments(0, 100).then((response) => setAppointments(response.data.appointments));
+  }, []);
+  if (isAdded) {
+    toast.success('Appointment successfully added', {
+      icon: () => <img src={SuccessIcon} alt="icon" />,
+    });
+    isAddedChangeState();
+  }
   return (
     <>
       <StyledControllers>
@@ -41,15 +55,19 @@ const UserAppointments = () => {
         </StyledSearch>
       </StyledTitle>
       <StyledAppointmentsList>
-        {appointments.map((item) => (
+        {appointments.map((appointment) => (
           <Appointment
-            key={item.id}
-            item={item}
+            key={appointment.id}
+            visitDate={appointment.visit_date}
+            reason={appointment.reason}
+            note={appointment.note}
+            status={appointment.status}
+            doctor={appointment.doctor}
           />
         ))}
       </StyledAppointmentsList>
+      <NotifySuccess />
     </>
   );
 };
-
 export default UserAppointments;

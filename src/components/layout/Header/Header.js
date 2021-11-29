@@ -25,5 +25,4 @@ const Header = ({ name, status, userAvatar }) => (
     </StyledUser>
   </StyledHeader>
 );
-
 export default Header;

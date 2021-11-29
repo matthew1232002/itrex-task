@@ -1,8 +1,11 @@
-import React, { Suspense } from 'react';
-import { Route, Switch, Redirect } from 'react-router-dom';
+import React, { Suspense, useEffect } from 'react';
+import {
+  Route, Switch, useHistory, Redirect,
+} from 'react-router-dom';
 
 import routes from './routes/routes';
 import LoadingSpinner from './components/UI/LoadingSpinner';
+import useActions from './hooks/useActions';
 
 const SignUp = React.lazy(() => import('./pages/SignUp'));
 const SignIn = React.lazy(() => import('./pages/SignIn'));
@@ -13,33 +16,31 @@ const UserCreateAppointment = React.lazy(() => import('./pages/UserCreateAppoint
 const NotFound = React.lazy(() => import('./pages/NotFound'));
 
 function App() {
+  const { profile = null } = useActions();
+  const history = useHistory();
+
+  useEffect(() => {
+    if (profile) {
+      if (profile.role_name === 'Doctor') {
+        history.replace(routes.doctorPatientsPage);
+      } else if (profile.role_name === 'Patient') {
+        history.replace(routes.userAppointmentsPage);
+      }
+    }
+  }, [profile]);
   return (
     <Suspense fallback={<LoadingSpinner />}>
       <Switch>
         <Route path="/" exact>
           <Redirect to={routes.signUpPage} />
         </Route>
-        <Route path={routes.signUpPage}>
-          <SignUp />
-        </Route>
-        <Route path={routes.signInPage}>
-          <SignIn />
-        </Route>
-        <Route path={routes.restorePage}>
-          <Restore />
-        </Route>
-        <Route path={routes.doctorPatientsPage}>
-          <DoctorPatients />
-        </Route>
-        <Route path={routes.userAppointmentsPage}>
-          <UserAppointments />
-        </Route>
-        <Route path={routes.createAppointmentPage}>
-          <UserCreateAppointment />
-        </Route>
-        <Route path="*">
-          <NotFound />
-        </Route>
+        <Route path={routes.signUpPage} component={SignUp} />
+        <Route path={routes.signInPage} component={SignIn} />
+        <Route path={routes.restorePage} component={Restore} />
+        <Route path={routes.doctorPatientsPage} component={DoctorPatients} />
+        <Route path={routes.userAppointmentsPage} component={UserAppointments} />
+        <Route path={routes.createAppointmentPage} component={UserCreateAppointment} />
+        <Route path="*" component={NotFound} />
       </Switch>
     </Suspense>
   );

@@ -1,7 +1,7 @@
 import styled from 'styled-components';
 
-import PatientTime from '../../assets/patient-time.svg';
-import PatientDescription from '../../assets/patient-description.svg';
+import PatientTime from '../../../assets/patient-time.svg';
+import PatientDescription from '../../../assets/patient-description.svg';
 
 export const StyledPatient = styled.div`
   background: #fff;
@@ -15,6 +15,7 @@ export const StyledHeader = styled.header`
   display: flex;
   justify-content: space-between;
   padding-bottom: 24px;
+  position: relative;
 `;
 
 export const StyledInfo = styled.div`
@@ -48,8 +49,30 @@ export const StyledStatus = styled.p`
     position: absolute;
     top: 50%;
     left: 0;
-    z-index: 999;
+    z-index: 1;
     transform: translateY(-50%);
+  }
+`;
+
+export const StyledMore = styled.div`
+  height: 40px;
+  width: 40px;
+  position: relative;
+  border-radius: 6px;
+  &:focus,
+  &:active{
+    background: #F9FAFF;
+  }
+  img{
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%, -50%);
+    cursor: pointer;
+    &:focus,
+    &:active{
+      filter: invert(51%) sepia(63%) saturate(942%) hue-rotate(200deg) brightness(101%) contrast(102%);
+    }
   }
 `;
 

@@ -1,5 +1,5 @@
 import styled from 'styled-components';
-import EmptyImg from '../../assets/empty_list.svg';
+import EmptyImg from '../../../assets/empty_list.svg';
 
 const StyledEmptyList = styled.div`
   display: flex;

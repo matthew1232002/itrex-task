@@ -1,0 +1,50 @@
+import axios from 'axios';
+import patientActions from './patientAction';
+
+axios.defaults.baseURL = 'https://reactlabapi.herokuapp.com';
+const localAuth = localStorage.getItem('persist:auth');
+const jsonAuth = JSON.parse(localAuth);
+const token = jsonAuth.token.replace(/"/g, '');
+axios.defaults.headers.common.Authorization = token;
+
+export const getAllSpecializations = () => axios.get('/api/specializations').then((response) => response.data.map((item) => (
+  {
+    value: item.id,
+    label: item.specialization_name,
+  }
+)));
+
+export const getDoctorsBySpecializations = (specializationId) => axios.get(`/api/doctors/specialization/${specializationId}`)
+  .then((response) => response.data.map((item) => ({
+    value: item.id,
+    label: `${item.first_name} ${item.last_name}`,
+  })));
+
+export const getAvailableTime = (doctorId, date) => axios.get('/api/appointments/time/free', {
+  params: {
+    doctorId,
+    date,
+  },
+});
+
+export const getAppointments = (offset, limit) => axios.get('/api/appointments/patient/me', {
+  params: {
+    offset,
+    limit,
+  },
+});
+
+export const addAppointment = (values) => async (dispatch) => {
+  dispatch(patientActions.createAppointmentRequest());
+
+  try {
+    const { data } = await axios.post('/api/appointments', values);
+    dispatch(patientActions.createAppointmentSuccess(data));
+  } catch (error) {
+    dispatch(patientActions.createAppointmentError(error.message));
+  }
+};
+
+export const changeIsAddedState = () => (dispatch) => {
+  dispatch(patientActions.changeIsAdded());
+};

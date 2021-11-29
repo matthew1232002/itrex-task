@@ -1,52 +1,37 @@
 import { useEffect, useState } from 'react';
 import { CustomSelect } from './Select.styled';
 import { StyledInput, StyledInputContainer, StyledLabel } from './FormPatient.styled';
+import { getAllSpecializations, getDoctorsBySpecializations } from '../../../../store/user/patientOperations';
 
 const FormPatient = ({ onChangeFormData }) => {
-  const [occupationData, setOccupationData] = useState();
-  const [doctorName, setDoctorName] = useState();
+  const [allOccupations, setAllOccupations] = useState([]);
+  const [namesBySpecialization, setNamesBySpecialization] = useState([]);
+  const [doctorId, setDoctorId] = useState();
   const [reason, setReason] = useState();
-  const [note, setNote] = useState();
+  const [note, setNote] = useState('');
 
   useEffect(() => {
+    getAllSpecializations().then((response) => setAllOccupations(response));
     const obj = {
-      occupation: occupationData,
-      doctorName,
+      doctorId,
       reason,
       note,
     };
     onChangeFormData(obj);
-  }, [occupationData, doctorName, reason, note]);
-
-  const occupation = [
-    { value: 'cardiologist', label: 'Cardiologist' },
-    { value: 'dermatologist', label: 'Dermatologist' },
-    { value: 'doctor', label: 'Doctor' },
-    { value: 'family Doctor', label: 'Family Doctor' },
-    { value: 'gastroenterologist', label: 'Gastroenterologist' },
-    { value: 'gynecologist', label: 'Gynecologist' },
-    { value: 'surgeon', label: 'Surgeon' },
-    { value: 'therapist', label: 'Therapist' },
-  ];
-
-  const names = [
-    { value: 'john milton', label: 'John Milton' },
-    { value: 'john charles', label: 'John Charles' },
-    { value: 'jonathan meyers', label: 'Jonathan Meyers' },
-    { value: 'andrew story', label: 'Andrew Story' },
-    { value: 'vitalii doc', label: 'Vitalii Doc' },
-  ];
+  }, [doctorId, reason, note]);
 
   const onChangeOccupation = (value) => {
-    setOccupationData(value.value);
+    getDoctorsBySpecializations(value.value).then((response) => setNamesBySpecialization(response));
   };
 
   const onChangeName = (value) => {
-    setDoctorName(value.value);
+    setDoctorId(value.value);
   };
 
   const onReasonHandler = (e) => {
-    setReason(e.target.value);
+    if (e.target.value.length >= 4) {
+      setReason(e.target.value);
+    }
   };
   const onNoteHandler = (e) => {
     setNote(e.target.value);
@@ -57,7 +42,7 @@ const FormPatient = ({ onChangeFormData }) => {
       <StyledInputContainer>
         <StyledLabel>Occupation</StyledLabel>
         <CustomSelect
-          options={occupation}
+          options={allOccupations}
           placeholder="Select an occupation"
           classNamePrefix="Select"
           onChange={onChangeOccupation}
@@ -66,7 +51,7 @@ const FormPatient = ({ onChangeFormData }) => {
       <StyledInputContainer>
         <StyledLabel>Doctor’s Name</StyledLabel>
         <CustomSelect
-          options={names}
+          options={namesBySpecialization}
           placeholder="Select a doctor’s name"
           classNamePrefix="Select"
           onChange={onChangeName}
