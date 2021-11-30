@@ -12,7 +12,7 @@ const SignUpForm = () => {
   const { registerUser } = useActions();
   const onSubmitHandler = (values) => {
     const obj = {
-      userName: values.email,
+      userName: values.userName,
       password: values.password,
       firstName: values.firstName,
       lastName: values.lastName,
@@ -22,7 +22,7 @@ const SignUpForm = () => {
   const validate = Yup.object({
     firstName: Yup.string().max(15, 'Must be 15 characters or less').required('First name is required'),
     lastName: Yup.string().max(20, 'Must be 20 characters or less').required('Last name is required'),
-    email: Yup.string().email('Email is invalid').required('Email is required'),
+    userName: Yup.string().email('Email is invalid').required('Email is required'),
     password: Yup.string().min(6, 'Password must be at least 6 characters').required('Password is required'),
     confirmPassword: Yup.string().oneOf([Yup.ref('password'), null], 'Password must match').required('Confirm password is required'),
   });
@@ -31,7 +31,7 @@ const SignUpForm = () => {
       initialValues={{
         firstName: '',
         lastName: '',
-        email: '',
+        userName: '',
         password: '',
         confirmPassword: '',
       }}
@@ -43,11 +43,11 @@ const SignUpForm = () => {
           <Header text="Sign Up" />
           <StyledForm>
             <StyledInputs>
-              <InputField type="text" placeholder="First Name" name="firstName" />
-              <InputField type="text" placeholder="Last Name" name="lastName" />
-              <InputField type="email" placeholder="Email" name="email" />
-              <InputField type="password" placeholder="Password" name="password" />
-              <InputField type="password" placeholder="Confirm Password" name="confirmPassword" />
+              <InputField type="text" placeholder="First Name" name="firstName" testId="firstName" />
+              <InputField type="text" placeholder="Last Name" name="lastName" testId="lastName" />
+              <InputField type="email" placeholder="Email" name="userName" testId="userNameSignUp" />
+              <InputField type="password" placeholder="Password" name="password" testId="passwordSignUp" />
+              <InputField type="password" placeholder="Confirm Password" name="confirmPassword" testId="confirmPassword" />
             </StyledInputs>
             <Button text="Sign Up" />
           </StyledForm>

@@ -18,7 +18,7 @@ const UserAppointments = () => {
   const [appointments, setAppointments] = useState([]);
   const { isAdded, isAddedChangeState } = useActions();
   useEffect(() => {
-    getAppointments(0, 100).then((response) => setAppointments(response.data.appointments));
+    getAppointments().then((response) => setAppointments(response.data.appointments));
   }, []);
   if (isAdded) {
     toast.success('Appointment successfully added', {
@@ -55,15 +55,15 @@ const UserAppointments = () => {
         </StyledSearch>
       </StyledTitle>
       <StyledAppointmentsList>
-        {appointments.map((item) => (
+        {appointments.map((appointment) => (
           <Appointment
-            key={item.id}
-            id={item.id}
-            visitDate={item.visit_date}
-            reason={item.reason}
-            note={item.note}
-            status={item.status}
-            doctor={item.doctor}
+            key={appointment.id}
+            id={appointment.id}
+            visitDate={appointment.visit_date}
+            reason={appointment.reason}
+            note={appointment.note}
+            status={appointment.status}
+            doctor={appointment.doctor}
           />
         ))}
       </StyledAppointmentsList>

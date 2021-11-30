@@ -19,7 +19,7 @@ const Appointment = ({
   <StyledPatient data-testid={id}>
     <StyledHeader>
       <StyledInfo>
-        <StyledAvatar><img alt="avatar" src={doctor.photo} width="48" height="48" /></StyledAvatar>
+        <StyledAvatar><img alt="avatar" src={doctor.photo} /></StyledAvatar>
         <StyledName>
           <p>
             {doctor.first_name}

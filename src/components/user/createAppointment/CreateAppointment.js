@@ -30,7 +30,7 @@ const CreateAppointment = () => {
     if (calendarData && time && formData.doctorId && formData.reason) {
       setDisabled(false);
     }
-  });
+  }, [calendarData, time, formData]);
 
   const selected = (crumb) => {
     if (crumb === 'Doctors') {

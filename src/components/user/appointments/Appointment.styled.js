@@ -23,6 +23,10 @@ export const StyledInfo = styled.div`
 
 export const StyledAvatar = styled.div`
   margin-right: 16px;
+  img {
+    width: 48px;
+    height: 48px;
+  }
 `;
 
 export const StyledName = styled.div`

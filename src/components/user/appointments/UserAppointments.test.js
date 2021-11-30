@@ -43,7 +43,7 @@ describe('User Appointments', () => {
     }));
     mock.onGet('/api/appointments/patient/me', { params: { offset: 0, limit: 20, token: '...' } }).reply(200, {
       appointments: [{
-        id: 'string',
+        id: 'id',
         reason: 'string',
         note: 'string',
         patient_id: 'string',

@@ -10,9 +10,18 @@ export function getToken() {
 
 getToken();
 
-export const getAllSpecializations = () => axios.get('/api/specializations');
+export const getAllSpecializations = () => axios.get('/api/specializations').then((response) => response.data.map((item) => (
+  {
+    value: item.id,
+    label: item.specialization_name,
+  }
+)));
 
-export const getDoctorsBySpecializations = (specializationId) => axios.get(`/api/doctors/specialization/${specializationId}`);
+export const getDoctorsBySpecializations = (specializationId) => axios.get(`/api/doctors/specialization/${specializationId}`)
+  .then((response) => response.data.map((item) => ({
+    value: item.id,
+    label: `${item.first_name} ${item.last_name}`,
+  })));
 
 export const getAvailableTime = (doctorId, date) => axios.get('/api/appointments/time/free', {
   params: {
@@ -21,10 +30,10 @@ export const getAvailableTime = (doctorId, date) => axios.get('/api/appointments
   },
 });
 
-export const getAppointments = (offset, limit) => axios.get('/api/appointments/patient/me', {
+export const getAppointments = () => axios.get('/api/appointments/patient/me', {
   params: {
-    offset,
-    limit,
+    offset: 0,
+    limit: 100,
   },
 });
 
