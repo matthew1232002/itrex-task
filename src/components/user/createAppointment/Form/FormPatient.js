@@ -59,11 +59,11 @@ const FormPatient = ({ onChangeFormData }) => {
       </StyledInputContainer>
       <StyledInputContainer>
         <StyledLabel>Reason for the visit</StyledLabel>
-        <StyledInput placeholder="Leave a reason" onChange={onReasonHandler} data-testid='reason'/>
+        <StyledInput placeholder="Leave a reason" onChange={onReasonHandler} data-testid="reason" />
       </StyledInputContainer>
       <StyledInputContainer>
         <StyledLabel>Note</StyledLabel>
-        <StyledInput placeholder="Leave a note if needed" onChange={onNoteHandler} data-testid='note'/>
+        <StyledInput placeholder="Leave a note if needed" onChange={onNoteHandler} data-testid="note" />
       </StyledInputContainer>
     </>
   );
