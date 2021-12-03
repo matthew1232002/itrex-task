@@ -58,6 +58,7 @@ const UserAppointments = () => {
         {appointments.map((appointment) => (
           <Appointment
             key={appointment.id}
+            id={appointment.id}
             visitDate={appointment.visit_date}
             reason={appointment.reason}
             note={appointment.note}
