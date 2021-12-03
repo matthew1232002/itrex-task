@@ -9,7 +9,7 @@ const Checkbox = ({ time, onChangeTime }) => {
 
   return (
     <StyledLabel onChange={onChangeHandler}>
-      <StyledInput type="radio" name="time" value={time} />
+      <StyledInput type="radio" name="time" value={time} data-testid='checkbox'/>
       <StyledSpan>{moment(time).format('hh:mm a')}</StyledSpan>
     </StyledLabel>
   );
