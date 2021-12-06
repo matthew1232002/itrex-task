@@ -8,13 +8,6 @@ import {BrowserRouter} from "react-router-dom";
 
 jest.mock('../../store/user/patientOperations', () => ({}));
 
-jest.mock("react-router-dom", () => ({
-    ...jest.requireActual("react-router-dom"),
-    useLocation: () => ({
-        pathname: "/sign-in"
-    })
-}));
-
 describe('Sign In form', () => {
     test('rendering and submitting a Sign In form', async () => {
         const loginUser = jest.fn((values) =>  {})
