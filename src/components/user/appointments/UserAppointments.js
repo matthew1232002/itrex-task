@@ -18,7 +18,7 @@ const UserAppointments = () => {
   const [appointments, setAppointments] = useState([]);
   const { isAdded, isAddedChangeState } = useActions();
   useEffect(() => {
-    getAppointments(0, 100).then((response) => setAppointments(response.data.appointments));
+    getAppointments().then((response) => setAppointments(response.data.appointments));
   }, []);
   if (isAdded) {
     toast.success('Appointment successfully added', {
@@ -29,9 +29,9 @@ const UserAppointments = () => {
   return (
     <>
       <StyledControllers>
-        <StyledBtn>Profile</StyledBtn>
-        <StyledBtn>Appointments</StyledBtn>
-        <StyledBtn>Resolutions</StyledBtn>
+        <StyledBtn to="/">Profile</StyledBtn>
+        <StyledBtn to="/">Appointments</StyledBtn>
+        <StyledBtn to="/">Resolutions</StyledBtn>
       </StyledControllers>
       <StyledTitle>
         <h2>My Appointments</h2>
@@ -58,6 +58,7 @@ const UserAppointments = () => {
         {appointments.map((appointment) => (
           <Appointment
             key={appointment.id}
+            id={appointment.id}
             visitDate={appointment.visit_date}
             reason={appointment.reason}
             note={appointment.note}

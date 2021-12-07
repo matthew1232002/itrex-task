@@ -11,6 +11,10 @@ import Button from './button/Button';
 const SignInForm = () => {
   const { loginUser } = useActions();
 
+  const handleSubmit = (values) => {
+    loginUser(values);
+  };
+
   const validate = Yup.object({
     userName: Yup.string().email('Email is invalid').required('Email is required'),
     password: Yup.string().min(6, 'Password must be at least 6 characters').required('Password is required'),
@@ -23,17 +27,15 @@ const SignInForm = () => {
         password: '',
       }}
       validationSchema={validate}
-      onSubmit={(value) => (
-        loginUser(value)
-      )}
+      onSubmit={handleSubmit}
     >
       {() => (
         <StyledSidebar>
           <Header text="Sign In" />
           <StyledForm>
             <StyledInputs>
-              <InputField type="email" placeholder="Email" name="userName" />
-              <InputField type="password" placeholder="Password" name="password" />
+              <InputField type="email" placeholder="Email" name="userName" testId="username" />
+              <InputField type="password" placeholder="Password" name="password" testId="password" />
             </StyledInputs>
             <Button text="Sign In" />
             <StyledLink to="/restore">Forgot Password?</StyledLink>

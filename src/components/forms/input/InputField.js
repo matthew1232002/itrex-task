@@ -4,7 +4,9 @@ import { ErrorMessage, useField } from 'formik';
 import { StyledEye, StyledInput, StyledWrapper } from './inputField.styled';
 import Eye from '../../../assets/eye1.png';
 
-const InputField = ({ type, placeholder, ...props }) => {
+const InputField = ({
+  type, placeholder, testId, ...props
+}) => {
   const [inputEyeStyle, setInputEyeStyle] = useState({});
   const [field, meta] = useField(props);
 
@@ -26,6 +28,7 @@ const InputField = ({ type, placeholder, ...props }) => {
   return (
     <StyledWrapper>
       <StyledInput
+        data-testid={testId}
         type={type}
         placeholder={placeholder}
         autoComplete="off"

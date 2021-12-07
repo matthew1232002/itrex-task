@@ -14,9 +14,9 @@ const Appointment = ({
   reason,
   note,
   doctor,
-
+  id,
 }) => (
-  <StyledPatient>
+  <StyledPatient data-testid={id}>
     <StyledHeader>
       <StyledInfo>
         <StyledAvatar><img alt="avatar" src={doctor.photo} /></StyledAvatar>

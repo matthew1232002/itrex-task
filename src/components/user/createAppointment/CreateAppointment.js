@@ -65,7 +65,7 @@ const CreateAppointment = () => {
   };
 
   return (
-    <StyledWrapper>
+    <StyledWrapper data-testid="test">
       <StyledCrumbs>
         <Breadcrumb crumbs={crumbs} selected={selected} />
       </StyledCrumbs>
@@ -86,7 +86,7 @@ const CreateAppointment = () => {
         <StyledContainer width="624px">
           <Title last text="Select a doctor and define the reason of your visit" number="3" />
           <FormPatient onChangeFormData={formDataHandler} />
-          <StyledButton disabled={disabled} onClick={onCreateHandler}>Submit</StyledButton>
+          <StyledButton disabled={disabled} onClick={onCreateHandler} data-testid="submit">Submit</StyledButton>
         </StyledContainer>
       </StyledFooter>
     </StyledWrapper>

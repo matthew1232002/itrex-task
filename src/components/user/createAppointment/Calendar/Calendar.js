@@ -23,7 +23,6 @@ const ReactCalendar = (props) => {
       <StyledCalendar
         locale="en"
         minDetail="year"
-        formatShortWeekday={(locale, d) => ['M', 'T', 'W', 'T', 'F', 'S', 'S'][d.getDate() - 1]}
         onChange={onChange}
         value={date}
       />

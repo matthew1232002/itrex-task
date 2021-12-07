@@ -2,10 +2,13 @@ import axios from 'axios';
 import patientActions from './patientAction';
 
 axios.defaults.baseURL = 'https://reactlabapi.herokuapp.com';
-const localAuth = localStorage.getItem('persist:auth');
-const jsonAuth = JSON.parse(localAuth);
-const token = jsonAuth.token.replace(/"/g, '');
-axios.defaults.headers.common.Authorization = token;
+export function getToken() {
+  const localAuth = localStorage.getItem('persist:auth');
+  const jsonAuth = JSON.parse(localAuth);
+  axios.defaults.headers.common.Authorization = jsonAuth.token.replace(/"/g, '');
+}
+
+getToken();
 
 export const getAllSpecializations = () => axios.get('/api/specializations').then((response) => response.data.map((item) => (
   {
@@ -27,10 +30,10 @@ export const getAvailableTime = (doctorId, date) => axios.get('/api/appointments
   },
 });
 
-export const getAppointments = (offset, limit) => axios.get('/api/appointments/patient/me', {
+export const getAppointments = () => axios.get('/api/appointments/patient/me', {
   params: {
-    offset,
-    limit,
+    offset: 0,
+    limit: 100,
   },
 });
 
