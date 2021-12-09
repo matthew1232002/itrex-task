@@ -5,10 +5,12 @@
     "es2021": true
   },
   "extends": [
-    "plugin:react/recommended",
-    "airbnb"
+    "airbnb",
+    "airbnb-typescript",
+    "airbnb-typescript/base"
   ],
   "parserOptions": {
+    "project": "./tsconfig.json",
     "ecmaFeatures": {
       "jsx": true
     },
@@ -26,6 +28,14 @@
     "import/prefer-default-export": "off",
     "react/jsx-props-no-spreading": "off",
     "react/jsx-uses-react": "off",
-    "react/react-in-jsx-scope": "off"
+    "react/react-in-jsx-scope": "off",
+    "react/require-default-props": "off",
+    "import/extensions": [
+      "error",
+      "never",
+      {
+        "json": "always"
+      }
+    ]
   }
 }
