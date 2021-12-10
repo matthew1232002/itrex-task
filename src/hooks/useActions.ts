@@ -1,6 +1,6 @@
 import { useDispatch, useSelector } from 'react-redux';
 import { useCallback } from 'react';
-import { addAppointment, changeIsAddedState } from '../store/user/patientOperations';
+import { addAppointment } from '../store/user/patientOperations';
 import authOperations from '../store/auth/authOperations';
 
 type IsLoggedState = {
@@ -21,12 +21,6 @@ type ProfileState = {
   }
 };
 
-type IsAddedState = {
-  doctors: {
-    isAdded: boolean
-  }
-};
-
 function useActions() {
   const dispatch = useDispatch();
   const createAppointment = useCallback((data) => {
@@ -41,22 +35,15 @@ function useActions() {
     dispatch(authOperations.register(data));
   }, [dispatch]);
 
-  const changeIsAdded = () => {
-    dispatch(changeIsAddedState());
-  };
-
   const isLogged = useSelector((state: IsLoggedState) => state.auth.isAuthenticated);
   const profile = useSelector((state: ProfileState) => state.auth.user);
-  const isAdded = useSelector((state: IsAddedState) => state.doctors.isAdded);
 
   return {
     createAppointment,
     loginUser,
     registerUser,
-    changeIsAdded,
     isLogged,
     profile,
-    isAdded,
   };
 }
 

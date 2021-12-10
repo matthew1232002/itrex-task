@@ -8,7 +8,7 @@ import '@testing-library/jest-dom/extend-expect';
 
 type Default = string;
 
-jest.mock('../../../store/user/patientOperations', () => ({}));
+jest.mock('../../../store/user/patientOperations', () => jest.fn(() => {}));
 
 describe('Appointment form', () => {
   test('to be truthy', () => {

@@ -18,13 +18,7 @@ const error = createReducer<string>('', {
   ) => payload,
 });
 
-const isAdded = createReducer(false, {
-  [patientAction.createAppointmentSuccess.type]: () => true,
-  [patientAction.changeIsAdded.type]: () => false,
-});
-
 export default combineReducers({
   appointments,
   error,
-  isAdded,
 });

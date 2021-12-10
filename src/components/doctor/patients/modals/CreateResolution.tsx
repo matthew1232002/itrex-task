@@ -1,14 +1,14 @@
-import Modal from '../../UI/Modal';
+import Modal from '../../../UI/Modal';
 import {
   StyledArea, StyledBtn, StyledControllers, StyledName, StyledText, StyledTitle, StyledWrapper,
 } from './CreateResolution.styled';
 
 type DropDownProps = {
-  onCloseCreate: () => void
+  onClose: () => void
 };
 
-const CreateResolution = ({ onCloseCreate }: DropDownProps) => (
-  <Modal onClose={onCloseCreate}>
+const CreateResolution = ({ onClose }: DropDownProps) => (
+  <Modal onClose={onClose}>
     <StyledWrapper>
       <StyledTitle>Create a Resolution</StyledTitle>
       <StyledName>Mila Western</StyledName>
@@ -16,8 +16,8 @@ const CreateResolution = ({ onCloseCreate }: DropDownProps) => (
       <StyledArea id="text" />
     </StyledWrapper>
     <StyledControllers>
-      <StyledBtn onClick={onCloseCreate} cancel>Cancel</StyledBtn>
-      <StyledBtn cancel={false}>Create</StyledBtn>
+      <StyledBtn onClick={onClose} cancel>Cancel</StyledBtn>
+      <StyledBtn>Create</StyledBtn>
     </StyledControllers>
   </Modal>
 );

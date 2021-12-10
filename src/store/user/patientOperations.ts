@@ -3,7 +3,8 @@ import { Dispatch } from 'redux';
 import patientActions from './patientAction';
 import { SpecializationsType } from '../../components/models/specializations.model';
 import { DoctorsBySpecializationType } from '../../components/models/doctorsBySpecialization.model';
-import { AddAppointmentType, AddAppointmentResponseType } from '../../components/models/addAppointment.model';
+import { AddAppointmentResponseType, AddAppointmentType } from '../../components/models/addAppointment.model';
+import { NotifyError, NotifySuccess } from '../../components/UI/Notify';
 
 axios.defaults.baseURL = 'https://reactlabapi.herokuapp.com';
 export function getToken() {
@@ -49,11 +50,9 @@ export const addAppointment = (values: AddAppointmentType) => async (
   try {
     const { data } = await axios.post<AddAppointmentResponseType>('/api/appointments', values);
     dispatch(patientActions.createAppointmentSuccess(data));
+    NotifySuccess('Appointment successfully added!');
   } catch (error) {
+    NotifyError('Something went wrong!');
     dispatch(patientActions.createAppointmentError((error as Error).message));
   }
-};
-
-export const changeIsAddedState = () => (dispatch: Dispatch<{ type: string }>) => {
-  dispatch(patientActions.changeIsAdded());
 };

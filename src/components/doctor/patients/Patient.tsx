@@ -11,14 +11,16 @@ import {
 import PatientAvatar from '../../../assets/patient-img.jpg';
 import PatientMore from '../../../assets/patient-more.svg';
 import DropDownList from './DropDownList';
-import CreateResolution from './CreateResolution';
+import CreateResolution from './modals/CreateResolution';
 import { PatientType } from '../../models/patient.model';
+import EditResolution from './modals/EditResolution';
 
 const Patient = ({
   id, name, status, time, description,
 }: PatientType) => {
   const [menuIsOpen, setMenuIsOpen] = useState(false);
   const [createResolutionIsShown, setCreateResolutionIsShown] = useState(false);
+  const [editResolutionIsShown, setEditResolutionIsShown] = useState(false);
 
   const onToggleList = () => {
     setMenuIsOpen((prevState) => !prevState);
@@ -26,15 +28,23 @@ const Patient = ({
 
   const onCreateResolution = () => {
     setCreateResolutionIsShown(true);
+    setMenuIsOpen((prevState) => !prevState);
   };
 
-  const onCloseCreate = () => {
+  const onEditResolution = () => {
+    setEditResolutionIsShown(true);
+    setMenuIsOpen((prevState) => !prevState);
+  };
+
+  const onClose = () => {
     setCreateResolutionIsShown(false);
+    setEditResolutionIsShown(false);
   };
 
   return (
     <>
-      {createResolutionIsShown && <CreateResolution onCloseCreate={onCloseCreate} />}
+      {createResolutionIsShown && <CreateResolution onClose={onClose} />}
+      {editResolutionIsShown && <EditResolution onClose={onClose} />}
       <StyledPatient key={id}>
         <StyledHeader>
           <StyledInfo>
@@ -47,7 +57,12 @@ const Patient = ({
           <StyledMore onClick={onToggleList}>
             <img alt="more" src={PatientMore} />
           </StyledMore>
-          {menuIsOpen && <DropDownList onCreateResolution={onCreateResolution} />}
+          {menuIsOpen && (
+          <DropDownList
+            onCreateResolution={onCreateResolution}
+            onEditResolution={onEditResolution}
+          />
+          )}
         </StyledHeader>
         <StyledFooter>
           <StyledTime>{time}</StyledTime>

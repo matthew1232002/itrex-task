@@ -8,11 +8,8 @@ const createAppointmentError = createAction('user/createAppointmentError', (date
   payload: date,
 }));
 
-const changeIsAdded = createAction('user/changeIsAdded');
-
 export default {
   createAppointmentRequest,
   createAppointmentSuccess,
   createAppointmentError,
-  changeIsAdded,
 };

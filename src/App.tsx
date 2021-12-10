@@ -6,6 +6,7 @@ import {
 import routes from './routes/routes';
 import LoadingSpinner from './components/UI/LoadingSpinner';
 import useActions from './hooks/useActions';
+import { Toast } from './components/UI/Notify';
 
 const SignUp = React.lazy(() => import('./pages/SignUp'));
 const SignIn = React.lazy(() => import('./pages/SignIn'));
@@ -29,20 +30,24 @@ function App() {
     }
   }, [profile]);
   return (
-    <Suspense fallback={<LoadingSpinner />}>
-      <Switch>
-        <Route path="/" exact>
-          <Redirect to={routes.signUpPage} />
-        </Route>
-        <Route path={routes.signUpPage} component={SignUp} />
-        <Route path={routes.signInPage} component={SignIn} />
-        <Route path={routes.restorePage} component={Restore} />
-        <Route path={routes.doctorPatientsPage} component={DoctorPatients} />
-        <Route path={routes.userAppointmentsPage} component={UserAppointments} />
-        <Route path={routes.createAppointmentPage} component={UserCreateAppointment} />
-        <Route path="*" component={NotFound} />
-      </Switch>
-    </Suspense>
+    <>
+      <Toast />
+      <Suspense fallback={<LoadingSpinner />}>
+        <Switch>
+          <Route path="/" exact>
+            <Redirect to={routes.signUpPage} />
+          </Route>
+          <Route path={routes.signUpPage} component={SignUp} />
+          <Route path={routes.signInPage} component={SignIn} />
+          <Route path={routes.restorePage} component={Restore} />
+          <Route path={routes.doctorPatientsPage} component={DoctorPatients} />
+          <Route path={routes.userAppointmentsPage} component={UserAppointments} />
+          <Route path={routes.createAppointmentPage} component={UserCreateAppointment} />
+          <Route path="*" component={NotFound} />
+        </Switch>
+      </Suspense>
+    </>
+
   );
 }
 

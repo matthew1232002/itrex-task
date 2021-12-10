@@ -3,7 +3,6 @@ import { persistStore, persistReducer } from 'redux-persist';
 import storage from 'redux-persist/lib/storage';
 import patientReducer from './user/patientReducer';
 import authReducer from './auth/authReducer';
-import { AuthReducerType } from '../components/models/authReducer.model';
 
 const authPersistConfig = {
   key: 'auth',
@@ -13,7 +12,7 @@ const authPersistConfig = {
 
 const store = configureStore({
   reducer: {
-    auth: persistReducer<any & AuthReducerType>(authPersistConfig, authReducer),
+    auth: persistReducer<any>(authPersistConfig, authReducer),
     doctors: patientReducer,
   },
   middleware: (getDefaultMiddleware) => getDefaultMiddleware({
