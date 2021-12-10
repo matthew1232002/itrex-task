@@ -26,7 +26,7 @@ const logIn = (credentials: LogInType) => async (dispatch: Dispatch<{ type: stri
 
     token.set(data.access_token);
 
-    dispatch(authActions.loginSuccess(data));
+    dispatch(authActions.loginSuccess(data.access_token));
 
     const response = await axios.get<ProfileWithDataType>('/api/auth/profile');
 
