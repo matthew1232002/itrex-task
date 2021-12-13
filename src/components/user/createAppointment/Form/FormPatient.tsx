@@ -30,12 +30,12 @@ const FormPatient = ({ onChangeFormData }: FormPatientProps) => {
     onChangeFormData(obj);
   }, [doctorId, reason, note]);
 
-  const onChangeOccupation = (value: any) => {
-    getDoctorsBySpecializations(value.value).then((response) => setNamesBySpecialization(response));
+  const onChangeOccupation = (option: unknown) => {
+    getDoctorsBySpecializations((option as HTMLInputElement).value).then((response) => setNamesBySpecialization(response));
   };
 
-  const onChangeName = (value: any) => {
-    setDoctorId(value.value);
+  const onChangeName = (option: unknown) => {
+    setDoctorId((option as HTMLInputElement).value);
   };
 
   const onReasonHandler = (e: React.ChangeEvent<HTMLInputElement>) => {
