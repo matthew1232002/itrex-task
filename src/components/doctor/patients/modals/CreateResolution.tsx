@@ -1,25 +1,42 @@
+import { useRef } from 'react';
 import Modal from '../../../UI/Modal';
 import {
   StyledArea, StyledBtn, StyledControllers, StyledName, StyledText, StyledTitle, StyledWrapper,
-} from './CreateResolution.styled';
+} from './ResolutionModal.styled';
 
-type DropDownProps = {
-  onClose: () => void
+interface DropDownProps {
+  onClose: () => void,
+  text: string,
+  firstName: string,
+  lastName: string,
+  id: string
+}
+
+const CreateResolution = ({
+  onClose, text, firstName, lastName, id,
+}: DropDownProps) => {
+  const textRef = useRef<HTMLTextAreaElement>(null);
+  const onCreateHandler = () => {
+    console.log(textRef.current!.value, id);
+  };
+  return (
+    <Modal onClose={onClose}>
+      <StyledWrapper>
+        <StyledTitle>Create a Resolution</StyledTitle>
+        <StyledName>
+          {firstName}
+          {' '}
+          {lastName}
+        </StyledName>
+        <StyledText>Resolution</StyledText>
+        <StyledArea id="text" defaultValue={text} ref={textRef} />
+      </StyledWrapper>
+      <StyledControllers>
+        <StyledBtn onClick={onClose} cancel>Cancel</StyledBtn>
+        <StyledBtn onClick={onCreateHandler}>Create</StyledBtn>
+      </StyledControllers>
+    </Modal>
+  );
 };
-
-const CreateResolution = ({ onClose }: DropDownProps) => (
-  <Modal onClose={onClose}>
-    <StyledWrapper>
-      <StyledTitle>Create a Resolution</StyledTitle>
-      <StyledName>Mila Western</StyledName>
-      <StyledText>Resolution</StyledText>
-      <StyledArea id="text" />
-    </StyledWrapper>
-    <StyledControllers>
-      <StyledBtn onClick={onClose} cancel>Cancel</StyledBtn>
-      <StyledBtn>Create</StyledBtn>
-    </StyledControllers>
-  </Modal>
-);
 
 export default CreateResolution;

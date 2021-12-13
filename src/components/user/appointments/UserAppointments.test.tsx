@@ -6,8 +6,6 @@ import { BrowserRouter } from 'react-router-dom';
 import * as useActions from '../../../hooks/useActions';
 import UserAppointments from './UserAppointments';
 
-type Default = string;
-
 const appointments = [
   {
     id: 'id',
@@ -39,7 +37,7 @@ jest.mock('../../../store/user/patientOperations', () => ({
 describe('User Appointments', () => {
   const mock = new MockAdapter(axios);
   test('Appointments list should render appointments', async () => {
-    jest.spyOn<any, Default>(useActions, 'default').mockImplementation(() => ({
+    jest.spyOn<any, string>(useActions, 'default').mockImplementation(() => ({
       isAdded: false,
       isAddedChangeState: () => {},
     }));

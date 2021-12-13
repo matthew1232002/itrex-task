@@ -13,7 +13,7 @@ const authPersistConfig = {
 const store = configureStore({
   reducer: {
     auth: persistReducer<any>(authPersistConfig, authReducer),
-    doctors: patientReducer,
+    patient: patientReducer,
   },
   middleware: (getDefaultMiddleware) => getDefaultMiddleware({
     serializableCheck: false,

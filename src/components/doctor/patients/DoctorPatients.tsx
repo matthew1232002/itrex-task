@@ -2,14 +2,14 @@ import { useEffect, useState } from 'react';
 
 import { StyledPatientsList } from './DoctorPatients.styled';
 import EmptyList from './EmptyList';
-import patientsList from './patients.json';
 import Patient from './Patient';
-import { PatientType } from '../../models/patient.model';
+import { IPatient } from '../../models/patient.model';
+import { getPatients } from '../../../store/doctor/doctorOperations';
 
 const DoctorPatients = () => {
-  const [patients, setPatients] = useState<Array<PatientType>>([]);
+  const [patients, setPatients] = useState<Array<IPatient>>([]);
   useEffect(() => {
-    setPatients(patientsList);
+    getPatients().then((response) => setPatients(response));
   }, []);
   return (
     <StyledPatientsList>
@@ -18,10 +18,11 @@ const DoctorPatients = () => {
         <Patient
           key={patient.id}
           id={patient.id}
-          name={patient.name}
+          reason={patient.reason}
+          note={patient.note}
+          visit_date={patient.visit_date}
           status={patient.status}
-          time={patient.time}
-          description={patient.description}
+          patient={patient.patient}
         />
       ))}
     </StyledPatientsList>

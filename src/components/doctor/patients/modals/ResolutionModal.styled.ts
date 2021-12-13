@@ -1,6 +1,7 @@
 import styled, { css } from 'styled-components';
 import User from '../../../../assets/user.svg';
-import Img from '../../../../assets/patient-description.svg';
+import Create from '../../../../assets/patient-description.svg';
+import Edit from '../../../../assets/check-edit-resolution.svg';
 
 export const StyledWrapper = styled.div`
   padding: 2rem;
@@ -37,8 +38,19 @@ export const StyledArea = styled.textarea`
   border-radius: 8px;
   width: 100%;
   height: 160px;
+  padding: 16px 24px;
   &:focus-visible{
     outline: none;
+  }
+  &::-webkit-scrollbar{
+    width: 12px;
+    height: auto;
+    background-color: rgba(220, 224, 236, 0.3);
+  }
+  &::-webkit-scrollbar-thumb {
+    cursor: pointer;
+    background-color: rgba(220, 224, 236, 0.5);
+    border-radius: 8px;
   }
 `;
 
@@ -50,7 +62,7 @@ export const StyledControllers = styled.div`
   border-top: 1px solid #DCE0EC;
 `;
 
-export const StyledBtn = styled.button<{ cancel?: boolean }>`
+export const StyledBtn = styled.button<{ cancel?: boolean, edit?: boolean }>`
   margin: 1.5rem 2rem;
   background-color: ${(props) => (props.cancel ? '#fff' : '#7297FF')};
   border: 1px solid #DCE0EC;
@@ -66,7 +78,10 @@ export const StyledBtn = styled.button<{ cancel?: boolean }>`
   background-position-y: center;
   background-position-x: 16px;
   ${(props) => (!props.cancel
-    ? css`background-image: url(${Img});` : null)
+    ? css`background-image: url(${Create});` : null)
+};
+  ${(props) => (!props.cancel && props.edit
+    ? css`background-image: url(${Edit});` : null)
 };
   &:before,
   &:after{
