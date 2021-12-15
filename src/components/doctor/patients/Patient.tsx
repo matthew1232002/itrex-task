@@ -14,10 +14,14 @@ import DropDownList from './DropDownList';
 import CreateResolution from './modals/CreateResolution';
 import { IPatient } from '../../models/patient.model';
 import EditResolution from './modals/EditResolution';
+import useActions from '../../../hooks/useActions';
+import useComponentVisible from '../../../hooks/useComponentVisible';
 
 const Patient = ({
   id, reason, note, visit_date, status, patient,
 }: IPatient) => {
+  const { ref } = useComponentVisible(true);
+  const { deleteAppointmentHandler } = useActions();
   const [menuIsOpen, setMenuIsOpen] = useState(false);
   const [createResolutionIsShown, setCreateResolutionIsShown] = useState(false);
   const [editResolutionIsShown, setEditResolutionIsShown] = useState(false);
@@ -41,6 +45,11 @@ const Patient = ({
     setEditResolutionIsShown(false);
   };
 
+  const onDeleteAppointment = (appointmentId: string) => {
+    deleteAppointmentHandler(appointmentId);
+    setMenuIsOpen((prevState) => !prevState);
+  };
+
   return (
     <>
       {createResolutionIsShown && (
@@ -49,7 +58,7 @@ const Patient = ({
         onClose={onClose}
         firstName={patient.first_name}
         lastName={patient.last_name}
-        id={patient.id}
+        id={id}
       />
       )}
       {editResolutionIsShown && (
@@ -58,7 +67,6 @@ const Patient = ({
         onClose={onClose}
         firstName={patient.first_name}
         lastName={patient.last_name}
-        id={patient.id}
       />
       )}
       <StyledPatient key={id}>
@@ -78,10 +86,14 @@ const Patient = ({
             <img alt="more" src={PatientMore} />
           </StyledMore>
           {menuIsOpen && (
-            <DropDownList
-              onCreateResolution={onCreateResolution}
-              onEditResolution={onEditResolution}
-            />
+            <div ref={ref}>
+              <DropDownList
+                onCreateResolution={onCreateResolution}
+                onEditResolution={onEditResolution}
+                onDelete={() => onDeleteAppointment(id)}
+                id={id}
+              />
+            </div>
           )}
         </StyledHeader>
         <StyledFooter>
@@ -92,7 +104,6 @@ const Patient = ({
           </StyledTime>
           <StyledDescription>
             {reason}
-            <br />
             {note}
           </StyledDescription>
         </StyledFooter>

@@ -13,7 +13,7 @@ type CheckboxesProps = {
 const Checkboxes = ({ onChangeTime, formData, dataIso }: CheckboxesProps) => {
   const [availableHours, setAvailableHours] = useState<Array<string>>();
   useEffect(() => {
-    if (formData && dataIso) {
+    if (formData.doctorId && dataIso) {
       getAvailableTime(formData.doctorId, dataIso)
         .then((response) => setAvailableHours(response.data));
     }

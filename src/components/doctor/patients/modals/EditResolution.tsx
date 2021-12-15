@@ -9,15 +9,13 @@ interface DropDownProps {
   text: string,
   firstName: string,
   lastName: string,
-  id: string
 }
 
 const EditResolution = ({
-  onClose, text, firstName, lastName, id,
+  onClose, text, firstName, lastName,
 }: DropDownProps) => {
   const textRef = useRef<HTMLTextAreaElement>(null);
   const onSaveHandler = () => {
-    console.log(textRef.current!.value, id);
   };
   return (
     <Modal onClose={onClose}>

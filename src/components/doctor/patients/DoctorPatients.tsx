@@ -1,20 +1,21 @@
-import { useEffect, useState } from 'react';
+import { useEffect } from 'react';
 
 import { StyledPatientsList } from './DoctorPatients.styled';
 import EmptyList from './EmptyList';
 import Patient from './Patient';
-import { IPatient } from '../../models/patient.model';
-import { getPatients } from '../../../store/doctor/doctorOperations';
+import useActions from '../../../hooks/useActions';
+import LoadingSpinner from '../../UI/LoadingSpinner';
 
 const DoctorPatients = () => {
-  const [patients, setPatients] = useState<Array<IPatient>>([]);
+  const { getPatientsHandler, patientsList, loading } = useActions();
   useEffect(() => {
-    getPatients().then((response) => setPatients(response));
+    getPatientsHandler();
   }, []);
   return (
     <StyledPatientsList>
-      {patients.length === 0 && <EmptyList />}
-      {patients && patients.map((patient) => (
+      {loading && <LoadingSpinner />}
+      {patientsList.length === 0 && !loading && <EmptyList />}
+      {patientsList && !loading && patientsList.map((patient) => (
         <Patient
           key={patient.id}
           id={patient.id}

@@ -56,3 +56,22 @@ export const addAppointment = (values: AddAppointmentType) => async (
     dispatch(patientActions.createAppointmentError((error as Error).message));
   }
 };
+
+export const getResolutionsPatient = () => async (
+  dispatch: Dispatch<{ type: string }>,
+) => {
+  dispatch(patientActions.getResolutionsPatientRequest());
+
+  try {
+    const { data } = await axios.get('/api/resolutions/patient/me', {
+      params: {
+        offset: 0,
+        limit: 100,
+      },
+    });
+    dispatch(patientActions.getResolutionsPatientSuccess(data.resolutions));
+  } catch (error) {
+    NotifyError('Something went wrong!');
+    dispatch(patientActions.getResolutionsPatientError((error as Error).message));
+  }
+};

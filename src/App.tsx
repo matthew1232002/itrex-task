@@ -14,6 +14,7 @@ const Restore = React.lazy(() => import('./pages/Restore'));
 const DoctorPatients = React.lazy(() => import('./pages/DoctorPagePatients'));
 const UserAppointments = React.lazy(() => import('./pages/UserAppointmentsPage'));
 const UserCreateAppointment = React.lazy(() => import('./pages/UserCreateAppointment'));
+const UserResolutions = React.lazy(() => import('./pages/UserResolutions'));
 const NotFound = React.lazy(() => import('./pages/NotFound'));
 
 function App() {
@@ -43,6 +44,7 @@ function App() {
           <Route path={routes.doctorPatientsPage} component={DoctorPatients} />
           <Route path={routes.userAppointmentsPage} component={UserAppointments} />
           <Route path={routes.createAppointmentPage} component={UserCreateAppointment} />
+          <Route path={routes.userResolutions} component={UserResolutions} />
           <Route path="*" component={NotFound} />
         </Switch>
       </Suspense>

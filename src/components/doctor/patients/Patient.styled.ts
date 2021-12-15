@@ -9,6 +9,7 @@ export const StyledPatient = styled.div`
   box-shadow: 0 4px 32px rgba(218, 228, 255, 0.24);
   border-radius: 12px;
   height: fit-content;
+  word-break: break-word;
 `;
 
 export const StyledHeader = styled.header`

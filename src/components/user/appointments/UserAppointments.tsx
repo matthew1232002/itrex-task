@@ -1,8 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import {
   StyledAppointmentsList,
-  StyledBtn,
-  StyledControllers, StyledCreateAppointment, StyledIcon,
+  StyledCreateAppointment, StyledIcon,
   StyledSearch,
   StyledSearchForm, StyledSearchHeader, StyledSearchItems, StyledSearchList,
   StyledTitle,
@@ -10,6 +9,7 @@ import {
 import { getAppointments } from '../../../store/user/patientOperations';
 import Appointment from './Appointment';
 import { AppointmentFullInfo } from '../../models/appointment.model';
+import UserControllers from '../../UI/UserControllers';
 
 const UserAppointments = () => {
   const [appointments, setAppointments] = useState<Array<AppointmentFullInfo>>([]);
@@ -18,11 +18,7 @@ const UserAppointments = () => {
   }, []);
   return (
     <>
-      <StyledControllers>
-        <StyledBtn to="/">Profile</StyledBtn>
-        <StyledBtn to="/">Appointments</StyledBtn>
-        <StyledBtn to="/">Resolutions</StyledBtn>
-      </StyledControllers>
+      <UserControllers />
       <StyledTitle>
         <h2>My Appointments</h2>
         <StyledSearch>

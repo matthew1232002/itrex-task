@@ -3,6 +3,7 @@ import Modal from '../../../UI/Modal';
 import {
   StyledArea, StyledBtn, StyledControllers, StyledName, StyledText, StyledTitle, StyledWrapper,
 } from './ResolutionModal.styled';
+import useActions from '../../../../hooks/useActions';
 
 interface DropDownProps {
   onClose: () => void,
@@ -15,9 +16,14 @@ interface DropDownProps {
 const CreateResolution = ({
   onClose, text, firstName, lastName, id,
 }: DropDownProps) => {
+  const { createResolutionHandler } = useActions();
   const textRef = useRef<HTMLTextAreaElement>(null);
   const onCreateHandler = () => {
-    console.log(textRef.current!.value, id);
+    const resolutionData = {
+      resolution: textRef.current!.value,
+      appointmentID: id,
+    };
+    createResolutionHandler(resolutionData);
   };
   return (
     <Modal onClose={onClose}>

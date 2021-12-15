@@ -5,4 +5,5 @@ export default {
   doctorPatientsPage: '/doctor-patients',
   userAppointmentsPage: '/user-appointments',
   createAppointmentPage: '/create-appointment',
+  userResolutions: '/user-resolutions',
 };
