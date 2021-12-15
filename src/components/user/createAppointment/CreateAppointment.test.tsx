@@ -6,7 +6,7 @@ import CreateAppointment from './CreateAppointment';
 import * as useActions from '../../../hooks/useActions';
 import '@testing-library/jest-dom/extend-expect';
 
-jest.mock('../../../store/user/patientOperations', () => jest.fn(() => {}));
+jest.mock('../../../store/user/patientOperations', () => ({}));
 
 describe('Appointment form', () => {
   test('to be truthy', () => {

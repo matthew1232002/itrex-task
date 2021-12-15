@@ -31,8 +31,7 @@ const FormPatient = ({ onChangeFormData }: FormPatientProps) => {
   }, [doctorId, reason, note]);
 
   const onChangeOccupation = (option: unknown) => {
-    getDoctorsBySpecializations((option as HTMLInputElement).value)
-      .then((response) => setNamesBySpecialization(response));
+    getDoctorsBySpecializations((option as HTMLInputElement).value).then((response) => setNamesBySpecialization(response));
   };
 
   const onChangeName = (option: unknown) => {
