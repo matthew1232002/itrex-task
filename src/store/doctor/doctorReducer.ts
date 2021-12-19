@@ -4,7 +4,7 @@ import doctorAction from './doctorAction';
 import { IAddResolutionResponse } from '../../components/models/createResolution.model';
 import { IPatient } from '../../components/models/patient.model';
 
-const patients = createReducer<Array<IPatient>>([], {
+const appointments = createReducer<Array<IPatient>>([], {
   [doctorAction.getPatientSuccess.type]: (
     state,
     { payload }: PayloadAction<Array<IPatient>>,
@@ -39,7 +39,7 @@ const error = createReducer<string>('', {
 });
 
 export default combineReducers({
-  patients,
+  appointments,
   resolutions,
   error,
   isLoading,

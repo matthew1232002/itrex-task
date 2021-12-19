@@ -7,22 +7,15 @@ const activeStyles = {
   color: '#fff',
 };
 
-const UserControllers = () => (
+const DoctorControllers = () => (
   <StyledControllers>
-    <StyledBtn to="/">Profile</StyledBtn>
+    <StyledBtn to={routes.doctorPatientsPage} activeStyle={activeStyles}>Patients</StyledBtn>
     <StyledBtn
-      to={routes.userAppointmentsPage}
-      activeStyle={activeStyles}
-    >
-      Appointments
-    </StyledBtn>
-    <StyledBtn
-      to={routes.userResolutions}
-      activeStyle={activeStyles}
+      to="/"
     >
       Resolutions
     </StyledBtn>
   </StyledControllers>
 );
 
-export default UserControllers;
+export default DoctorControllers;

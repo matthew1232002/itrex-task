@@ -117,12 +117,14 @@ export const StyledTitle = styled.div`
 export const StyledAppointmentsList = styled.div`
   display: grid;
   gap: 24px 20px;
-  grid-template-columns: repeat(auto-fit, minmax(406px, 1fr));
-  height: calc(100vh - 320px);
+  grid-template-columns: repeat(auto-fit,minmax(406px,1fr));
+  height: calc(100vh - 306px);
   background-color: #F9FAFF;
   overflow: auto;
   overflow-x: hidden;
   padding: 0 32px 0 0;
+  row-gap: 24px;
+  grid-auto-rows: max-content;
 
   &::-webkit-scrollbar{
     width: 12px;

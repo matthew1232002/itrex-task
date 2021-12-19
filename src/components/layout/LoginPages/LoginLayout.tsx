@@ -1,12 +1,14 @@
-import { StyledAside, StyledWrapper } from './LoginLayout.styled';
+import { StyledAside, StyledContainer, StyledWrapper } from './LoginLayout.styled';
 
 import { ChildrenProps } from '../../models/children.model';
 
 const LoginLayout = ({ children }: ChildrenProps) => (
   <StyledWrapper>
-    <StyledAside>
-      {children}
-    </StyledAside>
+    <StyledContainer>
+      <StyledAside>
+        {children}
+      </StyledAside>
+    </StyledContainer>
   </StyledWrapper>
 );
 

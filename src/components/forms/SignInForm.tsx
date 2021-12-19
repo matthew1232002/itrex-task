@@ -8,7 +8,6 @@ import { StyledInputs, StyledLink } from './SignInForm.styled';
 import { StyledForm, StyledSidebar } from './LoginPages.styled';
 import Button from './button/Button';
 import { LogInType } from '../models/logIn.model';
-// import { Toast } from '../UI/Notify';
 
 const SignInForm = () => {
   const { loginUser } = useActions();
@@ -34,7 +33,7 @@ const SignInForm = () => {
         onSubmit={handleSubmit}
       >
         {() => (
-          <StyledSidebar>
+          <StyledSidebar paddingTop="270px">
             <Header text="Sign In" />
             <StyledForm>
               <StyledInputs>

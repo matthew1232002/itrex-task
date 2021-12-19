@@ -18,7 +18,9 @@ const InputField = ({
   const [field, meta] = useField(name);
   const inputRef = useRef<HTMLInputElement>(null);
 
-  const errorClass = meta.touched && meta.error ? { border: '1px solid #F6657F' } : {};
+  const errorClass = meta.touched && meta.error ? {
+    border: '1px solid #F6657F',
+  } : {};
 
   const togglePassword = () => {
     const input = inputRef.current!;

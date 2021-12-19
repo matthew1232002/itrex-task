@@ -1,5 +1,4 @@
 import { StyledItem, StyledList, StyledWrapper } from './DropDownList.styled';
-// import useComponentVisible from '../../../hooks/useComponentVisible';
 
 type DropDownProps = {
   onCreateResolution: () => void,
@@ -7,12 +6,10 @@ type DropDownProps = {
   onDelete: (id: string) => void,
   id: string,
 };
-// const { ref, isComponentVisible } = useComponentVisible(true);
-// console.log(isComponentVisible);
 const DropDownList = ({
   onCreateResolution, onEditResolution, onDelete, id,
 }: DropDownProps) => (
-  <StyledWrapper>
+  <StyledWrapper id="dropDown">
     <StyledList>
       <StyledItem onClick={onCreateResolution}>Create a resolution</StyledItem>
       <StyledItem onClick={onEditResolution}>Edit an appointment</StyledItem>

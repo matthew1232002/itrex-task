@@ -1,6 +1,20 @@
 import styled from 'styled-components';
 import More from '../../../../assets/patient-more.svg';
 
+export const StyledWrapperTable = styled.div`
+  height: calc(100vh - 320px);
+  overflow: auto;
+  &::-webkit-scrollbar{
+    width: 12px;
+    height: auto;
+    background-color: rgba(220, 224, 236, 0.3);
+  }
+  &::-webkit-scrollbar-thumb {
+    background-color: rgba(220, 224, 236, 0.5);
+    border-radius: 8px;
+  }
+`;
+
 export const ResolutionTable = styled.table`
   color: #202225;
   width: 100%;

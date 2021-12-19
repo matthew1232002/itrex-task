@@ -3,12 +3,14 @@ import styled from 'styled-components';
 export const StyledPatientsList = styled.div`
   display: grid;
   gap: 24px 20px;
-  grid-template-columns: repeat(auto-fit, minmax(406px, 1fr));
+  grid-template-columns: repeat(auto-fit,minmax(406px,1fr));
   height: calc(100vh - 306px);
   background-color: #F9FAFF;
-  overflow: scroll;
+  overflow: auto;
   overflow-x: hidden;
   padding: 0 32px 0 0;
+  row-gap: 24px;
+  grid-auto-rows: max-content;
   &::-webkit-scrollbar{
     width: 12px;
     height: auto;
@@ -23,7 +25,7 @@ export const StyledPatientsList = styled.div`
   }
   @media (max-width: 600px) {
     padding: 0;
-    height: 100vh;
+    height: calc(100vh - 220px);
     &::-webkit-scrollbar{
       display: none;
     }

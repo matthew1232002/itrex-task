@@ -8,7 +8,10 @@ export const StyledWrapper = styled.div`
     color: #F6657F;
     position: absolute;
     bottom: -23px;
-    
+    @media (max-width: 600px) {
+     position: static;
+      margin-top: 14px;
+    }
   }
 `;
 

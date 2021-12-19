@@ -29,7 +29,7 @@ const RestoreForm = () => {
       )}
     >
       {() => (
-        <StyledSidebar>
+        <StyledSidebar paddingTop="267px">
           <Header text="Restore Password" />
           {isSent && (
             <StyledText>
@@ -50,7 +50,7 @@ const RestoreForm = () => {
               <StyledInputs>
                 <InputField type="email" placeholder="Email" name="email" testId="restore" />
               </StyledInputs>
-              <Button text="Send Reset Link" width="213px" mediaWidth="198px" />
+              <Button text="Send Reset Link" />
             </StyledForm>
           )}
         </StyledSidebar>

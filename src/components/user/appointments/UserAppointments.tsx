@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect } from 'react';
 import {
   StyledAppointmentsList,
   StyledCreateAppointment, StyledIcon,
@@ -6,15 +6,18 @@ import {
   StyledSearchForm, StyledSearchHeader, StyledSearchItems, StyledSearchList,
   StyledTitle,
 } from './UserAppointmets.styled';
-import { getAppointments } from '../../../store/user/patientOperations';
 import Appointment from './Appointment';
-import { AppointmentFullInfo } from '../../models/appointment.model';
 import UserControllers from '../../UI/UserControllers';
+import useActions from '../../../hooks/useActions';
+import LoadingSpinner from '../../UI/LoadingSpinner';
+import EmptyList from '../../doctor/patients/EmptyList';
 
 const UserAppointments = () => {
-  const [appointments, setAppointments] = useState<Array<AppointmentFullInfo>>([]);
+  const {
+    getAppointmentsHandler, appointments, isLoadingForUser,
+  } = useActions();
   useEffect(() => {
-    getAppointments().then((response) => setAppointments(response.data.appointments));
+    getAppointmentsHandler();
   }, []);
   return (
     <>
@@ -41,7 +44,9 @@ const UserAppointments = () => {
         </StyledSearch>
       </StyledTitle>
       <StyledAppointmentsList>
-        {appointments.map((appointment) => (
+        {isLoadingForUser && <LoadingSpinner />}
+        {appointments.length === 0 && !isLoadingForUser && <EmptyList />}
+        {appointments && !isLoadingForUser && appointments.map((appointment) => (
           <Appointment
             key={appointment.id}
             id={appointment.id}

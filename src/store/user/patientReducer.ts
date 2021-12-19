@@ -6,10 +6,10 @@ import { AddAppointmentResponseType } from '../../components/models/addAppointme
 import { IResolutionsPatient } from '../../components/models/resolutionsPatient.model';
 
 const appointments = createReducer<Array<AddAppointmentResponseType>>([], {
-  [patientAction.createAppointmentSuccess.type]: (
+  [patientAction.getAppointmentsSuccess.type]: (
     state,
-    { payload }: PayloadAction<AddAppointmentResponseType>,
-  ) => [...state, payload],
+    { payload }: PayloadAction<Array<AddAppointmentResponseType>>,
+  ) => [...payload],
 });
 
 const resolutions = createReducer<Array<IResolutionsPatient>>([], {
@@ -26,8 +26,16 @@ const error = createReducer<string>('', {
   ) => payload,
 });
 
+const isLoading = createReducer(false, {
+  [patientAction.getResolutionsPatientRequest.type]: () => true,
+  [patientAction.getResolutionsPatientSuccess.type]: () => false,
+  [patientAction.getAppointmentsRequest.type]: () => true,
+  [patientAction.getAppointmentsSuccess.type]: () => false,
+});
+
 export default combineReducers({
   appointments,
   resolutions,
   error,
+  isLoading,
 });

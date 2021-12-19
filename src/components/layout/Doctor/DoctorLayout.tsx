@@ -1,7 +1,4 @@
-import userAvatar from '../../../assets/user_avatar.png';
 import {
-  StyledBtn,
-  StyledControllers,
   StyledIcon,
   StyledMain,
   StyledSearch,
@@ -14,15 +11,17 @@ import {
 import DoctorAndUserLayout from '../DoctorAndUserLayout';
 import Header from '../Header/Header';
 import { ChildrenProps } from '../../models/children.model';
+import DoctorControllers from '../../UI/DoctorControllers';
 
 const DoctorLayout = ({ children }: ChildrenProps) => (
   <DoctorAndUserLayout>
-    <Header name="Miranda Nelson" status="Doctor" userAvatar={userAvatar} />
+    <Header />
     <StyledMain>
-      <StyledControllers>
-        <StyledBtn to="/">Patients</StyledBtn>
-        <StyledBtn to="/">Resolutions</StyledBtn>
-      </StyledControllers>
+      <DoctorControllers />
+      {/* <StyledControllers> */}
+      {/*  <StyledBtn to="/">Patients</StyledBtn> */}
+      {/*  <StyledBtn to="/">Resolutions</StyledBtn> */}
+      {/* </StyledControllers> */}
       <div>
         <StyledTitle>
           <h2>My Patients</h2>

@@ -85,7 +85,7 @@ export const StyledFooter = styled.div`
   font-size: 15px;
 `;
 
-export const StyledTime = styled.p`
+export const StyledTime = styled.data`
   font-weight: 600;
   line-height: 19px;
   margin-bottom: 16px;

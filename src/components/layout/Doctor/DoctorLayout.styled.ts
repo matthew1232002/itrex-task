@@ -1,5 +1,4 @@
 import styled from 'styled-components';
-import { Link } from 'react-router-dom';
 import Search from '../../../assets/search.svg';
 import ArrowUp from '../../../assets/arrow-up.svg';
 import SelectIcon from '../../../assets/select__icon.svg';
@@ -11,30 +10,6 @@ export const StyledMain = styled.main`
   min-height: calc(100% - 80px);
   @media (max-width: 600px) {
     padding: 40px 24px 0 24px;
-  }
-`;
-
-export const StyledControllers = styled.div`
-  margin-bottom: 56px;
-  @media (max-width: 600px) {
-    margin-bottom: 40px;
-  }
-`;
-
-export const StyledBtn = styled(Link)`
-  background: #FFFFFF;
-  color: #7297FF;
-  outline: none;
-  border: none;
-  border-radius: 8px;
-
-  margin: 0 12px 0 0;
-  padding: 12px 0;
-  width: 160px;
-  text-decoration: none;
-
-  @media (max-width: 600px) {
-    width: 120px;
   }
 `;
 

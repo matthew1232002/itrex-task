@@ -15,12 +15,10 @@ import CreateResolution from './modals/CreateResolution';
 import { IPatient } from '../../models/patient.model';
 import EditResolution from './modals/EditResolution';
 import useActions from '../../../hooks/useActions';
-import useComponentVisible from '../../../hooks/useComponentVisible';
 
 const Patient = ({
   id, reason, note, visit_date, status, patient,
 }: IPatient) => {
-  const { ref } = useComponentVisible(true);
   const { deleteAppointmentHandler } = useActions();
   const [menuIsOpen, setMenuIsOpen] = useState(false);
   const [createResolutionIsShown, setCreateResolutionIsShown] = useState(false);
@@ -86,14 +84,12 @@ const Patient = ({
             <img alt="more" src={PatientMore} />
           </StyledMore>
           {menuIsOpen && (
-            <div ref={ref}>
-              <DropDownList
-                onCreateResolution={onCreateResolution}
-                onEditResolution={onEditResolution}
-                onDelete={() => onDeleteAppointment(id)}
-                id={id}
-              />
-            </div>
+          <DropDownList
+            onCreateResolution={onCreateResolution}
+            onEditResolution={onEditResolution}
+            onDelete={() => onDeleteAppointment(id)}
+            id={id}
+          />
           )}
         </StyledHeader>
         <StyledFooter>
