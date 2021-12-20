@@ -8,12 +8,10 @@ import SignInForm from './SignInForm';
 
 jest.mock('../../store/user/patientOperations', () => ({}));
 
-type Default = string;
-
 describe('Sign In form', () => {
   test('rendering and submitting a Sign In form', async () => {
     const loginUser = jest.fn(() => {});
-    jest.spyOn<any, Default>(useActions, 'default').mockImplementation(() => ({
+    jest.spyOn<any, string>(useActions, 'default').mockImplementation(() => ({
       loginUser,
     }));
     render(
