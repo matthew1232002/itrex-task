@@ -18,10 +18,6 @@ const DoctorLayout = ({ children }: ChildrenProps) => (
     <Header />
     <StyledMain>
       <DoctorControllers />
-      {/* <StyledControllers> */}
-      {/*  <StyledBtn to="/">Patients</StyledBtn> */}
-      {/*  <StyledBtn to="/">Resolutions</StyledBtn> */}
-      {/* </StyledControllers> */}
       <div>
         <StyledTitle>
           <h2>My Patients</h2>

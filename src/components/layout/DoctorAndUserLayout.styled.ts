@@ -6,7 +6,7 @@ export const StyledWrapper = styled.div`
   font-family: "Poppins", sans-serif;
   min-height: 100vh;
   background: #E4EBFF;
-  overflow: hidden;
+  overflow: auto;
 
   @media (max-width: 600px) {
     padding: 0;

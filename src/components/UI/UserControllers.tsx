@@ -1,27 +1,12 @@
-import React from 'react';
 import routes from '../../routes/routes';
-import { StyledBtn, StyledControllers } from './Controllers.styled';
-
-const activeStyles = {
-  backgroundColor: '#7297FF',
-  color: '#fff',
-};
+import { StyledControllers } from './Controllers.styled';
+import Button from './Button';
 
 const UserControllers = () => (
   <StyledControllers>
-    <StyledBtn to="/">Profile</StyledBtn>
-    <StyledBtn
-      to={routes.userAppointmentsPage}
-      activeStyle={activeStyles}
-    >
-      Appointments
-    </StyledBtn>
-    <StyledBtn
-      to={routes.userResolutions}
-      activeStyle={activeStyles}
-    >
-      Resolutions
-    </StyledBtn>
+    <Button text="Profile" padding="12px 57px" to="/" itemPath="/" margin="0 12px 0 0" />
+    <Button text="Appointments" padding="12px 26px" to={routes.userAppointmentsPage} itemPath={routes.userAppointmentsPage} margin="0 12px 0 0" />
+    <Button text="Resolutions" padding="12px 38px" to={routes.userResolutions} itemPath={routes.userResolutions} />
   </StyledControllers>
 );
 

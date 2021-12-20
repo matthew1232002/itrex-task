@@ -46,6 +46,8 @@ export const StyledSearchList = styled.div`
 export const StyledSearchForm = styled.form`
   display: flex;
   position: relative;
+  margin-right: 64px;
+  align-items: center;
 
   p {
     font-size: 15px;
@@ -98,6 +100,7 @@ export const StyledTitle = styled.div`
   display: flex;
   justify-content: space-between;
   margin: 0 36px 32px 0;
+  align-items: center;
 
   h2 {
     font-size: 24px;
@@ -142,5 +145,8 @@ export const StyledAppointmentsList = styled.div`
   @media (max-width: 600px) {
     padding: 0;
     height: 100vh;
+    &::-webkit-scrollbar{
+      display: none;
+    }
   }
 `;

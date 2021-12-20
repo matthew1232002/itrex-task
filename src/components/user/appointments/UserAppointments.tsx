@@ -1,7 +1,7 @@
 import React, { useEffect } from 'react';
 import {
   StyledAppointmentsList,
-  StyledCreateAppointment, StyledIcon,
+  StyledIcon,
   StyledSearch,
   StyledSearchForm, StyledSearchHeader, StyledSearchItems, StyledSearchList,
   StyledTitle,
@@ -11,6 +11,9 @@ import UserControllers from '../../UI/UserControllers';
 import useActions from '../../../hooks/useActions';
 import LoadingSpinner from '../../UI/LoadingSpinner';
 import EmptyList from '../../doctor/patients/EmptyList';
+import Button from '../../UI/Button';
+import routes from '../../../routes/routes';
+import Plus from '../../../assets/plus.svg';
 
 const UserAppointments = () => {
   const {
@@ -38,9 +41,7 @@ const UserAppointments = () => {
               </StyledSearchItems>
             </StyledSearchList>
           </StyledSearchForm>
-          <StyledCreateAppointment to="/create-appointment">
-            Create an appointment
-          </StyledCreateAppointment>
+          <Button text="Create an appointment" padding="12px 16px 12px 48px" to={routes.createAppointmentPage} itemPath={routes.userAppointmentsPage} img={Plus} invisible="none" />
         </StyledSearch>
       </StyledTitle>
       <StyledAppointmentsList>

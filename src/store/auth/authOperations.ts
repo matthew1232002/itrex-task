@@ -15,7 +15,6 @@ const logIn = (credentials: LogInType) => async (dispatch: Dispatch<{ type: stri
   try {
     const { data } = await api.post<TokensType>('auth/login', credentials);
 
-    // token.set(data.access_token);
     tokenRepository.setToken(data.access_token);
 
     dispatch(authActions.loginSuccess(data.access_token));
@@ -37,7 +36,6 @@ const register = (credentials: RegisterType) => async (dispatch: Dispatch<{ type
 
   try {
     const { data } = await api.post<TokensType>('auth/registration', credentials);
-    // token.set(data.access_token);
     tokenRepository.setToken(data.access_token);
     dispatch(authActions.registerSuccess(data.access_token));
 
