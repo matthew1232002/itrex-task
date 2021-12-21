@@ -6,6 +6,7 @@ type DropDownProps = {
   onDelete: (id: string) => void,
   id: string,
 };
+
 const DropDownList = ({
   onCreateResolution, onEditResolution, onDelete, id,
 }: DropDownProps) => (
