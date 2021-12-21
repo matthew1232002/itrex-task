@@ -33,7 +33,11 @@ const Appointment = ({
       <img alt="more" src={More} />
     </StyledHeader>
     <StyledFooter>
-      <StyledTime>{moment(visitDate).format('ddd MMM D, YYYY h:mm a')}</StyledTime>
+      <StyledTime>
+        {moment(visitDate).format('ddd MMM D, YYYY h:mm a')}
+        {' - '}
+        {moment(visitDate).add(1, 'hours').format('h:mm a')}
+      </StyledTime>
       <StyledDescription>{`${reason} ${note}`}</StyledDescription>
     </StyledFooter>
   </StyledPatient>

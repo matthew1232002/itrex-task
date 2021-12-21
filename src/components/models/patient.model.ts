@@ -1,7 +1,15 @@
-export type PatientType = {
+export interface IPatient {
   id: string,
-  name: string,
+  reason: string,
+  note: string,
+  patient_id?: string,
+  doctor_id?: string,
+  visit_date: string,
   status: string,
-  time: string,
-  description: string,
-};
+  patient: {
+    last_name: string,
+    first_name: string,
+    id: string,
+    photo: string
+  }
+}

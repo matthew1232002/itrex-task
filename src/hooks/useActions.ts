@@ -1,7 +1,14 @@
 import { useDispatch, useSelector } from 'react-redux';
 import { useCallback } from 'react';
-import { addAppointment, changeIsAddedState } from '../store/user/patientOperations';
+import { addAppointment, getResolutionsPatient } from '../store/user/patientOperations';
 import authOperations from '../store/auth/authOperations';
+import {
+  createResolution,
+  deleteAppointment,
+  getPatients,
+} from '../store/doctor/doctorOperations';
+import { IPatient } from '../components/models/patient.model';
+import { IResolutionsPatient } from '../components/models/resolutionsPatient.model';
 
 type IsLoggedState = {
   auth: {
@@ -21,16 +28,39 @@ type ProfileState = {
   }
 };
 
-type IsAddedState = {
-  doctors: {
-    isAdded: boolean
+type DoctorState = {
+  doctor: {
+    patients: IPatient[],
+    isLoading: boolean
   }
 };
 
+interface PatientState {
+  patient:{
+    resolutions: IResolutionsPatient[]
+  }
+}
+
 function useActions() {
   const dispatch = useDispatch();
+  const getPatientsHandler = useCallback(() => {
+    dispatch(getPatients());
+  }, [dispatch]);
+
+  const getResolutionsPatientHandler = useCallback(() => {
+    dispatch(getResolutionsPatient());
+  }, [dispatch]);
+
   const createAppointment = useCallback((data) => {
     dispatch(addAppointment(data));
+  }, [dispatch]);
+
+  const createResolutionHandler = useCallback((data) => {
+    dispatch(createResolution(data));
+  }, [dispatch]);
+
+  const deleteAppointmentHandler = useCallback((data) => {
+    dispatch(deleteAppointment(data));
   }, [dispatch]);
 
   const loginUser = useCallback((data) => {
@@ -41,22 +71,25 @@ function useActions() {
     dispatch(authOperations.register(data));
   }, [dispatch]);
 
-  const changeIsAdded = () => {
-    dispatch(changeIsAddedState());
-  };
-
   const isLogged = useSelector((state: IsLoggedState) => state.auth.isAuthenticated);
   const profile = useSelector((state: ProfileState) => state.auth.user);
-  const isAdded = useSelector((state: IsAddedState) => state.doctors.isAdded);
+  const patientsList = useSelector((state: DoctorState) => state.doctor.patients);
+  const loading = useSelector((state: DoctorState) => state.doctor.isLoading);
+  const resolutionsPatient = useSelector((state: PatientState) => state.patient.resolutions);
 
   return {
     createAppointment,
     loginUser,
     registerUser,
-    changeIsAdded,
     isLogged,
     profile,
-    isAdded,
+    createResolutionHandler,
+    deleteAppointmentHandler,
+    getPatientsHandler,
+    patientsList,
+    loading,
+    getResolutionsPatientHandler,
+    resolutionsPatient,
   };
 }
 

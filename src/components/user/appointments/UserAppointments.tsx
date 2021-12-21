@@ -1,39 +1,24 @@
-import { useEffect, useState } from 'react';
-import { toast } from 'react-toastify';
+import React, { useEffect, useState } from 'react';
 import {
   StyledAppointmentsList,
-  StyledBtn,
-  StyledControllers, StyledCreateAppointment, StyledIcon,
+  StyledCreateAppointment, StyledIcon,
   StyledSearch,
   StyledSearchForm, StyledSearchHeader, StyledSearchItems, StyledSearchList,
   StyledTitle,
 } from './UserAppointmets.styled';
-import SuccessIcon from '../../../assets/notification_success.svg';
 import { getAppointments } from '../../../store/user/patientOperations';
 import Appointment from './Appointment';
-import useActions from '../../../hooks/useActions';
-import { NotifySuccess } from '../../UI/Notify';
 import { AppointmentFullInfo } from '../../models/appointment.model';
+import UserControllers from '../../UI/UserControllers';
 
 const UserAppointments = () => {
   const [appointments, setAppointments] = useState<Array<AppointmentFullInfo>>([]);
-  const { isAdded, changeIsAdded } = useActions();
   useEffect(() => {
     getAppointments().then((response) => setAppointments(response.data.appointments));
   }, []);
-  if (isAdded) {
-    toast.success('Appointment successfully added', {
-      icon: () => <img src={SuccessIcon} alt="icon" />,
-    });
-    changeIsAdded();
-  }
   return (
     <>
-      <StyledControllers>
-        <StyledBtn to="/">Profile</StyledBtn>
-        <StyledBtn to="/">Appointments</StyledBtn>
-        <StyledBtn to="/">Resolutions</StyledBtn>
-      </StyledControllers>
+      <UserControllers />
       <StyledTitle>
         <h2>My Appointments</h2>
         <StyledSearch>
@@ -67,7 +52,6 @@ const UserAppointments = () => {
           />
         ))}
       </StyledAppointmentsList>
-      <NotifySuccess />
     </>
   );
 };

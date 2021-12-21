@@ -44,3 +44,11 @@
     color: #fff;
     opacity: 1;
 }
+
+.Toastify__toast-theme--colored.Toastify__toast--success {
+    background-color: #34C197;
+}
+
+.Toastify__toast-theme--colored.Toastify__toast--error {
+    background-color: #FF2567;
+}

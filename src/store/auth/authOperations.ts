@@ -5,6 +5,7 @@ import { LogInType } from '../../components/models/logIn.model';
 import { RegisterType } from '../../components/models/register.model';
 import { TokensType } from '../../components/models/token.model';
 import { ProfileWithDataType } from '../../components/models/profile.model';
+import { NotifyError, NotifySuccess } from '../../components/UI/Notify';
 
 axios.defaults.baseURL = 'https://reactlabapi.herokuapp.com';
 
@@ -31,7 +32,9 @@ const logIn = (credentials: LogInType) => async (dispatch: Dispatch<{ type: stri
     const response = await axios.get<ProfileWithDataType>('/api/auth/profile');
 
     dispatch(authActions.getUserProfileSuccess(response.data));
+    NotifySuccess('Logged in successfully!');
   } catch (error) {
+    NotifyError('Something went wrong!');
     dispatch(authActions.loginError((error as Error).message));
     dispatch(authActions.getUserProfileError((error as Error).message));
   }
@@ -48,7 +51,9 @@ const register = (credentials: RegisterType) => async (dispatch: Dispatch<{ type
 
     const response = await axios.get<ProfileWithDataType>('/api/auth/profile');
     dispatch(authActions.getUserProfileSuccess(response.data));
+    NotifySuccess('Registered successfully!');
   } catch (error) {
+    NotifyError('Something went wrong!');
     dispatch(authActions.registerError((error as Error).message));
     dispatch(authActions.getUserProfileError((error as Error).message));
   }

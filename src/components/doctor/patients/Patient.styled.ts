@@ -9,6 +9,7 @@ export const StyledPatient = styled.div`
   box-shadow: 0 4px 32px rgba(218, 228, 255, 0.24);
   border-radius: 12px;
   height: fit-content;
+  word-break: break-word;
 `;
 
 export const StyledHeader = styled.header`
@@ -24,6 +25,10 @@ export const StyledInfo = styled.div`
 
 export const StyledAvatar = styled.div`
   margin-right: 16px;
+  img {
+    width: 48px;
+    height: 48px;
+  }
 `;
 
 export const StyledName = styled.div`
@@ -32,7 +37,7 @@ export const StyledName = styled.div`
   line-height: 22px;
 `;
 
-export const StyledStatus = styled.p`
+export const StyledStatus = styled.p<{ status: string }>`
   font-size: 13px;
   font-weight: 500;
   line-height: 17px;
@@ -42,7 +47,7 @@ export const StyledStatus = styled.p`
   &:before{
     content: "";
     display: block;
-    background: #34C197;
+    background: ${(props) => (props.status === 'waiting' ? '#7297FF' : null)};
     width: 8px;
     height: 8px;
     border-radius: 50%;
