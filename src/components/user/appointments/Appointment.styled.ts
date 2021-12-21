@@ -50,7 +50,6 @@ export const StyledFooter = styled.div`
 
 export const StyledTime = styled.data`
   font-weight: 600;
-  margin-bottom: 16px;
   background: url(${PatientTime}) no-repeat;
   background-position-y: center;
   padding: 2px 0 2px 30px;
