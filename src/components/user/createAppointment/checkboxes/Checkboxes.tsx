@@ -22,6 +22,7 @@ const Checkboxes = ({ onChangeTime, formData, dataIso }: CheckboxesProps) => {
   return (
     <>
       {!availableHours && <p>Chose the doctor</p>}
+      {availableHours?.length === 0 && <p>No available time</p>}
       {availableHours
             && availableHours.map((hour) => (
               <Checkbox

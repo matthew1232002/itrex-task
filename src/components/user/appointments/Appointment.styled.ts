@@ -50,14 +50,14 @@ export const StyledFooter = styled.div`
 
 export const StyledTime = styled.data`
   font-weight: 600;
-  line-height: 19px;
   margin-bottom: 16px;
   background: url(${PatientTime}) no-repeat;
   background-position-y: center;
-  padding-left: 30px;
+  padding: 2px 0 2px 30px;
 `;
 
 export const StyledDescription = styled.p`
+  margin-top: 16px;
   line-height: 21px;
   background: url(${Reason}) no-repeat;
   background-position-y: top;
