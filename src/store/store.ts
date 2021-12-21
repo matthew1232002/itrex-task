@@ -3,19 +3,18 @@ import { persistStore, persistReducer } from 'redux-persist';
 import storage from 'redux-persist/lib/storage';
 import patientReducer from './user/patientReducer';
 import authReducer from './auth/authReducer';
-import doctorReducer from './doctor/doctorReducer';
+import { AuthReducerType } from '../components/models/authReducer.model';
 
 const authPersistConfig = {
   key: 'auth',
   storage,
-  whitelist: ['user'],
+  whitelist: ['token'],
 };
 
 const store = configureStore({
   reducer: {
-    auth: persistReducer<any>(authPersistConfig, authReducer),
-    patient: patientReducer,
-    doctor: doctorReducer,
+    auth: persistReducer<any & AuthReducerType>(authPersistConfig, authReducer),
+    doctors: patientReducer,
   },
   middleware: (getDefaultMiddleware) => getDefaultMiddleware({
     serializableCheck: false,

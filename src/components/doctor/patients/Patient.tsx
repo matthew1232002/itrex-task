@@ -1,5 +1,4 @@
 import { useState } from 'react';
-import moment from 'moment';
 import {
   StyledAvatar, StyledDescription,
   StyledFooter,
@@ -9,20 +8,17 @@ import {
   StyledPatient,
   StyledStatus, StyledTime,
 } from './Patient.styled';
+import PatientAvatar from '../../../assets/patient-img.jpg';
 import PatientMore from '../../../assets/patient-more.svg';
 import DropDownList from './DropDownList';
-import CreateResolution from './modals/CreateResolution';
-import { IPatient } from '../../models/patient.model';
-import EditResolution from './modals/EditResolution';
-import useActions from '../../../hooks/useActions';
+import CreateResolution from './CreateResolution';
+import { PatientType } from '../../models/patient.model';
 
 const Patient = ({
-  id, reason, note, visit_date, status, patient,
-}: IPatient) => {
-  const { deleteAppointmentHandler } = useActions();
+  id, name, status, time, description,
+}: PatientType) => {
   const [menuIsOpen, setMenuIsOpen] = useState(false);
   const [createResolutionIsShown, setCreateResolutionIsShown] = useState(false);
-  const [editResolutionIsShown, setEditResolutionIsShown] = useState(false);
 
   const onToggleList = () => {
     setMenuIsOpen((prevState) => !prevState);
@@ -30,78 +26,32 @@ const Patient = ({
 
   const onCreateResolution = () => {
     setCreateResolutionIsShown(true);
-    setMenuIsOpen((prevState) => !prevState);
   };
 
-  const onEditResolution = () => {
-    setEditResolutionIsShown(true);
-    setMenuIsOpen((prevState) => !prevState);
-  };
-
-  const onClose = () => {
+  const onCloseCreate = () => {
     setCreateResolutionIsShown(false);
-    setEditResolutionIsShown(false);
-  };
-
-  const onDeleteAppointment = (appointmentId: string) => {
-    deleteAppointmentHandler(appointmentId);
-    setMenuIsOpen((prevState) => !prevState);
   };
 
   return (
     <>
-      {createResolutionIsShown && (
-      <CreateResolution
-        text={reason}
-        onClose={onClose}
-        firstName={patient.first_name}
-        lastName={patient.last_name}
-        id={id}
-      />
-      )}
-      {editResolutionIsShown && (
-      <EditResolution
-        text={reason}
-        onClose={onClose}
-        firstName={patient.first_name}
-        lastName={patient.last_name}
-      />
-      )}
+      {createResolutionIsShown && <CreateResolution onCloseCreate={onCloseCreate} />}
       <StyledPatient key={id}>
         <StyledHeader>
           <StyledInfo>
-            <StyledAvatar><img alt="avatar" src={patient.photo} /></StyledAvatar>
+            <StyledAvatar><img alt="avatar" src={PatientAvatar} /></StyledAvatar>
             <StyledName>
-              <p>
-                {patient.first_name}
-                {' '}
-                {patient.last_name}
-              </p>
-              <StyledStatus status={status}>{status}</StyledStatus>
+              <p>{name}</p>
+              <StyledStatus>{status}</StyledStatus>
             </StyledName>
           </StyledInfo>
           <StyledMore onClick={onToggleList}>
             <img alt="more" src={PatientMore} />
           </StyledMore>
-          {menuIsOpen && (
-          <DropDownList
-            onCreateResolution={onCreateResolution}
-            onEditResolution={onEditResolution}
-            onDelete={() => onDeleteAppointment(id)}
-            id={id}
-          />
-          )}
+          {menuIsOpen && <DropDownList onCreateResolution={onCreateResolution} />}
         </StyledHeader>
         <StyledFooter>
-          <StyledTime>
-            {moment(visit_date).format('ddd MMM D, YYYY h:mm a')}
-            {' - '}
-            {moment(visit_date).add(1, 'hours').format('h:mm a')}
-          </StyledTime>
-          <StyledDescription>
-            {reason}
-            {note}
-          </StyledDescription>
+          <StyledTime>{time}</StyledTime>
+          <StyledDescription>{description}</StyledDescription>
         </StyledFooter>
       </StyledPatient>
     </>

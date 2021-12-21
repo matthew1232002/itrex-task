@@ -26,28 +26,26 @@ const SignInForm = () => {
   });
 
   return (
-    <>
-      <Formik
-        initialValues={initialValues}
-        validationSchema={validate}
-        onSubmit={handleSubmit}
-      >
-        {() => (
-          <StyledSidebar paddingTop="270px">
-            <Header text="Sign In" />
-            <StyledForm>
-              <StyledInputs>
-                <InputField type="email" placeholder="Email" name="userName" testId="username" />
-                <InputField type="password" placeholder="Password" name="password" testId="password" />
-              </StyledInputs>
-              <Button text="Sign In" />
-              <StyledLink to="/restore">Forgot Password?</StyledLink>
-            </StyledForm>
-            <Footer text="Don’t have an account?" path="/sign-up" link="Sign up" />
-          </StyledSidebar>
-        )}
-      </Formik>
-    </>
+    <Formik
+      initialValues={initialValues}
+      validationSchema={validate}
+      onSubmit={handleSubmit}
+    >
+      {() => (
+        <StyledSidebar>
+          <Header text="Sign In" />
+          <StyledForm>
+            <StyledInputs>
+              <InputField type="email" placeholder="Email" name="userName" testId="username" />
+              <InputField type="password" placeholder="Password" name="password" testId="password" />
+            </StyledInputs>
+            <Button text="Sign In" />
+            <StyledLink to="/restore">Forgot Password?</StyledLink>
+          </StyledForm>
+          <Footer text="Don’t have an account?" path="/sign-up" link="Sign up" />
+        </StyledSidebar>
+      )}
+    </Formik>
   );
 };
 

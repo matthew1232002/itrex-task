@@ -3,20 +3,12 @@ import { createReducer, PayloadAction } from '@reduxjs/toolkit';
 
 import patientAction from './patientAction';
 import { AddAppointmentResponseType } from '../../components/models/addAppointment.model';
-import { IResolutionsPatient } from '../../components/models/resolutionsPatient.model';
 
 const appointments = createReducer<Array<AddAppointmentResponseType>>([], {
-  [patientAction.getAppointmentsSuccess.type]: (
+  [patientAction.createAppointmentSuccess.type]: (
     state,
-    { payload }: PayloadAction<Array<AddAppointmentResponseType>>,
-  ) => [...payload],
-});
-
-const resolutions = createReducer<Array<IResolutionsPatient>>([], {
-  [patientAction.getResolutionsPatientSuccess.type]: (
-    state,
-    { payload }: PayloadAction<Array<IResolutionsPatient>>,
-  ) => [...payload],
+    { payload }: PayloadAction<AddAppointmentResponseType>,
+  ) => [...state, payload],
 });
 
 const error = createReducer<string>('', {
@@ -26,16 +18,13 @@ const error = createReducer<string>('', {
   ) => payload,
 });
 
-const isLoading = createReducer(false, {
-  [patientAction.getResolutionsPatientRequest.type]: () => true,
-  [patientAction.getResolutionsPatientSuccess.type]: () => false,
-  [patientAction.getAppointmentsRequest.type]: () => true,
-  [patientAction.getAppointmentsSuccess.type]: () => false,
+const isAdded = createReducer(false, {
+  [patientAction.createAppointmentSuccess.type]: () => true,
+  [patientAction.changeIsAdded.type]: () => false,
 });
 
 export default combineReducers({
   appointments,
-  resolutions,
   error,
-  isLoading,
+  isAdded,
 });

@@ -1,30 +1,39 @@
-import React, { useEffect } from 'react';
+import { useEffect, useState } from 'react';
+import { toast } from 'react-toastify';
 import {
   StyledAppointmentsList,
-  StyledIcon,
+  StyledBtn,
+  StyledControllers, StyledCreateAppointment, StyledIcon,
   StyledSearch,
   StyledSearchForm, StyledSearchHeader, StyledSearchItems, StyledSearchList,
   StyledTitle,
 } from './UserAppointmets.styled';
+import SuccessIcon from '../../../assets/notification_success.svg';
+import { getAppointments } from '../../../store/user/patientOperations';
 import Appointment from './Appointment';
-import UserControllers from '../../UI/UserControllers';
 import useActions from '../../../hooks/useActions';
-import LoadingSpinner from '../../UI/LoadingSpinner';
-import EmptyList from '../../doctor/patients/EmptyList';
-import Button from '../../UI/Button';
-import routes from '../../../routes/routes';
-import Plus from '../../../assets/plus.svg';
+import { NotifySuccess } from '../../UI/Notify';
+import { AppointmentFullInfo } from '../../models/appointment.model';
 
 const UserAppointments = () => {
-  const {
-    getAppointmentsHandler, appointments, isLoadingForUser,
-  } = useActions();
+  const [appointments, setAppointments] = useState<Array<AppointmentFullInfo>>([]);
+  const { isAdded, changeIsAdded } = useActions();
   useEffect(() => {
-    getAppointmentsHandler();
+    getAppointments().then((response) => setAppointments(response.data.appointments));
   }, []);
+  if (isAdded) {
+    toast.success('Appointment successfully added', {
+      icon: () => <img src={SuccessIcon} alt="icon" />,
+    });
+    changeIsAdded();
+  }
   return (
     <>
-      <UserControllers />
+      <StyledControllers>
+        <StyledBtn to="/">Profile</StyledBtn>
+        <StyledBtn to="/">Appointments</StyledBtn>
+        <StyledBtn to="/">Resolutions</StyledBtn>
+      </StyledControllers>
       <StyledTitle>
         <h2>My Appointments</h2>
         <StyledSearch>
@@ -41,13 +50,13 @@ const UserAppointments = () => {
               </StyledSearchItems>
             </StyledSearchList>
           </StyledSearchForm>
-          <Button text="Create an appointment" padding="12px 16px 12px 48px" to={routes.createAppointmentPage} itemPath={routes.userAppointmentsPage} img={Plus} invisible="none" />
+          <StyledCreateAppointment to="/create-appointment">
+            Create an appointment
+          </StyledCreateAppointment>
         </StyledSearch>
       </StyledTitle>
       <StyledAppointmentsList>
-        {isLoadingForUser && <LoadingSpinner />}
-        {appointments.length === 0 && !isLoadingForUser && <EmptyList />}
-        {appointments && !isLoadingForUser && appointments.map((appointment) => (
+        {appointments.map((appointment) => (
           <Appointment
             key={appointment.id}
             id={appointment.id}
@@ -58,6 +67,7 @@ const UserAppointments = () => {
           />
         ))}
       </StyledAppointmentsList>
+      <NotifySuccess />
     </>
   );
 };

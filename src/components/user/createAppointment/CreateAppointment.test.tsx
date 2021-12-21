@@ -6,12 +6,14 @@ import CreateAppointment from './CreateAppointment';
 import * as useActions from '../../../hooks/useActions';
 import '@testing-library/jest-dom/extend-expect';
 
+type Default = string;
+
 jest.mock('../../../store/user/patientOperations', () => ({}));
 
 describe('Appointment form', () => {
   test('to be truthy', () => {
     jest.spyOn(React, 'useEffect').mockImplementation(() => {});
-    jest.spyOn<any, string>(useActions, 'default').mockImplementation(() => ({}));
+    jest.spyOn<any, Default>(useActions, 'default').mockImplementation(() => ({}));
     render(<CreateAppointment />);
     const selects = screen.getAllByRole('combobox');
     expect(selects[0]).toBeTruthy();
@@ -19,7 +21,7 @@ describe('Appointment form', () => {
   });
   test('should accept text', async () => {
     jest.spyOn(React, 'useEffect').mockImplementation(() => {});
-    jest.spyOn<any, string>(useActions, 'default').mockImplementation(() => ({}));
+    jest.spyOn<any, Default>(useActions, 'default').mockImplementation(() => ({}));
     render(<CreateAppointment />);
     const selects = screen.getAllByRole('combobox');
     fireEvent.change(selects[0], { target: { textContent: 'therapist' } });
@@ -31,7 +33,7 @@ describe('Appointment form', () => {
   });
   test('button should be disabled', () => {
     jest.spyOn(React, 'useEffect').mockImplementation(() => {});
-    jest.spyOn<any, string>(useActions, 'default').mockImplementation(() => ({}));
+    jest.spyOn<any, Default>(useActions, 'default').mockImplementation(() => ({}));
     render(<CreateAppointment />);
     expect(screen.getByTestId(/submit/i)).toBeDisabled();
   });
