@@ -5,11 +5,11 @@ export const StyledSidebar = styled.div<{ paddingTop: string }>`
   display: flex;
   flex-direction: column;
   min-height: 100%;
-  padding: 0 96px 0 96px;
+  padding: 0 96px 80px 96px;
   padding-top: ${(props) => (props.paddingTop ? props.paddingTop : 0)};
 
   @media (max-width: 600px) {
-    padding: 0 32px;
+    padding: 0 32px 44px 32px;
   }
 `;
 

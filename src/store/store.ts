@@ -8,7 +8,7 @@ import doctorReducer from './doctor/doctorReducer';
 const authPersistConfig = {
   key: 'auth',
   storage,
-  whitelist: ['user'],
+  whitelist: [],
 };
 
 const store = configureStore({

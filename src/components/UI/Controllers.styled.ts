@@ -1,8 +1,10 @@
 import styled from 'styled-components';
 
 export const StyledControllers = styled.div`
-  margin-bottom: 56px;
+  margin-bottom: 36px;
+  display: flex;
+  flex-wrap: wrap;
   @media (max-width: 600px) {
-    margin-bottom: 40px;
+    margin-bottom: 20px;
   }
 `;
