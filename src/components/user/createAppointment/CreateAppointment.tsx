@@ -67,7 +67,6 @@ const CreateAppointment = () => {
     };
 
     createAppointment(obj);
-    history.replace(routes.userAppointmentsPage);
   };
 
   return (

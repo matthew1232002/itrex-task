@@ -1,20 +1,26 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect } from 'react';
 import {
   StyledAppointmentsList,
-  StyledCreateAppointment, StyledIcon,
+  StyledIcon,
   StyledSearch,
   StyledSearchForm, StyledSearchHeader, StyledSearchItems, StyledSearchList,
   StyledTitle,
 } from './UserAppointmets.styled';
-import { getAppointments } from '../../../store/user/patientOperations';
 import Appointment from './Appointment';
-import { AppointmentFullInfo } from '../../models/appointment.model';
 import UserControllers from '../../UI/UserControllers';
+import useActions from '../../../hooks/useActions';
+import LoadingSpinner from '../../UI/LoadingSpinner';
+import EmptyList from '../../doctor/patients/EmptyList';
+import Button from '../../UI/Button';
+import routes from '../../../routes/routes';
+import Plus from '../../../assets/plus.svg';
 
 const UserAppointments = () => {
-  const [appointments, setAppointments] = useState<Array<AppointmentFullInfo>>([]);
+  const {
+    getAppointmentsHandler, appointments, isLoadingForUser,
+  } = useActions();
   useEffect(() => {
-    getAppointments().then((response) => setAppointments(response.data.appointments));
+    getAppointmentsHandler();
   }, []);
   return (
     <>
@@ -35,13 +41,13 @@ const UserAppointments = () => {
               </StyledSearchItems>
             </StyledSearchList>
           </StyledSearchForm>
-          <StyledCreateAppointment to="/create-appointment">
-            Create an appointment
-          </StyledCreateAppointment>
+          <Button text="Create an appointment" padding="12px 16px 12px 48px" to={routes.createAppointmentPage} itemPath={routes.userAppointmentsPage} img={Plus} invisible="none" />
         </StyledSearch>
       </StyledTitle>
       <StyledAppointmentsList>
-        {appointments.map((appointment) => (
+        {isLoadingForUser && <LoadingSpinner />}
+        {appointments.length === 0 && !isLoadingForUser && <EmptyList />}
+        {appointments && !isLoadingForUser && appointments.map((appointment) => (
           <Appointment
             key={appointment.id}
             id={appointment.id}

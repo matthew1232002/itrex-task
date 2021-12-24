@@ -10,7 +10,7 @@ type DropDownProps = {
 const DropDownList = ({
   onCreateResolution, onEditResolution, onDelete, id,
 }: DropDownProps) => (
-  <StyledWrapper>
+  <StyledWrapper id="dropDown">
     <StyledList>
       <StyledItem onClick={onCreateResolution}>Create a resolution</StyledItem>
       <StyledItem onClick={onEditResolution}>Edit an appointment</StyledItem>

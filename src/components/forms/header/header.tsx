@@ -9,18 +9,13 @@ type HeaderProps = {
 const Header = ({ text }: HeaderProps) => {
   const location = useLocation();
 
-  let margin: string = '172px 0 40px 0';
   let paddingLeft;
-  if (location.pathname === '/sign-in') {
-    margin = '270px 0 40px 0';
-  }
   if (location.pathname === '/restore') {
-    margin = '267px 0 32px 0';
     paddingLeft = '40px';
   }
 
   return (
-    <StyledHeader margin={margin} paddingLeft={paddingLeft}>
+    <StyledHeader paddingLeft={paddingLeft}>
       {location.pathname === '/restore' && <StyledArrow to="/sign-in" />}
       <StyledText>{text}</StyledText>
     </StyledHeader>

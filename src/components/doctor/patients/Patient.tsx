@@ -15,12 +15,10 @@ import CreateResolution from './modals/CreateResolution';
 import { IPatient } from '../../models/patient.model';
 import EditResolution from './modals/EditResolution';
 import useActions from '../../../hooks/useActions';
-import useComponentVisible from '../../../hooks/useComponentVisible';
 
 const Patient = ({
   id, reason, note, visit_date, status, patient,
 }: IPatient) => {
-  const { ref } = useComponentVisible(true);
   const { deleteAppointmentHandler } = useActions();
   const [menuIsOpen, setMenuIsOpen] = useState(false);
   const [createResolutionIsShown, setCreateResolutionIsShown] = useState(false);
@@ -51,64 +49,61 @@ const Patient = ({
   };
 
   return (
-    <>
+
+    <StyledPatient key={id}>
       {createResolutionIsShown && (
-      <CreateResolution
-        text={reason}
-        onClose={onClose}
-        firstName={patient.first_name}
-        lastName={patient.last_name}
-        id={id}
-      />
+        <CreateResolution
+          text={reason}
+          onClose={onClose}
+          firstName={patient.first_name}
+          lastName={patient.last_name}
+          id={id}
+        />
       )}
       {editResolutionIsShown && (
-      <EditResolution
-        text={reason}
-        onClose={onClose}
-        firstName={patient.first_name}
-        lastName={patient.last_name}
-      />
+        <EditResolution
+          text={reason}
+          onClose={onClose}
+          firstName={patient.first_name}
+          lastName={patient.last_name}
+        />
       )}
-      <StyledPatient key={id}>
-        <StyledHeader>
-          <StyledInfo>
-            <StyledAvatar><img alt="avatar" src={patient.photo} /></StyledAvatar>
-            <StyledName>
-              <p>
-                {patient.first_name}
-                {' '}
-                {patient.last_name}
-              </p>
-              <StyledStatus status={status}>{status}</StyledStatus>
-            </StyledName>
-          </StyledInfo>
-          <StyledMore onClick={onToggleList}>
-            <img alt="more" src={PatientMore} />
-          </StyledMore>
-          {menuIsOpen && (
-            <div ref={ref}>
-              <DropDownList
-                onCreateResolution={onCreateResolution}
-                onEditResolution={onEditResolution}
-                onDelete={() => onDeleteAppointment(id)}
-                id={id}
-              />
-            </div>
-          )}
-        </StyledHeader>
-        <StyledFooter>
-          <StyledTime>
-            {moment(visit_date).format('ddd MMM D, YYYY h:mm a')}
-            {' - '}
-            {moment(visit_date).add(1, 'hours').format('h:mm a')}
-          </StyledTime>
-          <StyledDescription>
-            {reason}
-            {note}
-          </StyledDescription>
-        </StyledFooter>
-      </StyledPatient>
-    </>
+      <StyledHeader>
+        <StyledInfo>
+          <StyledAvatar><img alt="avatar" src={patient.photo} /></StyledAvatar>
+          <StyledName>
+            <p>
+              {patient.first_name}
+              {' '}
+              {patient.last_name}
+            </p>
+            <StyledStatus status={status}>{status}</StyledStatus>
+          </StyledName>
+        </StyledInfo>
+        <StyledMore onClick={onToggleList}>
+          <img alt="more" src={PatientMore} />
+        </StyledMore>
+        {menuIsOpen && (
+          <DropDownList
+            onCreateResolution={onCreateResolution}
+            onEditResolution={onEditResolution}
+            onDelete={() => onDeleteAppointment(id)}
+            id={id}
+          />
+        )}
+      </StyledHeader>
+      <StyledFooter>
+        <StyledTime>
+          {moment(visit_date).format('ddd MMM D, YYYY h:mm a')}
+          {' - '}
+          {moment(visit_date).add(1, 'hours').format('h:mm a')}
+        </StyledTime>
+        <StyledDescription>
+          {reason}
+          {note}
+        </StyledDescription>
+      </StyledFooter>
+    </StyledPatient>
   );
 };
 

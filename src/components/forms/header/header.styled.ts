@@ -2,14 +2,9 @@ import styled from 'styled-components';
 import { Link } from 'react-router-dom';
 import Arrow from '../../../assets/arrow-left.svg';
 
-type StyledHeaderProps = {
-  margin: string,
-  paddingLeft?: string,
-};
-
-export const StyledHeader = styled.header <StyledHeaderProps>`
+export const StyledHeader = styled.header <{ paddingLeft?: string }>`
   position: relative;
-  margin: ${(props) => props.margin};
+  margin: 0 0 40px 0;
   padding-left: ${(props) => props.paddingLeft};
 
   @media (max-width: 600px) {

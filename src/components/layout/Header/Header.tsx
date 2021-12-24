@@ -7,28 +7,30 @@ import {
   StyledUserProfession,
 } from './Header.styled';
 import logo from '../../../assets/logo.png';
+import useActions from '../../../hooks/useActions';
 
-type HeaderProps = {
-  name: string
-  status: string
-  userAvatar: string
+const Header = () => {
+  const { profile } = useActions();
+  return (
+    <StyledHeader>
+      <StyledLogo>
+        <div><img src={logo} alt="logo" /></div>
+        <span>PALM CLINIC</span>
+      </StyledLogo>
+      <StyledUser>
+        <StyledUserData>
+          <p>
+            {profile.first_name}
+            {' '}
+            {profile.last_name}
+          </p>
+          <StyledUserProfession>{profile.role_name}</StyledUserProfession>
+        </StyledUserData>
+        <StyledUserImg>
+          <img src={profile.photo} alt="logo" />
+        </StyledUserImg>
+      </StyledUser>
+    </StyledHeader>
+  );
 };
-
-const Header = ({ name, status, userAvatar }: HeaderProps) => (
-  <StyledHeader>
-    <StyledLogo>
-      <div><img src={logo} alt="logo" /></div>
-      <span>PALM CLINIC</span>
-    </StyledLogo>
-    <StyledUser>
-      <StyledUserData>
-        <p>{name}</p>
-        <StyledUserProfession>{status}</StyledUserProfession>
-      </StyledUserData>
-      <StyledUserImg>
-        <img src={userAvatar} alt="logo" />
-      </StyledUserImg>
-    </StyledUser>
-  </StyledHeader>
-);
 export default Header;

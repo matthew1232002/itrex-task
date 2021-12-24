@@ -33,7 +33,7 @@ const SignInForm = () => {
         onSubmit={handleSubmit}
       >
         {() => (
-          <StyledSidebar>
+          <StyledSidebar paddingTop="270px">
             <Header text="Sign In" />
             <StyledForm>
               <StyledInputs>

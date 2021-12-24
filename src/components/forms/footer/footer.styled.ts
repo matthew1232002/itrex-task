@@ -2,14 +2,6 @@ import styled from 'styled-components';
 
 import { Link } from 'react-router-dom';
 
-export const StyledFooter = styled.footer`
-  padding: 0 0 80px 0;
-
-  @media (max-width: 600px) {
-    padding: 0 0 44px 0;
-  }
-`;
-
 export const StyledText = styled.span`
   font-size: 15px;
   font-weight: 400;

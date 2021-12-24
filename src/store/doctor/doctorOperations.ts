@@ -1,18 +1,8 @@
-import axios from 'axios';
 import { Dispatch } from 'redux';
 import { NotifyError, NotifySuccess } from '../../components/UI/Notify';
 import doctorAction from './doctorAction';
 import { IAddResolution, IAddResolutionResponse } from '../../components/models/createResolution.model';
-
-axios.defaults.baseURL = 'https://reactlabapi.herokuapp.com';
-
-export function getToken() {
-  const localAuth = localStorage.getItem('persist:auth') || '{}';
-  const jsonAuth = JSON.parse(localAuth);
-  axios.defaults.headers.common.Authorization = jsonAuth.token.replace(/"/g, '');
-}
-
-getToken();
+import { api } from '../../services/api';
 
 export const getPatients = () => async (
   dispatch: Dispatch<{ type: string }>,
@@ -20,7 +10,7 @@ export const getPatients = () => async (
   dispatch(doctorAction.getPatientRequest());
 
   try {
-    const { data } = await axios.get('/api/appointments/doctor/me', {
+    const { data } = await api.get('appointments/doctor/me', {
       params: {
         offset: 0,
         limit: 100,
@@ -39,7 +29,7 @@ export const createResolution = (values: IAddResolution) => async (
   dispatch(doctorAction.createResolutionRequest());
 
   try {
-    const { data } = await axios.post<IAddResolutionResponse>('/api/resolutions', values);
+    const { data } = await api.post<IAddResolutionResponse>('resolutions', values);
     dispatch(doctorAction.createResolutionSuccess(data));
     NotifySuccess('Resolution successfully added!');
   } catch (error) {
@@ -54,7 +44,7 @@ export const deleteAppointment = (appointmentId: string) => async (
   dispatch(doctorAction.deleteAppointmentRequest());
 
   try {
-    await axios.delete<string>(`/api/appointments/${appointmentId}`);
+    await api.delete<string>(`appointments/${appointmentId}`);
     dispatch(doctorAction.deleteAppointmentSuccess(appointmentId));
     NotifySuccess('Appointment successfully deleted!');
   } catch (error) {

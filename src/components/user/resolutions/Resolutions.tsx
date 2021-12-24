@@ -8,13 +8,14 @@ import {
   ResolutionTable, ResolutionTableCell,
   ResolutionTableHead,
   ResolutionTableHeaderColumn,
-  ResolutionTableHeadRow, ResolutionTableRow, StyledArrow, StyledMore,
+  ResolutionTableHeadRow, ResolutionTableRow, StyledArrow, StyledMore, StyledWrapperTable,
 } from './table/Table.styled';
 import useActions from '../../../hooks/useActions';
 import Arrow from '../../../assets/arrow-down.svg';
+import LoadingSpinner from '../../UI/LoadingSpinner';
 
 const Resolutions = () => {
-  const { getResolutionsPatientHandler, resolutionsPatient } = useActions();
+  const { getResolutionsPatientHandler, resolutionsPatient, isLoadingForUser } = useActions();
   useEffect(() => {
     getResolutionsPatientHandler();
   }, [getResolutionsPatientHandler]);
@@ -39,38 +40,44 @@ const Resolutions = () => {
     <>
       <UserControllers />
       <Title />
-      <ResolutionTable>
-        <ResolutionTableHead>
-          {headerGroups.map((headerGroup) => (
-            <ResolutionTableHeadRow {...headerGroup.getHeaderGroupProps()}>
-              {headerGroup.headers.map((column) => (
-                <ResolutionTableHeaderColumn
-                  {...column.getHeaderProps()}
-                >
-                  {column.render('Header')}
-                  <StyledArrow src={Arrow} />
-                </ResolutionTableHeaderColumn>
+      {isLoadingForUser && <LoadingSpinner />}
+      {!isLoadingForUser && resolutionsPatient && (
+        <StyledWrapperTable>
+          <ResolutionTable>
+            <ResolutionTableHead>
+              {headerGroups.map((headerGroup) => (
+                <ResolutionTableHeadRow {...headerGroup.getHeaderGroupProps()}>
+                  {headerGroup.headers.map((column) => (
+                    <ResolutionTableHeaderColumn
+                      {...column.getHeaderProps()}
+                    >
+                      {column.render('Header')}
+                      <StyledArrow src={Arrow} />
+                    </ResolutionTableHeaderColumn>
+                  ))}
+                </ResolutionTableHeadRow>
               ))}
-            </ResolutionTableHeadRow>
-          ))}
-        </ResolutionTableHead>
-        <tbody {...getTableBodyProps()}>
-          {rows.map((row) => {
-            prepareRow(row);
-            return (
-              <ResolutionTableRow {...row.getRowProps()}>
-                {row.cells.map((cell) => (
-                  <ResolutionTableCell
-                    {...cell.getCellProps()}
-                  >
-                    {cell.render('Cell')}
-                  </ResolutionTableCell>
-                ))}
-              </ResolutionTableRow>
-            );
-          })}
-        </tbody>
-      </ResolutionTable>
+            </ResolutionTableHead>
+            <tbody {...getTableBodyProps()}>
+              {rows.map((row) => {
+                prepareRow(row);
+                return (
+                  <ResolutionTableRow {...row.getRowProps()}>
+                    {row.cells.map((cell) => (
+                      <ResolutionTableCell
+                        {...cell.getCellProps()}
+                      >
+                        {cell.render('Cell')}
+                      </ResolutionTableCell>
+                    ))}
+                  </ResolutionTableRow>
+                );
+              })}
+            </tbody>
+          </ResolutionTable>
+        </StyledWrapperTable>
+      )}
+
     </>
   );
 };

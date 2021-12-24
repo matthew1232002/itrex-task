@@ -1,4 +1,4 @@
-import { StyledFooter, StyledLink, StyledText } from './footer.styled';
+import { StyledLink, StyledText } from './footer.styled';
 
 type FooterProps = {
   text: string,
@@ -7,10 +7,10 @@ type FooterProps = {
 };
 
 const Footer = ({ text, path, link }: FooterProps) => (
-  <StyledFooter>
+  <footer>
     <StyledText>{text}</StyledText>
     <StyledLink to={path}>{link}</StyledLink>
-  </StyledFooter>
+  </footer>
 );
 
 export default Footer;

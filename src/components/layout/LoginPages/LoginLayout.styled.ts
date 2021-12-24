@@ -4,7 +4,11 @@ import Background from '../../../assets/bg.webp';
 import BackgroundMob from '../../../assets/bg-mob.png';
 
 export const StyledWrapper = styled.div`
-  height: 100vh;
+  height: 100vh
+`;
+
+export const StyledContainer = styled.div`
+  min-height: 100%;
   background: url(${Background});
   width: 100%;
   display: flex;
