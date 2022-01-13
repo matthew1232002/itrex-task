@@ -127,7 +127,7 @@ export const StyledCalendar = styled(Calendar)`
     background: none;
     border-radius: 12px;
     &:disabled{
-      background-color: #f0f0f0;
+      background-color: inherit;
     }
   }
   
@@ -143,6 +143,9 @@ export const StyledCalendar = styled(Calendar)`
     border: 1px solid #7297FF !important;
     border-radius: 12px;
     color: #7297FF;
+    &:disabled{
+      color: #7297FF;
+    }
   }
 
   .react-calendar__tile--now:enabled:hover,
