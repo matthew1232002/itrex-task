@@ -3,7 +3,6 @@ import { useHistory } from 'react-router-dom';
 import CalendarFormik from './Calendar/CalendarFormik';
 import {
   StyledBtnContainer,
-  StyledButton,
   StyledContainer,
   StyledCrumbs,
   StyledForm,
@@ -11,13 +10,14 @@ import {
   StyledInputWrapper, StyledLabel, StyledSubtitle, StyledWrapper,
 } from './CreateAppointmentFormik.styled';
 import SelectOccupations from './select/SelectOccupation';
-import Input from './input/input';
+import Input from './input/Input';
 import SelectDoctor from './select/SelectDoctor';
 import CheckboxesFormik from './checkboxes/CheckboxesFormik';
 import Breadcrumb from './BreadCrumbs/Breadcrumb';
 import routes from '../../../routes/routes';
 import { validationSchema } from './schema/validationSchema';
 import Title from './title/Title';
+import Button from './button/Button';
 
 interface IFormValues {
   date: string;
@@ -56,8 +56,9 @@ const CreateAppointmentFormik = () => {
       initialValues={initialValues}
       onSubmit={submitHandler}
       validationSchema={validationSchema}
+      enableReinitialize
     >
-      {({ isValid }) => (
+      {({ setFieldValue }) => (
         <StyledWrapper>
           <StyledCrumbs>
             <Breadcrumb crumbs={crumbs} selected={selected} />
@@ -77,7 +78,7 @@ const CreateAppointmentFormik = () => {
                 <Title last text="Select a doctor and define the reason of your visit" number="3" />
                 <StyledInputWrapper>
                   <StyledLabel>Occupation</StyledLabel>
-                  <Field name="occupation" id="occupation" component={SelectOccupations} />
+                  <Field name="occupation" id="occupation" component={SelectOccupations} handleReset={setFieldValue} />
                 </StyledInputWrapper>
                 <StyledInputWrapper>
                   <StyledLabel>Doctor’s Name</StyledLabel>
@@ -94,14 +95,8 @@ const CreateAppointmentFormik = () => {
               </StyledContainer>
             </StyledFormContainer>
             <StyledBtnContainer>
-              <StyledButton
-                type="submit"
-                disabled={!isValid}
-              >
-                Submit
-              </StyledButton>
+              <Button />
             </StyledBtnContainer>
-
           </StyledForm>
         </StyledWrapper>
       )}

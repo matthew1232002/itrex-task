@@ -45,44 +45,7 @@ export const StyledLabel = styled.label`
   top: -25px;
 `;
 
-export const StyledErrorMessage = styled.p`
-  color: #F6657F;
-  position: absolute;
-  top: 110%;
-`;
-
-export const StyledInput = styled.input`
-  width: 100%;
-  outline: none;
-  border: 1px solid #DCE0EC;
-  border-radius: 8px;
-  height: 56px;
-  padding: 0 0 0 24px;
-  transition: 100ms linear;
-  cursor: pointer;
-
-  &:hover {
-    border-color: hsl(0, 0%, 70%);
-  }
-
-  &:focus {
-    border-color: #7297FF;
-  }
-`;
-
 export const StyledBtnContainer = styled.div`
   display: flex;
   justify-content: flex-end;
-`;
-
-export const StyledButton = styled.button`
-  border: none;
-  outline: none;
-  background: ${(props) => (!props.disabled ? '#7297FF' : '#DCE0EC')};
-  color: #ffffff;
-  border-radius: 8px;
-  line-height: 24px;
-  padding: 16px 50px;
-  cursor: pointer;
-  margin-bottom: 20px;
 `;

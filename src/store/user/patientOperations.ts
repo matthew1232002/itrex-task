@@ -26,6 +26,39 @@ export const getAvailableTime = (doctorId: string, date: string) => api.get('app
   },
 });
 
+export const getSpecializations = () => async (dispatch: Dispatch<{ type: string }>) => {
+  dispatch(patientActions.getSpecializationsRequest());
+
+  try {
+    const data = await api.get('specializations').then((response) => response.data.map((item: SpecializationsType) => (
+      {
+        value: item.id,
+        label: item.specialization_name,
+      }
+    )));
+    dispatch(patientActions.getSpecializationsSuccess(data));
+  } catch (error) {
+    dispatch(patientActions.getSpecializationsError((error as Error).message));
+  }
+};
+
+export const getDoctors = (specializationId: string) => async (
+  dispatch: Dispatch<{ type: string }>,
+) => {
+  dispatch(patientActions.getDoctorsRequest());
+
+  try {
+    const data = await api.get(`doctors/specialization/${specializationId}`)
+      .then((response) => response.data.map((item: DoctorsBySpecializationType) => ({
+        value: item.id,
+        label: `${item.first_name} ${item.last_name}`,
+      })));
+    dispatch(patientActions.getDoctorsSuccess(data));
+  } catch (error) {
+    dispatch(patientActions.getDoctorsError((error as Error).message));
+  }
+};
+
 export const addAppointment = (values: AddAppointmentType) => async (
   dispatch: Dispatch<{ type: string }>,
 ) => {

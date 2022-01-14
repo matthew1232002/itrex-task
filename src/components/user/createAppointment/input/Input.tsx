@@ -1,8 +1,8 @@
-import React from 'react';
 import {
   ErrorMessage, FormikValues, useField, useFormikContext,
 } from 'formik';
-import { StyledErrorMessage, StyledInput } from '../CreateAppointmentFormik.styled';
+import { StyledInput } from './Input.styled';
+import { StyledErrorMessage } from '../error/ErrorMessage.styled';
 
 interface IAuthTextInputProps {
   name: string;
@@ -13,6 +13,7 @@ interface IAuthTextInputProps {
 const Input = ({ name, id, placeholder }: IAuthTextInputProps) => {
   const [field, meta] = useField(id);
   const { values } = useFormikContext<FormikValues>();
+
   return (
     <>
       <StyledInput

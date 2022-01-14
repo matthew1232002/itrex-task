@@ -16,6 +16,8 @@ const CalendarFormik = ({ id }: ICalendarProps) => {
   useEffect(() => {
     if (values.occupation && values.doctorName) {
       setDisabled(false);
+    } else {
+      setDisabled(true);
     }
   }, [values.occupation, values.doctorName]);
 

@@ -16,9 +16,9 @@ const CheckboxesFormik = ({ id }: { id: string }) => {
 
   return (
     <>
-      {!availableHours && <p>Choose the doctor</p>}
-      {availableHours?.length === 0 && <p>No available time</p>}
-      {availableHours
+      {!values.doctorName && <p>Choose the doctor</p>}
+      {values.doctorName && availableHours?.length === 0 && <p>No available time</p>}
+      {availableHours && values.doctorName
                 && availableHours.map((hour) => (
                   <CheckboxFormik key={hour} time={hour} id={id} />
                 ))}

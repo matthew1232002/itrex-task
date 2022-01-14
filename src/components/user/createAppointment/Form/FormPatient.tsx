@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import { CustomSelect } from './Select.styled';
+import { CustomSelect } from '../select/Select.styled';
 import { StyledInput, StyledInputContainer, StyledLabel } from './FormPatient.styled';
 import { getAllSpecializations, getDoctorsBySpecializations } from '../../../../store/user/patientOperations';
 
