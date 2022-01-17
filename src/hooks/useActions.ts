@@ -16,7 +16,6 @@ import {
 import { IPatient } from '../components/models/patient.model';
 import { IResolutionsPatient } from '../components/models/resolutionsPatient.model';
 import { AppointmentFullInfo } from '../components/models/appointment.model';
-import routes from '../routes/routes';
 import { ISelectOptions } from '../components/models/SelectOptions.model';
 
 type IsLoggedState = {
@@ -55,6 +54,7 @@ interface PatientState {
     specializations: ISelectOptions[],
     doctors: ISelectOptions[],
     timeSlots: string[],
+    isAppointmentAdded: boolean,
   }
 }
 
@@ -86,8 +86,7 @@ function useActions() {
   }, [dispatch]);
 
   const createAppointment = useCallback((data) => {
-    dispatch(addAppointment(data));
-    history.replace(routes.userAppointmentsPage);
+    dispatch(addAppointment(data, history));
   }, [dispatch]);
 
   const createResolutionHandler = useCallback((data) => {
@@ -118,6 +117,7 @@ function useActions() {
   const specializations = useSelector((state: PatientState) => state.patient.specializations);
   const doctors = useSelector((state: PatientState) => state.patient.doctors);
   const timeSlots = useSelector((state: PatientState) => state.patient.timeSlots);
+  const isAppointmentAdded = useSelector((state: PatientState) => state.patient.isAppointmentAdded);
 
   return {
     createAppointment,
@@ -143,6 +143,7 @@ function useActions() {
     timeSlots,
     fetchingTimeSlots,
     getTimeSlotsHandler,
+    isAppointmentAdded,
   };
 }
 

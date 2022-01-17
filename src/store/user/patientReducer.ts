@@ -57,6 +57,12 @@ const isLoading = createReducer(false, {
   [patientAction.getSpecializationsSuccess.type]: () => false,
 });
 
+const isAppointmentAdded = createReducer(false, {
+  [patientAction.createAppointmentRequest.type]: () => true,
+  [patientAction.createAppointmentSuccess.type]: () => false,
+  [patientAction.createAppointmentError.type]: () => false,
+});
+
 const isFetchingDoctors = createReducer(false, {
   [patientAction.getDoctorsRequest.type]: () => true,
   [patientAction.getDoctorsSuccess.type]: () => false,
@@ -77,4 +83,5 @@ export default combineReducers({
   isFetchingDoctors,
   timeSlots,
   fetchingTimeSlots,
+  isAppointmentAdded,
 });

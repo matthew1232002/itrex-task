@@ -6,6 +6,7 @@ import { AddAppointmentResponseType, AddAppointmentType } from '../../components
 import { NotifyError, NotifySuccess } from '../../components/UI/Notify';
 import { api } from '../../services/api';
 import { ITimeSlots } from '../../components/models/TimeSlotsType.model';
+import routes from '../../routes/routes';
 
 export const getSpecializations = () => async (dispatch: Dispatch<{ type: string }>) => {
   dispatch(patientActions.getSpecializationsRequest());
@@ -57,7 +58,7 @@ export const getTimeSlots = (values: ITimeSlots) => async (
   }
 };
 
-export const addAppointment = (values: AddAppointmentType) => async (
+export const addAppointment = (values: AddAppointmentType, history: any) => async (
   dispatch: Dispatch<{ type: string }>,
 ) => {
   dispatch(patientActions.createAppointmentRequest());
@@ -65,6 +66,7 @@ export const addAppointment = (values: AddAppointmentType) => async (
   try {
     const { data } = await api.post<AddAppointmentResponseType>('appointments', values);
     dispatch(patientActions.createAppointmentSuccess(data));
+    history.replace(routes.userAppointmentsPage);
     NotifySuccess('Appointment successfully added!');
   } catch (error) {
     NotifyError('Something went wrong!');

@@ -1,6 +1,8 @@
 import styled from 'styled-components';
 import { FormikValues, useFormikContext } from 'formik';
 import { useEffect, useState } from 'react';
+import LoadingDots from './LoadingDots';
+import useActions from '../../../../hooks/useActions';
 
 const StyledButton = styled.button`
   border: none;
@@ -17,6 +19,11 @@ const StyledButton = styled.button`
 const Button = () => {
   const { values } = useFormikContext<FormikValues>();
   const [isDisabled, setIsDisabled] = useState(true);
+  const { isAppointmentAdded } = useActions();
+
+  useEffect(() => {
+    setIsDisabled(true);
+  }, [isAppointmentAdded]);
 
   useEffect(() => {
     if (values.occupation && values.doctorName
@@ -29,7 +36,10 @@ const Button = () => {
   }, [values]);
 
   return (
-    <StyledButton type="submit" disabled={isDisabled}>Submit</StyledButton>);
+    <StyledButton type="submit" disabled={isDisabled}>
+      {!isAppointmentAdded ? 'Submit' : <LoadingDots />}
+    </StyledButton>
+  );
 };
 
 export default Button;
