@@ -28,9 +28,16 @@ const specializations = createReducer<Array<ISelectOptions>>([], {
 });
 
 const doctors = createReducer<Array<ISelectOptions>>([], {
-  [patientAction.getSpecializationsSuccess.type]: (
+  [patientAction.getDoctorsSuccess.type]: (
     state,
     { payload }: PayloadAction<Array<ISelectOptions>>,
+  ) => [...payload],
+});
+
+const timeSlots = createReducer<Array<string>>([], {
+  [patientAction.getTimeSlotsSuccess.type]: (
+    state,
+    { payload }: PayloadAction<Array<string>>,
   ) => [...payload],
 });
 
@@ -55,6 +62,11 @@ const isFetchingDoctors = createReducer(false, {
   [patientAction.getDoctorsSuccess.type]: () => false,
 });
 
+const fetchingTimeSlots = createReducer(false, {
+  [patientAction.getTimeSlotsRequest.type]: () => true,
+  [patientAction.getTimeSlotsSuccess.type]: () => false,
+});
+
 export default combineReducers({
   appointments,
   resolutions,
@@ -63,4 +75,6 @@ export default combineReducers({
   error,
   isLoading,
   isFetchingDoctors,
+  timeSlots,
+  fetchingTimeSlots,
 });

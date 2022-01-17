@@ -1,36 +1,28 @@
-import { useEffect, useState } from 'react';
+import React, { useEffect } from 'react';
+import { FormikValues, useFormikContext } from 'formik';
 import Checkbox from './Checkbox';
-import { getAvailableTime } from '../../../../store/user/patientOperations';
+import LoadingSpinner from '../../../UI/LoadingSpinner';
+import useActions from '../../../../hooks/useActions';
 
-type CheckboxesProps = {
-  onChangeTime: (time: string) => void
-  formData: {
-    doctorId: string
-  }
-  dataIso?: string
-};
+const Checkboxes = ({ id }: { id: string }) => {
+  const { values } = useFormikContext<FormikValues>();
+  const { timeSlots, getTimeSlotsHandler, fetchingTimeSlots } = useActions();
 
-const Checkboxes = ({ onChangeTime, formData, dataIso }: CheckboxesProps) => {
-  const [availableHours, setAvailableHours] = useState<Array<string>>();
   useEffect(() => {
-    if (formData.doctorId && dataIso) {
-      getAvailableTime(formData.doctorId, dataIso)
-        .then((response) => setAvailableHours(response.data));
+    if (values.doctorName && values.date) {
+      getTimeSlotsHandler({ doctorId: values.doctorName, date: values.date });
     }
-  }, [formData, dataIso]);
+  }, [values.doctorName, values.date]);
 
   return (
     <>
-      {!availableHours && <p>Chose the doctor</p>}
-      {availableHours?.length === 0 && <p>No available time</p>}
-      {availableHours
-            && availableHours.map((hour) => (
-              <Checkbox
-                key={hour}
-                time={hour}
-                onChangeTime={(time: string) => onChangeTime(time)}
-              />
-            ))}
+      {fetchingTimeSlots && <LoadingSpinner />}
+      {!values.doctorName && <p>Choose the doctor</p>}
+      {values.doctorName && timeSlots?.length === 0 && <p>No available time</p>}
+      {!fetchingTimeSlots && timeSlots && values.doctorName
+                && timeSlots.map((hour) => (
+                  <Checkbox key={hour} time={hour} id={id} />
+                ))}
     </>
   );
 };

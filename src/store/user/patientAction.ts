@@ -32,6 +32,14 @@ const getDoctorsError = createAction('user/getDoctorsError', (date) => ({
   payload: date,
 }));
 
+const getTimeSlotsRequest = createAction('user/getTimeSlotsRequest');
+const getTimeSlotsSuccess = createAction('user/getTimeSlotsSuccess', (date) => ({
+  payload: date,
+}));
+const getTimeSlotsError = createAction('user/getTimeSlotsError', (date) => ({
+  payload: date,
+}));
+
 const getAppointmentsRequest = createAction('user/getAppointmentsRequest');
 const getAppointmentsSuccess = createAction('user/getAppointmentsSuccess', (date) => ({
   payload: date,
@@ -56,4 +64,7 @@ export default {
   getDoctorsRequest,
   getDoctorsSuccess,
   getDoctorsError,
+  getTimeSlotsRequest,
+  getTimeSlotsSuccess,
+  getTimeSlotsError,
 };

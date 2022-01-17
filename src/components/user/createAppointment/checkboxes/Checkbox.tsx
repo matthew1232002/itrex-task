@@ -1,22 +1,23 @@
-import React from 'react';
 import moment from 'moment';
+import React from 'react';
+import { useField } from 'formik';
 import { StyledInput, StyledLabel, StyledSpan } from './Checkbox.styled';
 
-type CheckBoxProps = {
-  time: string,
-  onChangeTime: (timeValue: string) => void;
+interface ICheckboxProp {
+  time: string;
+  id: string;
+}
 
-};
+const Checkbox = ({ time, id }: ICheckboxProp) => {
+  const [,,{ setValue }] = useField(id);
 
-const Checkbox = ({ time, onChangeTime }: CheckBoxProps) => {
   const onChangeHandler = (event: React.ChangeEvent<HTMLInputElement>) => {
-    const timeValue = event.target.value;
-    onChangeTime(timeValue);
+    setValue(event.target.value);
   };
 
   return (
     <StyledLabel>
-      <StyledInput type="radio" name="time" value={time} data-testid="checkbox" onChange={onChangeHandler} />
+      <StyledInput type="radio" name="time" value={time} onChange={onChangeHandler} />
       <StyledSpan>{moment(time).format('hh:mm a')}</StyledSpan>
     </StyledLabel>
   );

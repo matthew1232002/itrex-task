@@ -1,37 +1,40 @@
+import { FormikValues, useField, useFormikContext } from 'formik';
 import { useEffect, useState } from 'react';
 import moment from 'moment';
 import { StyledCalendar } from './Calendar.styled';
 
-type CalendarProps = {
-  onChangeData: (data: string) => void
-};
-
-const ReactCalendar = (props: CalendarProps) => {
+const Calendar = ({ id }: { id: string }) => {
   const [date, setDate] = useState(new Date());
-
-  function generateData(d: Date) {
-    props.onChangeData(`${moment(d).format().slice(0, 11)}00:00:00.000Z`);
-  }
+  const [disabled, setDisabled] = useState(true);
+  const [,,{ setValue }] = useField(id);
+  const { values } = useFormikContext<FormikValues>();
 
   useEffect(() => {
-    generateData(date);
-  }, []);
+    if (values.occupation && values.doctorName) {
+      setDisabled(false);
+    } else {
+      setDisabled(true);
+    }
+  }, [values.occupation, values.doctorName]);
 
-  const onChange = (dateValue: Date) => {
-    setDate(dateValue);
-    generateData(dateValue);
+  const onChange = (value: Date) => {
+    setDate(value);
+    setValue(`${moment(value).format('YYYY-MM-DD')}T00:00:00.000Z`);
   };
 
+  useEffect(() => {
+    onChange(date);
+  }, []);
+
   return (
-    <div>
-      <StyledCalendar
-        locale="en"
-        minDetail="year"
-        onChange={onChange}
-        value={date}
-      />
-    </div>
+    <StyledCalendar
+      locale="en"
+      minDetail="year"
+      onChange={onChange}
+      value={date}
+      tileDisabled={() => disabled}
+    />
   );
 };
 
-export default ReactCalendar;
+export default Calendar;

@@ -6,11 +6,7 @@ import { CustomSelect } from './Select.styled';
 import { StyledErrorMessage } from '../error/ErrorMessage.styled';
 import useActions from '../../../../hooks/useActions';
 
-interface ISelectProps {
-  id: string;
-}
-
-const SelectDoctor = ({ id }: ISelectProps) => {
+const SelectDoctor = ({ id }: { id: string }) => {
   const { values } = useFormikContext<FormikValues>();
   const [,meta, { setValue }] = useField(id);
   const [val, setVal] = useState<any>(undefined);

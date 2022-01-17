@@ -5,7 +5,7 @@ import {
   addAppointment,
   getAppointments, getDoctors,
   getResolutionsPatient,
-  getSpecializations,
+  getSpecializations, getTimeSlots,
 } from '../store/user/patientOperations';
 import authOperations from '../store/auth/authOperations';
 import {
@@ -50,9 +50,11 @@ interface PatientState {
     resolutions: IResolutionsPatient[],
     isLoading: boolean,
     isFetchingDoctors: boolean,
+    fetchingTimeSlots: boolean,
     appointments: AppointmentFullInfo[],
     specializations: ISelectOptions[],
     doctors: ISelectOptions[],
+    timeSlots: string[],
   }
 }
 
@@ -77,6 +79,10 @@ function useActions() {
 
   const getDoctorsHandler = useCallback((data) => {
     dispatch(getDoctors(data));
+  }, [dispatch]);
+
+  const getTimeSlotsHandler = useCallback((data) => {
+    dispatch(getTimeSlots(data));
   }, [dispatch]);
 
   const createAppointment = useCallback((data) => {
@@ -106,10 +112,12 @@ function useActions() {
   const loading = useSelector((state: DoctorState) => state.doctor.isLoading);
   const isLoadingForUser = useSelector((state: PatientState) => state.patient.isLoading);
   const fetchingDoctors = useSelector((state: PatientState) => state.patient.isFetchingDoctors);
+  const fetchingTimeSlots = useSelector((state: PatientState) => state.patient.fetchingTimeSlots);
   const resolutionsPatient = useSelector((state: PatientState) => state.patient.resolutions);
   const appointments = useSelector((state: PatientState) => state.patient.appointments);
   const specializations = useSelector((state: PatientState) => state.patient.specializations);
   const doctors = useSelector((state: PatientState) => state.patient.doctors);
+  const timeSlots = useSelector((state: PatientState) => state.patient.timeSlots);
 
   return {
     createAppointment,
@@ -132,6 +140,9 @@ function useActions() {
     getSpecializationsHandler,
     doctors,
     getDoctorsHandler,
+    timeSlots,
+    fetchingTimeSlots,
+    getTimeSlotsHandler,
   };
 }
 
