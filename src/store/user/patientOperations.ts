@@ -5,28 +5,60 @@ import { DoctorsBySpecializationType } from '../../components/models/doctorsBySp
 import { AddAppointmentResponseType, AddAppointmentType } from '../../components/models/addAppointment.model';
 import { NotifyError, NotifySuccess } from '../../components/UI/Notify';
 import { api } from '../../services/api';
+import { ITimeSlots } from '../../components/models/TimeSlotsType.model';
+import routes from '../../routes/routes';
 
-export const getAllSpecializations = () => api.get('specializations').then((response) => response.data.map((item: SpecializationsType) => (
-  {
-    value: item.id,
-    label: item.specialization_name,
+export const getSpecializations = () => async (dispatch: Dispatch<{ type: string }>) => {
+  dispatch(patientActions.getSpecializationsRequest());
+
+  try {
+    const data = await api.get('specializations').then((response) => response.data.map((item: SpecializationsType) => (
+      {
+        value: item.id,
+        label: item.specialization_name,
+      }
+    )));
+    dispatch(patientActions.getSpecializationsSuccess(data));
+  } catch (error) {
+    dispatch(patientActions.getSpecializationsError((error as Error).message));
   }
-)));
+};
 
-export const getDoctorsBySpecializations = (specializationId: string) => api.get(`doctors/specialization/${specializationId}`)
-  .then((response) => response.data.map((item: DoctorsBySpecializationType) => ({
-    value: item.id,
-    label: `${item.first_name} ${item.last_name}`,
-  })));
+export const getDoctors = (specializationId: string) => async (
+  dispatch: Dispatch<{ type: string }>,
+) => {
+  dispatch(patientActions.getDoctorsRequest());
 
-export const getAvailableTime = (doctorId: string, date: string) => api.get('appointments/time/free', {
-  params: {
-    doctorId,
-    date,
-  },
-});
+  try {
+    const data = await api.get(`doctors/specialization/${specializationId}`)
+      .then((response) => response.data.map((item: DoctorsBySpecializationType) => ({
+        value: item.id,
+        label: `${item.first_name} ${item.last_name}`,
+      })));
+    dispatch(patientActions.getDoctorsSuccess(data));
+  } catch (error) {
+    dispatch(patientActions.getDoctorsError((error as Error).message));
+  }
+};
 
-export const addAppointment = (values: AddAppointmentType) => async (
+export const getTimeSlots = (values: ITimeSlots) => async (
+  dispatch: Dispatch<{ type: string }>,
+) => {
+  dispatch(patientActions.getTimeSlotsRequest());
+  try {
+    const { data } = await api.get('appointments/time/free', {
+      params: {
+        doctorId: values.doctorId,
+        date: values.date,
+      },
+    });
+    dispatch(patientActions.getTimeSlotsSuccess(data));
+  } catch (error) {
+    dispatch(patientActions.getTimeSlotsError((error as Error).message));
+  }
+};
+
+export const addAppointment = (values: AddAppointmentType, history: any) => async (
   dispatch: Dispatch<{ type: string }>,
 ) => {
   dispatch(patientActions.createAppointmentRequest());
@@ -34,6 +66,7 @@ export const addAppointment = (values: AddAppointmentType) => async (
   try {
     const { data } = await api.post<AddAppointmentResponseType>('appointments', values);
     dispatch(patientActions.createAppointmentSuccess(data));
+    history.replace(routes.userAppointmentsPage);
     NotifySuccess('Appointment successfully added!');
   } catch (error) {
     NotifyError('Something went wrong!');

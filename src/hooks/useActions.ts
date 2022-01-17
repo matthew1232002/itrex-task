@@ -1,7 +1,12 @@
 import { useDispatch, useSelector } from 'react-redux';
 import { useCallback } from 'react';
 import { useHistory } from 'react-router-dom';
-import { addAppointment, getAppointments, getResolutionsPatient } from '../store/user/patientOperations';
+import {
+  addAppointment,
+  getAppointments, getDoctors,
+  getResolutionsPatient,
+  getSpecializations, getTimeSlots,
+} from '../store/user/patientOperations';
 import authOperations from '../store/auth/authOperations';
 import {
   createResolution,
@@ -11,7 +16,7 @@ import {
 import { IPatient } from '../components/models/patient.model';
 import { IResolutionsPatient } from '../components/models/resolutionsPatient.model';
 import { AppointmentFullInfo } from '../components/models/appointment.model';
-import routes from '../routes/routes';
+import { ISelectOptions } from '../components/models/SelectOptions.model';
 
 type IsLoggedState = {
   auth: {
@@ -43,7 +48,13 @@ interface PatientState {
   patient:{
     resolutions: IResolutionsPatient[],
     isLoading: boolean,
-    appointments: AppointmentFullInfo[]
+    isFetchingDoctors: boolean,
+    fetchingTimeSlots: boolean,
+    appointments: AppointmentFullInfo[],
+    specializations: ISelectOptions[],
+    doctors: ISelectOptions[],
+    timeSlots: string[],
+    isAppointmentAdded: boolean,
   }
 }
 
@@ -62,9 +73,20 @@ function useActions() {
     dispatch(getAppointments());
   }, [dispatch]);
 
+  const getSpecializationsHandler = useCallback(() => {
+    dispatch(getSpecializations());
+  }, [dispatch]);
+
+  const getDoctorsHandler = useCallback((data) => {
+    dispatch(getDoctors(data));
+  }, [dispatch]);
+
+  const getTimeSlotsHandler = useCallback((data) => {
+    dispatch(getTimeSlots(data));
+  }, [dispatch]);
+
   const createAppointment = useCallback((data) => {
-    dispatch(addAppointment(data));
-    history.replace(routes.userAppointmentsPage);
+    dispatch(addAppointment(data, history));
   }, [dispatch]);
 
   const createResolutionHandler = useCallback((data) => {
@@ -88,8 +110,14 @@ function useActions() {
   const patientsList = useSelector((state: DoctorState) => state.doctor.appointments);
   const loading = useSelector((state: DoctorState) => state.doctor.isLoading);
   const isLoadingForUser = useSelector((state: PatientState) => state.patient.isLoading);
+  const fetchingDoctors = useSelector((state: PatientState) => state.patient.isFetchingDoctors);
+  const fetchingTimeSlots = useSelector((state: PatientState) => state.patient.fetchingTimeSlots);
   const resolutionsPatient = useSelector((state: PatientState) => state.patient.resolutions);
   const appointments = useSelector((state: PatientState) => state.patient.appointments);
+  const specializations = useSelector((state: PatientState) => state.patient.specializations);
+  const doctors = useSelector((state: PatientState) => state.patient.doctors);
+  const timeSlots = useSelector((state: PatientState) => state.patient.timeSlots);
+  const isAppointmentAdded = useSelector((state: PatientState) => state.patient.isAppointmentAdded);
 
   return {
     createAppointment,
@@ -103,10 +131,19 @@ function useActions() {
     patientsList,
     loading,
     isLoadingForUser,
+    fetchingDoctors,
     getResolutionsPatientHandler,
     resolutionsPatient,
     appointments,
     getAppointmentsHandler,
+    specializations,
+    getSpecializationsHandler,
+    doctors,
+    getDoctorsHandler,
+    timeSlots,
+    fetchingTimeSlots,
+    getTimeSlotsHandler,
+    isAppointmentAdded,
   };
 }
 
