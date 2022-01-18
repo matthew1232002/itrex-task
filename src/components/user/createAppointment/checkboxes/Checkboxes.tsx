@@ -18,7 +18,8 @@ const Checkboxes = ({ id }: { id: string }) => {
     <>
       {fetchingTimeSlots && <LoadingSpinner />}
       {!values.doctorName && <p>Choose the doctor</p>}
-      {values.doctorName && timeSlots?.length === 0 && <p>No available time</p>}
+      {!fetchingTimeSlots && values.doctorName
+          && timeSlots?.length === 0 && <p>No available time</p>}
       {!fetchingTimeSlots && timeSlots && values.doctorName
                 && timeSlots.map((hour) => (
                   <Checkbox key={hour} time={hour} id={id} />

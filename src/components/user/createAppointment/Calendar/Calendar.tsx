@@ -10,12 +10,12 @@ const Calendar = ({ id }: { id: string }) => {
   const { values } = useFormikContext<FormikValues>();
 
   useEffect(() => {
-    if (values.occupation && values.doctorName) {
+    if (values.doctorName) {
       setDisabled(false);
     } else {
       setDisabled(true);
     }
-  }, [values.occupation, values.doctorName]);
+  }, [values.doctorName]);
 
   const onChange = (value: Date) => {
     setDate(value);

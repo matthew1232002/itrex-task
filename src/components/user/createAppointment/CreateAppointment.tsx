@@ -66,7 +66,7 @@ const CreateAppointment = () => {
       onSubmit={submitHandler}
       validationSchema={validationSchema}
     >
-      {({ setFieldValue }) => (
+      {({ setFieldValue, handleChange }) => (
         <StyledWrapper>
           <StyledCrumbs>
             <Breadcrumb crumbs={crumbs} selected={selected} />
@@ -94,11 +94,11 @@ const CreateAppointment = () => {
                 </StyledInputWrapper>
                 <StyledInputWrapper>
                   <StyledLabel>Reason for the visit</StyledLabel>
-                  <Field name="reason" id="reason" type="text" component={Input} placeholder="Leave a reason" />
+                  <Field onChange={handleChange} name="reason" id="reason" type="text" component={Input} placeholder="Leave a reason" />
                 </StyledInputWrapper>
                 <StyledInputWrapper>
                   <StyledLabel>Note</StyledLabel>
-                  <Field name="note" id="note" type="text" component={Input} placeholder="Leave a note if needed" />
+                  <Field onChange={handleChange} name="note" id="note" type="text" component={Input} placeholder="Leave a note if needed" />
                 </StyledInputWrapper>
               </StyledContainer>
             </StyledFormContainer>
