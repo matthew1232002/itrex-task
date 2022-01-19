@@ -1,29 +1,50 @@
 import React, { useEffect } from 'react';
-import { FormikValues, useFormikContext } from 'formik';
+import { useFormContext, useWatch } from 'react-hook-form';
 import Checkbox from './Checkbox';
-import LoadingSpinner from '../../../UI/LoadingSpinner';
 import useActions from '../../../../hooks/useActions';
 
-const Checkboxes = ({ id }: { id: string }) => {
-  const { values } = useFormikContext<FormikValues>();
-  const { timeSlots, getTimeSlotsHandler, fetchingTimeSlots } = useActions();
+const Checkboxes = () => {
+  const { getTimeSlotsHandler } = useActions();
+  const { setValue } = useFormContext();
+  const doctorValue = useWatch({ name: 'doctor' });
+  const dateValue = useWatch({ name: 'date' });
+
+  const allTime = [
+    'T05:00:00.000Z',
+    'T06:00:00.000Z',
+    'T07:00:00.000Z',
+    'T08:00:00.000Z',
+    'T09:00:00.000Z',
+    'T10:00:00.000Z',
+    'T11:00:00.000Z',
+    'T12:00:00.000Z',
+    'T13:00:00.000Z',
+    'T14:00:00.000Z',
+    'T15:00:00.000Z',
+    'T16:00:00.000Z',
+    'T17:00:00.000Z',
+  ];
 
   useEffect(() => {
-    if (values.doctorName && values.date) {
-      getTimeSlotsHandler({ doctorId: values.doctorName, date: values.date });
+    if (doctorValue && dateValue) {
+      console.log('Mojno');
+      getTimeSlotsHandler({ doctorId: doctorValue, date: dateValue });
     }
-  }, [values.doctorName, values.date]);
+  }, [doctorValue, dateValue]);
 
   return (
     <>
-      {fetchingTimeSlots && <LoadingSpinner />}
-      {!values.doctorName && <p>Choose the doctor</p>}
-      {!fetchingTimeSlots && values.doctorName
-          && timeSlots?.length === 0 && <p>No available time</p>}
-      {!fetchingTimeSlots && timeSlots && values.doctorName
-                && timeSlots.map((hour) => (
-                  <Checkbox key={hour} time={hour} id={id} />
-                ))}
+      {allTime.map((hour) => (
+        <Checkbox key={hour} time={hour} setValue={setValue} />
+      ))}
+      {/* {fetchingTimeSlots && <LoadingSpinner />} */}
+      {/* {!doctorValue && <p>Choose the doctor</p>} */}
+      {/* {!fetchingTimeSlots && doctorValue */}
+      {/*    && timeSlots?.length === 0 && <p>No available time</p>} */}
+      {/* {!fetchingTimeSlots && timeSlots && doctorValue */}
+      {/*          && timeSlots.map((hour) => ( */}
+      {/*            <Checkbox key={hour} time={hour} setValue={setValue} /> */}
+      {/*          ))} */}
     </>
   );
 };
