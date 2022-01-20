@@ -1,38 +1,43 @@
-import { FormikValues, useField, useFormikContext } from 'formik';
+import {
+  Control,
+  Controller, useFormContext, useWatch,
+} from 'react-hook-form';
 import { useEffect, useState } from 'react';
 import moment from 'moment';
 import { StyledCalendar } from './Calendar.styled';
 
-const Calendar = ({ id }: { id: string }) => {
+interface ICalendarProps {
+  control: Control;
+  name: string;
+}
+
+const Calendar = ({ control, name }: ICalendarProps) => {
+  const { setValue } = useFormContext();
   const [date, setDate] = useState(new Date());
-  const [disabled, setDisabled] = useState(true);
-  const [,,{ setValue }] = useField(id);
-  const { values } = useFormikContext<FormikValues>();
+  const doctorValue = useWatch({ name: 'doctor' });
 
   useEffect(() => {
-    if (values.doctorName) {
-      setDisabled(false);
-    } else {
-      setDisabled(true);
-    }
-  }, [values.doctorName]);
-
-  const onChange = (value: Date) => {
-    setDate(value);
-    setValue(`${moment(value).format('YYYY-MM-DD')}T00:00:00.000Z`);
-  };
-
-  useEffect(() => {
-    onChange(date);
+    setValue('date', `${moment(new Date()).format('YYYY-MM-DD')}T00:00:00.000Z`);
   }, []);
 
+  const onChange = (value: Date, field: any) => {
+    setDate(value);
+    field.onChange(`${moment(value).format('YYYY-MM-DD')}T00:00:00.000Z`);
+  };
+
   return (
-    <StyledCalendar
-      locale="en"
-      minDetail="year"
-      onChange={onChange}
-      value={date}
-      tileDisabled={() => disabled}
+    <Controller
+      control={control}
+      name={name}
+      render={({ field }) => (
+        <StyledCalendar
+          locale="en"
+          minDetail="year"
+          onChange={(value: Date) => onChange(value, field)}
+          value={date}
+          tileDisabled={() => !doctorValue}
+        />
+      )}
     />
   );
 };

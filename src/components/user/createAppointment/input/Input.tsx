@@ -1,58 +1,30 @@
-import {
-  ErrorMessage, FormikHandlers, FormikValues, useField, useFormikContext,
-} from 'formik';
-import React, { useCallback, useState } from 'react';
-import { useDebouncedCallback } from 'use-debounce';
+import React, { useEffect } from 'react';
+import { useFormContext } from 'react-hook-form';
 import { StyledInput } from './Input.styled';
 import { StyledErrorMessage } from '../error/ErrorMessage.styled';
 
 interface IAuthTextInputProps {
-  name: string;
-  id: string;
   placeholder: string;
-  onChange(event: React.ChangeEvent<HTMLInputElement>): FormikHandlers;
+  register: any;
+  name: string;
 }
 
 const Input = ({
-  name, id, placeholder, onChange,
+  placeholder, register, name,
 }: IAuthTextInputProps) => {
-  const [field, meta] = useField(id);
-  const { values } = useFormikContext<FormikValues>();
-  const [innerValue, setInnerValue] = useState('');
-
-  const debouncedHandleOnChange = useDebouncedCallback(
-    (event: React.ChangeEvent<HTMLInputElement>) => {
-      if (onChange) {
-        onChange(event);
-      }
-    }, 400,
-  );
-
-  const handleOnChange = useCallback((event: React.ChangeEvent<HTMLInputElement>) => {
-    const newValue = event.target.value;
-    setInnerValue(newValue);
-    debouncedHandleOnChange(event);
-  }, []);
-
+  const { formState: { errors }, trigger } = useFormContext();
+  useEffect(() => {
+    trigger();
+  }, [trigger]);
   return (
     <>
       <StyledInput
+        {...register(name)}
         placeholder={placeholder}
-        {...field}
-        name={name}
-        id={id}
-        value={innerValue}
-        onChange={handleOnChange}
       />
-      <ErrorMessage name={field.name}>
-        {(msg) => <StyledErrorMessage>{msg}</StyledErrorMessage>}
-      </ErrorMessage>
-      {values.occupation
-                && values.doctorName && meta.error && !meta.touched
-                && <StyledErrorMessage>Reason is required field</StyledErrorMessage>}
+      <StyledErrorMessage>{errors[name]?.message}</StyledErrorMessage>
     </>
-
   );
 };
 
-export default Input;
+export default React.memo(Input);

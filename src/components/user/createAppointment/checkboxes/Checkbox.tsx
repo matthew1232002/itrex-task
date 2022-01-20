@@ -4,19 +4,14 @@ import { StyledInput, StyledLabel, StyledSpan } from './Checkbox.styled';
 
 interface ICheckboxProp {
   time: string;
-  setValue: any;
+  onChange: (e: React.ChangeEvent<HTMLInputElement>) => void;
+  register: any;
 }
 
-const Checkbox = ({ time, setValue }: ICheckboxProp) => {
-  const onChangeHandler = (event: React.ChangeEvent<HTMLInputElement>) => {
-    setValue('time ', event.target.value);
-  };
-  return (
-    <StyledLabel>
-      <StyledInput type="radio" name="time" value={time} onChange={onChangeHandler} />
-      <StyledSpan>{moment(`2021-11-22${time}`).format('hh:mm a')}</StyledSpan>
-    </StyledLabel>
-  );
-};
-
+const Checkbox = ({ time, onChange, register }: ICheckboxProp) => (
+  <StyledLabel>
+    <StyledInput {...register('time')} type="radio" name="time" value={time} onChange={onChange} />
+    <StyledSpan>{moment(time).format('hh:mm a')}</StyledSpan>
+  </StyledLabel>
+);
 export default Checkbox;

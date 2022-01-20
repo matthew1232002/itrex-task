@@ -1,6 +1,6 @@
 import styled from 'styled-components';
-import { FormikValues, useFormikContext } from 'formik';
 import { useEffect, useState } from 'react';
+import { useWatch } from 'react-hook-form';
 import LoadingDots from './LoadingDots';
 import useActions from '../../../../hooks/useActions';
 
@@ -17,7 +17,8 @@ const StyledButton = styled.button`
 `;
 
 const Button = () => {
-  const { values } = useFormikContext<FormikValues>();
+  const timeValue = useWatch({ name: 'time' });
+  const reasonValue = useWatch({ name: 'reason' });
   const [isDisabled, setIsDisabled] = useState(true);
   const { isAppointmentAdded } = useActions();
 
@@ -26,14 +27,13 @@ const Button = () => {
   }, [isAppointmentAdded]);
 
   useEffect(() => {
-    if (values.occupation && values.doctorName
-        && values.date && values.time
-        && values.reason.length >= 4) {
+    if (timeValue
+        && reasonValue?.length >= 4) {
       setIsDisabled(false);
     } else {
       setIsDisabled(true);
     }
-  }, [values]);
+  }, [timeValue, reasonValue]);
 
   return (
     <StyledButton type="submit" disabled={isDisabled}>

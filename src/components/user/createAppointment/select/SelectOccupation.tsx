@@ -1,41 +1,42 @@
-import React, { useEffect } from 'react';
-import { FormikHandlers, useField } from 'formik';
+import { Control, Controller, useFormContext } from 'react-hook-form';
+import { useEffect } from 'react';
 import { CustomSelect } from './Select.styled';
-import { StyledErrorMessage } from '../error/ErrorMessage.styled';
 import useActions from '../../../../hooks/useActions';
 
 interface ISelectProps {
-  id: string;
-  handleReset(name: string, value: string): FormikHandlers;
+  control: Control;
+  name: string;
 }
 
-const SelectOccupations = ({ id, handleReset }: ISelectProps) => {
+const SelectOccupation = ({ control, name }: ISelectProps) => {
   const { specializations, isLoadingForUser, getSpecializationsHandler } = useActions();
-  const [, meta, { setValue }] = useField(id);
+  const { resetField } = useFormContext();
 
   useEffect(() => {
     getSpecializationsHandler();
   }, []);
 
-  const onChange = (option: unknown) => {
-    handleReset('doctorName', '');
-    handleReset('time', '');
-    handleReset('reason', '');
-    setValue((option as HTMLInputElement).value);
+  const onChange = (option: unknown, field: any) => {
+    field.onChange((option as HTMLInputElement).value);
+    resetField('doctor');
+    resetField('time');
   };
-
   return (
-    <>
-      <CustomSelect
-        options={specializations}
-        placeholder="Select an occupation"
-        classNamePrefix="Select"
-        onChange={onChange}
-        isLoading={isLoadingForUser}
-      />
-      {meta.error && <StyledErrorMessage>*Choose an occupation*</StyledErrorMessage>}
-    </>
+    <Controller
+      control={control}
+      name={name}
+      render={({ field }) => (
+        <CustomSelect
+          options={specializations}
+          isLoading={isLoadingForUser}
+          placeholder="Select an occupation"
+          classNamePrefix="Select"
+          onChange={(option) => onChange(option, field)}
+        />
+      )}
+    />
+
   );
 };
 
-export default SelectOccupations;
+export default SelectOccupation;

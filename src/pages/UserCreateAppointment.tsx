@@ -1,11 +1,9 @@
 import UserLayout from '../components/layout/User/UserLayout';
-// import CreateAppointment from '../components/user/createAppointment/CreateAppointment';
-import CreateAppointmentForm from '../components/user/createAppointment/CreateAppointmentForm';
+import CreateAppointment from '../components/user/createAppointment/CreateAppointment';
 
 const UserCreateAppointment = () => (
   <UserLayout>
-    {/* <CreateAppointment /> */}
-    <CreateAppointmentForm />
+    <CreateAppointment />
   </UserLayout>
 );
 
