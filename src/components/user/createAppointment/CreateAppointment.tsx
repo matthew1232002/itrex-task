@@ -7,7 +7,7 @@ import Calendar from './Calendar/Calendar';
 import SelectOccupation from './select/SelectOccupation';
 import SelectDoctor from './select/SelectDoctor';
 import Input from './input/Input';
-import Checkboxes from './checkboxes/Checkboxes';
+import TimeSlots from './timeSlots/TimeSlots';
 import Title from './title/Title';
 import {
   StyledBtnContainer, StyledLabel, StyledWrapper, StyledContainer,
@@ -64,7 +64,7 @@ const CreateAppointment = () => {
             </StyledContainer>
             <StyledContainer width="464px">
               <Title last={false} text="Select an available timeslot" number="2" />
-              <Checkboxes />
+              <TimeSlots />
             </StyledContainer>
             <StyledContainer width="624px">
               <Title last text="Select a doctor and define the reason of your visit" number="3" />

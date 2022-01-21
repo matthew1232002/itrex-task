@@ -1,11 +1,11 @@
 import React, { useEffect } from 'react';
 import { useFormContext, useWatch } from 'react-hook-form';
 import moment from 'moment';
-import Checkbox from './Checkbox';
+import TimeSlot from './TimeSlot';
 import LoadingSpinner from '../../../UI/LoadingSpinner';
 import useActions from '../../../../hooks/useActions';
 
-const Checkboxes = () => {
+const TimeSlots = () => {
   const { getTimeSlotsHandler, fetchingTimeSlots, timeSlots } = useActions();
   const { setValue, register } = useFormContext();
   const doctorValue = useWatch({ name: 'doctor' });
@@ -29,10 +29,10 @@ const Checkboxes = () => {
                 && timeSlots?.length === 0 && <p>No available time</p>}
       {!fetchingTimeSlots && timeSlots && doctorValue
                 && timeSlots.map((hour) => (
-                  <Checkbox key={hour} time={hour} onChange={onChange} register={register} />
+                  <TimeSlot key={hour} time={hour} onChange={onChange} register={register} />
                 ))}
     </>
   );
 };
 
-export default Checkboxes;
+export default TimeSlots;
