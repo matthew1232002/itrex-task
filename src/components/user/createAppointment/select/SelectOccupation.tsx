@@ -1,7 +1,7 @@
 import { Control, Controller, useFormContext } from 'react-hook-form';
-import { useEffect } from 'react';
+import { useEffect, useState } from 'react';
 import { CustomSelect } from './Select.styled';
-import useActions from '../../../../hooks/useActions';
+import { getAllSpecializations } from '../../../../store/user/patientOperations';
 
 interface ISelectProps {
   control: Control;
@@ -9,29 +9,36 @@ interface ISelectProps {
 }
 
 const SelectOccupation = ({ control, name }: ISelectProps) => {
-  const { specializations, isLoadingForUser, getSpecializationsHandler } = useActions();
-  const { resetField } = useFormContext();
+  const [allOccupations, setAllOccupations] = useState<any>([]);
+  const [isLoading, setIsLoading] = useState(false);
+  const { setValue } = useFormContext();
 
   useEffect(() => {
-    getSpecializationsHandler();
+    setIsLoading(true);
+    getAllSpecializations()
+      .then((response) => {
+        setAllOccupations(response);
+        setIsLoading(false);
+      })
+      .catch(() => setIsLoading(false));
   }, []);
 
-  const onChange = (option: unknown, field: any) => {
-    field.onChange((option as HTMLInputElement).value);
-    resetField('doctor');
-    resetField('time');
+  const onChange = (option: unknown) => {
+    setValue('occupation', (option as HTMLInputElement).value);
+    setValue('doctor', '');
+    setValue('time', '');
   };
   return (
     <Controller
       control={control}
       name={name}
-      render={({ field }) => (
+      render={() => (
         <CustomSelect
-          options={specializations}
-          isLoading={isLoadingForUser}
+          options={allOccupations}
+          isLoading={isLoading}
           placeholder="Select an occupation"
           classNamePrefix="Select"
-          onChange={(option) => onChange(option, field)}
+          onChange={onChange}
         />
       )}
     />

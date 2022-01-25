@@ -1,19 +1,26 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 import { useFormContext, useWatch } from 'react-hook-form';
 import moment from 'moment';
 import TimeSlot from './TimeSlot';
 import LoadingSpinner from '../../../UI/LoadingSpinner';
-import useActions from '../../../../hooks/useActions';
+import { getAvailableTime } from '../../../../store/user/patientOperations';
 
 const TimeSlots = () => {
-  const { getTimeSlotsHandler, fetchingTimeSlots, timeSlots } = useActions();
   const { setValue, register } = useFormContext();
+  const [timeSlots, setTimeSlots] = useState([]);
+  const [fetchingTimeSlots, setFetchingTimeSlots] = useState(false);
   const doctorValue = useWatch({ name: 'doctor' });
   const dateValue = useWatch({ name: 'date', defaultValue: `${moment(new Date()).format('YYYY-MM-DD')}T00:00:00.000Z` });
 
   useEffect(() => {
     if (doctorValue && dateValue) {
-      getTimeSlotsHandler({ doctorId: doctorValue, date: dateValue });
+      setFetchingTimeSlots(true);
+      getAvailableTime(doctorValue, dateValue)
+        .then((response) => {
+          setTimeSlots(response);
+          setFetchingTimeSlots(false);
+        })
+        .catch(() => setFetchingTimeSlots(false));
     }
   }, [doctorValue, dateValue]);
 

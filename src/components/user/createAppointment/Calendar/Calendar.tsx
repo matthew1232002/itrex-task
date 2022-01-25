@@ -20,20 +20,20 @@ const Calendar = ({ control, name }: ICalendarProps) => {
     setValue('date', `${moment(new Date()).format('YYYY-MM-DD')}T00:00:00.000Z`);
   }, []);
 
-  const onChange = (value: Date, field: any) => {
+  const onChange = (value: Date) => {
     setDate(value);
-    field.onChange(`${moment(value).format('YYYY-MM-DD')}T00:00:00.000Z`);
+    setValue('date', `${moment(value).format('YYYY-MM-DD')}T00:00:00.000Z`);
   };
 
   return (
     <Controller
       control={control}
       name={name}
-      render={({ field }) => (
+      render={() => (
         <StyledCalendar
           locale="en"
           minDetail="year"
-          onChange={(value: Date) => onChange(value, field)}
+          onChange={onChange}
           value={date}
           tileDisabled={() => !doctorValue}
         />
