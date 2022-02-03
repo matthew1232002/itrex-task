@@ -1,26 +1,24 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect } from 'react';
 import { useFormContext, useWatch } from 'react-hook-form';
 import moment from 'moment';
 import TimeSlot from './TimeSlot';
 import LoadingSpinner from '../../../UI/LoadingSpinner';
-import { getAvailableTime } from '../../../../store/user/patientOperations';
+import { useFetchTimeSlots } from '../../../../hooks/queryHooks/useFetchTimeSlots';
 
 const TimeSlots = () => {
   const { setValue, register } = useFormContext();
-  const [timeSlots, setTimeSlots] = useState([]);
-  const [fetchingTimeSlots, setFetchingTimeSlots] = useState(false);
+  const occupationField = useWatch({ name: 'occupation' });
   const doctorValue = useWatch({ name: 'doctor' });
   const dateValue = useWatch({ name: 'date', defaultValue: `${moment(new Date()).format('YYYY-MM-DD')}T00:00:00.000Z` });
+  const { data, isFetching, refetch } = useFetchTimeSlots(doctorValue, dateValue);
+
+  useEffect(() => {
+    setValue('time', '');
+  }, [occupationField]);
 
   useEffect(() => {
     if (doctorValue && dateValue) {
-      setFetchingTimeSlots(true);
-      getAvailableTime(doctorValue, dateValue)
-        .then((response) => {
-          setTimeSlots(response);
-          setFetchingTimeSlots(false);
-        })
-        .catch(() => setFetchingTimeSlots(false));
+      refetch();
     }
   }, [doctorValue, dateValue]);
 
@@ -30,12 +28,12 @@ const TimeSlots = () => {
 
   return (
     <>
-      {fetchingTimeSlots && <LoadingSpinner />}
+      {isFetching && <LoadingSpinner />}
       {!doctorValue && <p>Choose the doctor</p>}
-      {!fetchingTimeSlots && doctorValue
-                && timeSlots?.length === 0 && <p>No available time</p>}
-      {!fetchingTimeSlots && timeSlots && doctorValue
-                && timeSlots.map((hour) => (
+      {!isFetching && doctorValue
+                && data?.length === 0 && <p>No available time</p>}
+      {!isFetching && data && doctorValue
+                && data.map((hour: any) => (
                   <TimeSlot key={hour} time={hour} onChange={onChange} register={register} />
                 ))}
     </>

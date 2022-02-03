@@ -3,7 +3,7 @@ import {
 } from 'react-hook-form';
 import { useEffect, useState } from 'react';
 import { CustomSelect } from './Select.styled';
-import { getDoctorsBySpecializations } from '../../../../store/user/patientOperations';
+import { useFetchDoctors } from '../../../../hooks/queryHooks/useFetchDoctors';
 
 interface ISelectProps {
   control: Control;
@@ -11,23 +11,15 @@ interface ISelectProps {
 }
 
 const SelectDoctor = ({ control, name }: ISelectProps) => {
-  const [doctors, setDoctors] = useState([]);
-  const [isLoading, setIsLoading] = useState(false);
   const [val, setVal] = useState<any>(undefined);
   const { setValue } = useFormContext();
   const occupationField = useWatch({ name: 'occupation' });
+  const { data, isFetching, refetch } = useFetchDoctors(occupationField);
 
   useEffect(() => {
-    if (occupationField) {
-      setVal(null);
-      setIsLoading(true);
-      getDoctorsBySpecializations(occupationField)
-        .then((response) => {
-          setDoctors(response);
-          setIsLoading(false);
-        })
-        .catch(() => setIsLoading(false));
-    }
+    refetch();
+    setValue('doctor', '');
+    setVal(null);
   }, [occupationField]);
 
   const onChange = (option: unknown) => {
@@ -40,9 +32,9 @@ const SelectDoctor = ({ control, name }: ISelectProps) => {
       name={name}
       render={() => (
         <CustomSelect
-          options={doctors}
+          options={data}
           value={val}
-          isLoading={isLoading}
+          isLoading={isFetching}
           isDisabled={!occupationField}
           placeholder="Select a doctor’s name"
           classNamePrefix="Select"
